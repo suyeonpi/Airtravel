@@ -1,0 +1,333 @@
+// {
+//   "workbench.sideBar.location": "left",
+//   "editor.fontSize": 18,
+//   "editor.cursorBlinking": "smooth",
+//   "editor.acceptSuggestionOnEnter": "smart",
+//   "editor.tabCompletion": "on",
+//   "editor.wordWrap": "on",
+//   "explorer.confirmDelete": false,
+//   "editor.parameterHints.enabled": false,
+//   "html.format.unformatted": "",
+//   "editor.formatOnType": true,
+//   "editor.formatOnPaste": false,
+//   "launch": {
+//   },
+//   "liveServer.settings.donotShowInfoMsg": true,
+//   "auto-close-tag.SublimeText3Mode": true,
+//   "editor.mouseWheelZoom": true,
+//   "editor.wrappingIndent": "indent",
+//   "html.format.indentHandlebars": true,
+
+//   "csscomb.preset": {
+//     "always-semicolon": true,
+//     "block-indent": 2,
+//     "eof-newline": true,
+//     "leading-zero": true,
+//     "lines-between-rulesets": 1,
+//     "space-between-declarations": "\n",
+//     "strip-spaces": true,
+//     "space-before-colon": "",
+//     "space-after-colon": " ",
+//     "space-before-combinator": " ",
+//     "space-after-combinator": " ",
+//     "space-before-opening-brace": " ",
+//     "space-after-opening-brace": "\n",
+//     "space-before-selector-delimiter": "",
+//     "space-after-selector-delimiter": "\n",
+//     "space-before-closing-brace": "\n",
+//     "color-case": "lower",
+//     "sort-order": [
+//       "content",
+//       "overflow",
+//       "display",
+//       "position",
+//       "top",
+//       "right",
+//       "bottom",
+//       "left",
+//       "transform",
+//       "float",
+//       "clear",
+//       "width",
+//       "height",
+//       "margin",
+//       "margin-top",
+//       "margin-right",
+//       "margin-bottom",
+//       "margin-right",
+//       "padding",
+//       "padding-top",
+//       "padding-right",
+//       "padding-bottom",
+//       "padding-left",
+//       "border-top",
+//       "border-right",
+//       "border-bottom",
+//       "border-left",
+//       "border-radius",
+//       "background",
+//       "background-repeat",
+//       "background-poistion",
+//       "background-size",
+//       "color",
+//       "font",
+//       "font-family",
+//       "font-size",
+//       "font-weight",
+//       "line-height",
+//       "letter-spacing",
+//       "text-decoration",
+//       "text-align",
+//       "verticla-align",
+//       "white-space",
+//       "animation",
+//       "list-style"
+//       ]
+//   },
+//   "eslint.probe": [
+//     "javascript",
+//     "javascriptreact",
+//     "typescript",
+//     "typescriptreact",
+//     "html",
+//     "vue",
+//     "markdown",
+//     "react"
+//   ],
+//   "tslint.enable": false,
+//   "prettier.disableLanguages": [
+//     "\"react\""
+//   ],
+//   "editor.suggestSelection": "first",
+//   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+//   "files.exclude": {
+//     "**/.classpath": true,
+//     "**/.project": true,
+//     "**/.settings": true,
+//     "**/.factorypath": true
+//   },
+
+//   "editor.tabSize": 2,
+//   "[javascript]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "csscomb.formatOnSave": true,
+// "csscomb.syntaxAssociations": {
+//   "postcss": "scss"
+// },
+// "prettier.tabWidth": 2,
+//"prettier.printWidth": 120,
+// "vetur.format.options.tabSize": 2,
+// "editor.codeActionsOnSave": true,
+// "auto-close-tag.activationOnLanguage": [
+//   "xml",
+//   "php",
+//   "blade",
+//   "ejs",
+//   "jinja",
+//   "javascript",
+//   "javascriptreact",
+//   "typescript",
+//   "typescriptreact",
+//   "plaintext",
+//   "markdown",
+//   "vue",
+//   "liquid",
+//   "erb",
+//   "lang-cfml",
+//   "cfml",
+//   "HTML (EEx)",
+//   "HTML (Eex)",
+//   "plist"
+// ],
+// "editor.formatOnSave": false,
+// "editor.fontLigatures": null,
+// "[scss]": {
+//   "editor.defaultFormatter": "mrmlnc.vscode-postcss-sorting"
+//"editor.defaultFormatter": "mrmlnc.vscode-postcss-sorting"
+// },
+//   "explorer.confirmDragAndDrop": false,
+//   "[css]": {
+//     "editor.defaultFormatter": "mrmlnc.vscode-postcss-sorting"
+//   },
+//   "settingsSync.ignoredExtensions": [
+//   ],
+//   "diffEditor.ignoreTrimWhitespace": false,
+//   "[typescriptreact]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "[typescript]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "javascript.updateImportsOnFileMove.enabled": "always",
+//   "terminal.integrated.defaultProfile.windows": "Git Bash",
+//   "window.zoomLevel": -1,
+//   "security.workspace.trust.untrustedFiles": "open",
+// }
+// {
+//   "emmet.showSuggestionsAsSnippets": true,
+//   "emmet.includeLanguages": {
+//     "html.autoClosingTags":true,
+//     "html.suggest.html5":true,
+//     "javascript": "javascriptreact" //jsx에서도 html 자동완성 되도록
+//   },
+
+//   "workbench.settings.useSplitJSON": true,
+//   // "liveServer.settings.donotVerifyTags": true,
+//   // "liveServer.settings.port": 5000,
+//   // "liveSassCompile.settings.autoprefix": [],
+//   // "liveSassCompile.settings.generateMap": true,
+//   // "liveSassCompile.settings.formats": [
+//   //   {
+//   //     "format": "expanded",
+//   //     "extensionName": ".css",
+//   //     "savePath": "/src/assets/css/"
+//   //   }
+//   // ],
+
+//   "workbench.iconTheme": "material-icon-theme",
+//   "typescript.updateImportsOnFileMove.enabled": "always",
+//   "[typescript]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "prettier.parser": "typescript",
+//   "editor.suggestSelection": "first",
+//   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+//   "[javascript]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "terminal.integrated.defaultProfile.windows": "Git Bash",
+//   "editor.fontLigatures": null,
+//   "[json]": {
+
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+//   "explorer.confirmDelete": false,
+//   "liveServer.settings.ChromeDebuggingAttachment": false,
+//   "liveServer.settings.AdvanceCustomBrowserCmdLine": "",
+//   "explorer.confirmDragAndDrop": false,
+//   "[typescriptreact]": {
+//     "editor.defaultFormatter": "esbenp.prettier-vscode"
+//   },
+
+// "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+// "editor.fontLigatures": null,
+// "explorer.confirmDragAndDrop": false,
+// "explorer.confirmDelete": false,
+// }
+{
+  "liveServer.settings.donotVerifyTags": true,
+  "liveServer.settings.port": 5000,
+  "liveSassCompile.settings.autoprefix": [],
+  "liveSassCompile.settings.generateMap": true,
+  "liveSassCompile.settings.formats": [
+    {
+      "format": "expanded",
+      "extensionName": ".css",
+      "savePath": "/src/assets/css/"
+    }
+  ],
+
+  "workbench.iconTheme": "material-icon-theme",
+
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+
+  "editor.tabSize": 2,
+
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "editor.formatOnSave": true,
+
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+
+  "eslint.alwaysShowStatus": true,
+
+  "files.autoSave": "onFocusChange",
+
+  "javascript.validate.enable": false,
+
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "git.autofetch": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "explorer.confirmDelete": false,
+  "git.confirmSync": false,
+  "[html]": {
+    "editor.defaultFormatter": "vscode.html-language-features"
+  },
+  "window.zoomLevel": -1,
+
+  "csscomb.preset": {
+    "always-semicolon": true,
+    "block-indent": 2,
+    "eof-newline": true,
+    "leading-zero": true,
+    "lines-between-rulesets": 1,
+    "space-between-declarations": "\n",
+    "strip-spaces": true,
+    "space-before-colon": "",
+    "space-after-colon": " ",
+    "space-before-combinator": " ",
+    "space-after-combinator": " ",
+    "space-before-opening-brace": " ",
+    "space-after-opening-brace": "\n",
+    "space-before-selector-delimiter": "",
+    "space-after-selector-delimiter": "\n",
+    "space-before-closing-brace": "\n",
+    "color-case": "lower",
+    "sort-order": [
+      "content",
+      "overflow",
+      "display",
+      "position",
+      "top",
+      "right",
+      "bottom",
+      "left",
+      "transform",
+      "float",
+      "clear",
+      "width",
+      "height",
+      "margin",
+      "margin-top",
+      "margin-right",
+      "margin-bottom",
+      "margin-right",
+      "padding",
+      "padding-top",
+      "padding-right",
+      "padding-bottom",
+      "padding-left",
+      "border-top",
+      "border-right",
+      "border-bottom",
+      "border-left",
+      "border-radius",
+      "background",
+      "background-repeat",
+      "background-poistion",
+      "background-size",
+      "color",
+      "font",
+      "font-family",
+      "font-size",
+      "font-weight",
+      "line-height",
+      "letter-spacing",
+      "text-decoration",
+      "text-align",
+      "verticla-align",
+      "white-space",
+      "animation",
+      "list-style"
+    ]
+  },
+  "files.associations": {
+    "*.html": "html"
+  },
+  "liveServer.settings.donotShowInfoMsg": true,
+  "python.terminal.activateEnvInCurrentTerminal": true
+}
