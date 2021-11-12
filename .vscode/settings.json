@@ -10,6 +10,7 @@
       "savePath": "/front/src/assets/css/"
     }
   ],
+  "prettier.trailingComma": "es5",
 
   "workbench.iconTheme": "material-icon-theme",
 
@@ -22,7 +23,7 @@
   "editor.formatOnSave": true,
 
   "[javascript]": {
-    "editor.formatOnSave": false
+    "editor.formatOnSave": true
   },
 
   "eslint.alwaysShowStatus": true,
