@@ -2,14 +2,6 @@
   "liveServer.settings.donotVerifyTags": true,
   "liveServer.settings.port": 5000,
   "liveSassCompile.settings.autoprefix": [],
-  "liveSassCompile.settings.generateMap": true,
-  "liveSassCompile.settings.formats": [
-    {
-      "format": "compressed",
-      "extensionName": ".css",
-      "savePath": "/front/src/assets/css/"
-    }
-  ],
   "prettier.trailingComma": "es5",
 
   "workbench.iconTheme": "material-icon-theme",
