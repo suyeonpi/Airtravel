@@ -1,6 +1,7 @@
-@import "./reset";
-@import "./header";
-@import "./list";
-@import "./modal";
-@import "./utils";
-@import "./mixin";
+@use "root";
+@use "reset";
+@use "header";
+@use "main";
+@use "list";
+
+@use "common";

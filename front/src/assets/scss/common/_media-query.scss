@@ -1,0 +1,35 @@
+@use 'variables' as var;
+
+/* 
+### Note: 상혁님 확인 후 주석 필요 없을 것 같을 때에 삭제해 주세요!!
+미디어쿼리 사용 예시
+모바일에서의 스타일을 줘야 할 경우
+
+@use './common/media-query' as 예시;
+@include 예시.mobile { 
+  .어쩌고클래스{
+    font-size: 1rem  // 이 부분이 @mixin 안의 @content 부분으로 들어감
+  }
+}
+*/
+
+// 769아상 ~ 1200이하
+@mixin labtop {
+  @media all and (min-width: #{var.$labtop + 1}) {
+    @content;
+  }
+}
+
+//  361이상 ~ 768 이하
+@mixin tablet {
+  @media all and (max-width: #{var.$tablet - 1}) {
+    @content;
+  }
+}
+
+//360 이하
+@mixin mobile {
+  @media all and (max-width: #{var.$mobile - 1}) {
+    @content;
+  }
+}

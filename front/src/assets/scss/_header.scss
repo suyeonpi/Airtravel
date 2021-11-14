@@ -1,0 +1,30 @@
+@use './common/media-query' as media;
+@use './common/utils' as utils;
+
+// scss 사용 예시
+.header {
+  width: 100%;
+  font-size: 3.2rem;
+  nav {
+    width: 1200px;
+    margin: 0 auto;
+    @include utils.setFlex(flex, space-between);
+  }
+  &__logo {
+    overflow: hidden;
+  }
+  &__mypage {
+    overflow: hidden;
+  }
+}
+
+@include media.labtop {
+  .header {
+  }
+}
+
+@include media.tablet {
+}
+
+@include media.mobile {
+}

@@ -1,0 +1,32 @@
+//float 사용 시, 그 부모 요소에 clear-fix 클래스 추가
+.clear-fix {
+  &::after {
+    display: block;
+    content: "";
+    clear: both;
+  }
+}
+
+@mixin setPosition($pos, $top, $right, $bottom, $left) {
+  position: $pos;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+// flex 정중앙 정렬
+@mixin setFlex($display: inline-flex, $justify: center, $align: center) {
+  display: $display;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin ellipsis($line, $height: 3em) {
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $line;
+  -webkit-box-orient: vertical;
+  height: $height;
+}

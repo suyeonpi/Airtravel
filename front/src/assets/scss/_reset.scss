@@ -1,7 +1,6 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+@use './common/media-query' as media;
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap");
+
 html,
 body,
 div,
@@ -41,9 +40,6 @@ sub,
 sup,
 tt,
 var,
-b,
-u,
-i,
 center,
 dl,
 dt,
@@ -86,13 +82,13 @@ video {
   margin: 0;
   padding: 0;
   border: 0;
-  font-size: 100%;
-  font: inherit;
+  font-family: var(--font-family);
+  font-size: inherit;
+  font-weight: inherit;
   vertical-align: baseline;
+  box-sizing: border-box;
 }
-
 /* HTML5 display-role reset for older browsers */
-
 article,
 aside,
 details,
@@ -108,45 +104,89 @@ section {
 }
 html,
 body {
-  height: 100%;
+  font-size: var(--font-size);
+  color: var(--black-color);
+  word-break: keep-all;
+  line-height: 1.5;
+  text-size-adjust: none;
 }
-body {
-  position: re;
-  line-height: 1;
-}
-
 ol,
 ul {
   list-style: none;
 }
-
 blockquote,
 q {
   quotes: none;
 }
-
-blockquote {
-  &:before,
-  &:after {
-    content: "";
-    content: none;
-  }
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: none;
 }
-
-q {
-  &:before,
-  &:after {
-    content: "";
-    content: none;
-  }
-}
-
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
-a {
-  display: inline-block;
+button,
+textarea,
+input {
+  padding: 0.5rem 1rem;
+  margin: 0;
+  border-width: 1px;
+  box-sizing: border-box;
+  font-size: 1.4rem;
+  outline: none;
+}
+input[type="text"],
+input[type="password"],
+input[type="tel"],
+input[type="number"],
+button {
+  appearance: none;
+}
+button {
+  border: 1px solid var(--black-color);
+  border-radius: 2px;
+  background-color: #fff;
+  font-family: var(--font-family);
+  color: var(--black-color);
+  cursor: pointer;
+  transition-property: background-color, border-color, color;
+  transition-duration: 0.1s;
+  transition-timing-function: ease;
+}
+select {
+  height: 3rem;
+  padding: 0 0 0 1rem;
+  border: 1px solid #b2b2b2;
+  border-radius: 2px;
+  background-color: #fff;
+}
+img {
+  max-width: 100%;
+}
+a,
+a:visited,
+a:active {
   text-decoration: none;
+  color: var(--black-color);
+}
+
+:before,
+:after {
+  box-sizing: border-box;
+}
+
+@include media.tablet {
+  html,
+  body {
+    font-weight: 300;
+  }
+}
+
+@include media.mobile {
+  select {
+    height: 5rem;
+  }
 }

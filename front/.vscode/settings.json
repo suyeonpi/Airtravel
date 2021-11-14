@@ -1,35 +1,21 @@
 {
-  "liveServer.settings.donotVerifyTags": true,
-  "liveServer.settings.port": 5000,
-  "liveSassCompile.settings.autoprefix": [],
   "prettier.trailingComma": "es5",
-
-  "workbench.iconTheme": "material-icon-theme",
-
-  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
 
   "editor.tabSize": 2,
 
   "editor.defaultFormatter": "esbenp.prettier-vscode",
 
-  "editor.formatOnSave": true,
-
-  "[javascript]": {
-    "editor.formatOnSave": true
-  },
-
   "eslint.alwaysShowStatus": true,
-
-  "files.autoSave": "onFocusChange",
 
   "javascript.validate.enable": false,
 
-  "typescript.updateImportsOnFileMove.enabled": "always",
   "git.autofetch": true,
-  "editor.suggestSelection": "first",
+
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "explorer.confirmDelete": false,
-  "git.confirmSync": false,
   "[html]": {
     "editor.defaultFormatter": "vscode.html-language-features"
   },
@@ -103,7 +89,5 @@
   },
   "files.associations": {
     "*.html": "html"
-  },
-  "liveServer.settings.donotShowInfoMsg": true,
-  "python.terminal.activateEnvInCurrentTerminal": true
+  }
 }
