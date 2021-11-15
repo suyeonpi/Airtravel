@@ -1,5 +1,6 @@
 @use 'common/utils' as util;
 
+//S: Post Card 스타일
 .post {
   float: left;
   margin-bottom: 5rem;
@@ -59,6 +60,7 @@
     }
   }
 }
+//E: Post Card 스타일
 
 .btn__like {
   input[type="button"] {
@@ -86,6 +88,7 @@
 // <label htmlFor="likeBtn">{like}</label>
 // </div>
 
+//S: Slick-Slider 스타일
 .slider {
   &__wrap {
     width: 100%;
@@ -119,3 +122,5 @@
 .slick-dots {
   bottom: 30px;
 }
+
+//E: Slick-Slider 스타일
