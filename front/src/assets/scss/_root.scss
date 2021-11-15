@@ -11,7 +11,7 @@
   color: var( --primary-color) 이렇게 작성해주시면 됩니다.
 */
 
-@use './common/media-query' as media;
+@use "./common/media-query" as media;
 
 :root {
   --font-size: 10px;
@@ -23,7 +23,7 @@
   // --black-color: ;
   // --brand-color: ;
 }
-
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap");
 @include media.tablet {
   :root {
     --font-family: "Noto Sans KR", sans-serif;
