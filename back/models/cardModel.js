@@ -42,6 +42,11 @@ const cardSchema = new Mongoose.Schema(
       type: Number,
       default: 0,
     },
+    usernick: {
+      type: String,
+      required: true,
+    },
+    user_url: String,
   },
   { timestamps: true }
 );
@@ -49,3 +54,27 @@ const cardSchema = new Mongoose.Schema(
 createVirtualId(cardSchema);
 
 export const Card = Mongoose.model('Card', cardSchema);
+
+export const getAll = () => {
+  return Card.find().sort({ createdAt: -1 });
+};
+
+export const getAllByUser = (usernick) => {
+  return Card.find({ usernick }).sort({ createdAt: -1 });
+};
+
+export const getById = (id) => {
+  return Card.findById(id);
+};
+
+export const create = (card) => {
+  return new Card(card).save();
+};
+
+export const update = (id, card) => {
+  return Card.findByIdAndUpdate(id, { card }, { returnOriginal: false });
+};
+
+export const remove = (id) => {
+  return Card.findByIdAndDelete(id);
+};
