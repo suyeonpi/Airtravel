@@ -1,14 +1,20 @@
-import Header from "./components/HeaderComponent/Header";
-import CategoryList from "./components/ListComponent/SliderList";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import MainPage from "./pages/MainPage";
+import MyPage from "./pages/MyPage";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <div className="contents-container">
-        <CategoryList />
-      </div>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="mypage" element={<MyPage />} />
+        <Route path="login" element={<LoginPage />} />
+        <Route path="signup" element={<SignupPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
