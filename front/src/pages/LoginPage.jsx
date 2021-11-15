@@ -2,31 +2,27 @@ import React from "react";
 
 function LoginPage(props) {
   return (
-    <div className="login__container">
-      <div className="login__form">
-        <div className="login__form--title">로그인</div>
-        <div className="login__form--divider-top"></div>
+    <div className="login login-container">
+      <div className="login-form">
+        <div className="login-form title">로그인</div>
+        <div className="divider"></div>
+        <input type="text" placeholder="아이디" />
+        <input type="password" placeholder="비밀번호" />
         <input
-          className="login__form--input login__form--id"
-          type="text"
-          placeholder="아이디"
-        />
-        <input
-          className="login__form--input login__form--password"
-          type="text"
-          placeholder="비밀번호"
-        />
-        <input
-          className="login__form--login-button"
+          className="btn btn__primary btn__large"
           type="button"
           value="로그인"
         />
-        <div className="login__form--divider-bottom"></div>
-        <div className="question__wrap">
+        <div className="divider"></div>
+        <div className="question question-wrap">
           <div className="question__text">
             <span>아직 회원이 아니신가요?</span>
           </div>
-          <input className="question__button" type="button" value="회원가입" />
+          <input
+            className="btn btn__light btn__large"
+            type="button"
+            value="회원가입"
+          />
         </div>
       </div>
     </div>

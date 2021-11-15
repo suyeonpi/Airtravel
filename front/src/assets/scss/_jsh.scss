@@ -1,91 +1,71 @@
 .login {
-  &__container {
-    margin-top: 110px;
+  &-container {
+    margin-top: 11rem;
     display: flex;
     justify-content: center;
   }
 
-  &__form {
-    width: 580px;
+  &-form {
+    width: 38.6666rem;
+
+    &.title {
+      margin-bottom: 3.2rem;
+      text-align: center;
+      font-size: 3.2rem;
+      font-weight: 700;
+    }
+
+    input[type="text"] {
+      margin-top: 3.4666rem;
+    }
+
+    input[type="password"] {
+      margin-top: 2.1333rem;
+    }
   }
 
-  &__form--title {
-    text-align: center;
-    font-size: 48px;
+  input[type="button"] {
+    margin-top: 3.4666rem;
+    margin-bottom: 6.6666rem;
   }
 
-  &__form--divider-top {
-    margin-top: 34px;
-    height: 4px;
-    background-color: #767676;
-  }
-
-  &__form--input {
-    padding: 20px;
-    font-size: 2.4rem;
-    width: 580px;
-    height: 76px;
+  input[type="text"],
+  input[type="password"] {
+    padding: 1.3333rem;
+    font-size: 1.6rem;
+    width: 38.6666rem;
+    height: 5.0666rem;
     background-color: #f1f1f5;
-    border: 1px solid #f1f1f5;
+    border: 2px solid #f1f1f5;
     border-radius: 8px;
-  }
-
-  &__form--id {
-    margin-top: 52px;
-  }
-
-  &__form--password {
-    margin-top: 32px;
-  }
-
-  &__form--login-button {
-    margin-top: 72px;
-    width: 580px;
-    height: 76px;
-    background: #3269f7;
-    border-radius: 8px;
-    font-size: 24px;
-    line-height: 36px;
-    font-weight: bold;
-    color: #ffffff;
-    cursor: pointer;
-  }
-
-  &__form--divider-bottom {
-    margin-top: 100px;
-    height: 4px;
-    background-color: #dbdbdb;
+    &:focus {
+      border: 2px solid #dbdbdb;
+    }
   }
 }
 
 .question {
-  &__wrap {
+  &-wrap {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 
   &__text {
-    margin-top: 60px;
-    font-size: 24px;
-    line-height: 35px;
-    font-weight: normal;
+    margin-top: 4rem;
+    font-size: 1.6rem;
+    line-height: 1;
+    font-weight: 400;
     color: #000000;
   }
 
-  &__button {
+  input[type="button"] {
     display: inline-block;
-    margin-top: 32px;
-    width: 580px;
-    height: 76px;
-    background: #ffffff;
-    border: 2px solid #191919;
-    border-radius: 8px;
-    font-size: 24px;
-    cursor: pointer;
+    margin-top: 3.2rem;
+
     &:hover {
-      transition: 1.5s;
+      transition: 0.5s;
       color: #ffffff;
       background-color: #000000;
     }
