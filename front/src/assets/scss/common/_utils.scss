@@ -7,6 +7,14 @@
   }
 }
 
+@mixin after($dis) {
+  &::after {
+    display: $dis;
+    content: "";
+    @content;
+  }
+}
+
 @mixin setPosition($pos, $top, $right, $bottom, $left) {
   position: $pos;
   top: $top;
@@ -29,4 +37,9 @@
   -webkit-line-clamp: $line;
   -webkit-box-orient: vertical;
   height: $height;
+}
+
+//이미지 bacseUrl
+@function imgUrl($filename) {
+  @return url("../images/#{$filename}");
 }
