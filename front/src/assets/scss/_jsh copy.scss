@@ -1,0 +1,93 @@
+.login {
+  &__container {
+    margin-top: 110px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__form {
+    width: 580px;
+  }
+
+  &__form--title {
+    text-align: center;
+    font-size: 48px;
+  }
+
+  &__form--divider-top {
+    margin-top: 34px;
+    height: 4px;
+    background-color: #767676;
+  }
+
+  &__form--input {
+    padding: 20px;
+    font-size: 2.4rem;
+    width: 580px;
+    height: 76px;
+    background-color: #f1f1f5;
+    border: 1px solid #f1f1f5;
+    border-radius: 8px;
+  }
+
+  &__form--id {
+    margin-top: 52px;
+  }
+
+  &__form--password {
+    margin-top: 32px;
+  }
+
+  &__form--login-button {
+    margin-top: 72px;
+    width: 580px;
+    height: 76px;
+    background: #3269f7;
+    border-radius: 8px;
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: bold;
+    color: #ffffff;
+    cursor: pointer;
+  }
+
+  &__form--divider-bottom {
+    margin-top: 100px;
+    height: 4px;
+    background-color: #dbdbdb;
+  }
+}
+
+.question {
+  &__wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__text {
+    margin-top: 60px;
+    font-size: 24px;
+    line-height: 35px;
+    font-weight: normal;
+    color: #000000;
+  }
+
+  &__button {
+    display: inline-block;
+    margin-top: 32px;
+    width: 580px;
+    height: 76px;
+    background: #ffffff;
+    border: 2px solid #191919;
+    border-radius: 8px;
+    font-size: 24px;
+    cursor: pointer;
+    &:hover {
+      transition: 1.5s;
+      color: #ffffff;
+      background-color: #000000;
+    }
+  }
+}
