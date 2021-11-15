@@ -1,22 +1,48 @@
 @use './common/media-query' as media;
 @use './common/utils' as utils;
 
-// scss 사용 예시
+//:S Header
 .header {
   width: 100%;
   font-size: 3.2rem;
+
+  height: 8.6rem;
   nav {
-    width: 1200px;
-    margin: 0 auto;
     @include utils.setFlex(flex, space-between);
+    width: 1200px;
+    height: 100%;
+    margin: 0 auto;
   }
   &__logo {
+    width: 20rem;
+    height: 100%;
     overflow: hidden;
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      line-height: 8.6rem;
+      overflow: hidden;
+      text-indent: -99999rem;
+      background: utils.imgUrl("@ico-logo.svg") no-repeat center / contain;
+    }
   }
   &__mypage {
+    width: 3rem;
+    height: 100%;
     overflow: hidden;
+    a {
+      display: inline-block;
+      width: 100%;
+      height: 100%;
+      line-height: 8.6rem;
+      overflow: hidden;
+      text-indent: -99999rem;
+      background: utils.imgUrl("@ico-user.svg") no-repeat center / contain;
+    }
   }
 }
+//:E Header
 
 @include media.labtop {
   .header {
