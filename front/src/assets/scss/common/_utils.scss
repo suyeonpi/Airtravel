@@ -7,6 +7,42 @@
   }
 }
 
+.divider {
+  height: 0.2rem;
+  background-color: #dbdbdb;
+}
+
+.btn {
+  font-size: 1.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  border-radius: 0.8rem;
+
+  &__primary {
+    background-color: var(--main-blue-color);
+    border: 3px solid var(--main-blue-color);
+    color: #fff;
+  }
+  &__light {
+    background-color: #fff;
+    border: 2px solid #191919;
+    color: #191919;
+  }
+  &__large {
+    width: 38.6666rem;
+    height: 5.0666rem;
+    line-height: 3.6rem;
+  }
+  &__medium {
+    width: 38.6666rem;
+    height: 5.0666rem;
+  }
+  &__small {
+    width: 8.0666rem;
+    height: 4rem;
+  }
+}
+
 @mixin after($dis) {
   &::after {
     display: $dis;

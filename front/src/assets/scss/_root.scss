@@ -15,18 +15,14 @@
 
 :root {
   --font-size: 10px;
-  --font-family: "Malgun Gothic", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
-
-  // TODO: 디자인 완전히 나오면 아래 컬러 값 셋팅
-  // --primary-color: ;
-  // --red-color: ;
-  // --black-color: ;
-  // --brand-color: ;
+  --font-family: "Noto Sans KR", "맑은 고딕", "Apple SD Gothic Neo", sans-serif;
+  --main-blue-color: #3269f6;
+  --form-gray-color: #f1f1f5;
 }
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap");
 @include media.tablet {
   :root {
-    --font-family: "Noto Sans KR", sans-serif;
+    --font-family: "Noto Sans KR", "맑은 고딕", "Apple SD Gothic Neo",
+      sans-serif;
   }
 }
 
