@@ -1,7 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "./assets/scss/styled.scss";
+// import "./assets/css/slick.min.css";
+// import "./assets/css/slick-theme.min.css";
 import App from "./App";
+
 import reportWebVitals from "./reportWebVitals";
 
 ReactDOM.render(
