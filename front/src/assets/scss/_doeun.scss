@@ -25,3 +25,68 @@
 // <input id="likeBtn" type="button" onClick={onLikeHandler} />
 // <label htmlFor="likeBtn">{like}</label>
 // </div>
+
+.main-content-wrap {
+  width: 120rem;
+  height: auto;
+  margin: 0 auto;
+}
+
+.categories {
+  margin: 0 auto 22rem;
+  &-title {
+    text-align: center;
+    font-size: 3.6rem;
+    font-weight: 700;
+    color: #191919;
+    margin-bottom: 4rem;
+  }
+  .slick-track {
+    display: flex;
+    margin: 0 auto;
+    & > div {
+      margin: 0 2.5rem;
+      width: 17.2rem !important;
+    }
+  }
+  &__item {
+    width: 100%;
+    overflow: hidden;
+
+    strong {
+      display: inline-block;
+      margin-top: 2.4rem;
+      text-align: center;
+      display: inline-block;
+      width: 100%;
+      font-size: 2.4rem;
+      border-radius: 50%;
+      font-weight: 400;
+      color: #191919;
+    }
+  }
+  &__thumbnail {
+    overflow: hidden;
+    display: inline-block;
+    width: 17.2rem;
+    height: 17.2rem;
+    background-color: #c4c4c4;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  &__thumbnail > img {
+    height: 100%;
+    transition: 0.7s;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+}
+
+.section-title {
+  text-align: center;
+  font-size: 3.6rem;
+  font-weight: 700;
+  color: #191919;
+  margin-bottom: 4.8rem;
+}
