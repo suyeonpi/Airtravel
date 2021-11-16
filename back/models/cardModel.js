@@ -43,6 +43,10 @@ const cardSchema = new Mongoose.Schema(
       type: Number,
       default: 0,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
     usernick: {
       type: String,
       required: true,
@@ -83,7 +87,7 @@ export const create = async (card, userId) => {
   }).save();
 };
 
-export const update = async (id, card) => {
+export const update = (id, card) => {
   const { picture_url, userId, usernick, user_url } = Card.findById(id);
   return Card.findByIdAndUpdate(
     id,
