@@ -1,6 +1,8 @@
 const userInfo = [
   {
-    usernick: "닉네임",
+    id: "user1",
+    password: "user1",
+    usernick: "빠바밤",
   },
 ];
 
