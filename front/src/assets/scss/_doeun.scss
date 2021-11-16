@@ -141,3 +141,28 @@
     margin-bottom: 2.8rem;
   }
 }
+
+.btn__regist-post {
+}
+
+.set-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer {
+  width: 100%;
+  height: 100px;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 40px;
+  &-wrap p {
+    line-height: 1.7em;
+    font-size: 14px;
+  }
+}

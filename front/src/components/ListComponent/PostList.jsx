@@ -1,13 +1,19 @@
 import React, { useState } from "react";
 import PostCard from "../PostComponent/PostCard";
 
-const PostList = ({ posts }) => {
+const PostList = ({ posts, mypage }) => {
   return (
     <>
-      <p style={{ fontSize: "1.8rem", margin: "2rem  0 6rem" }}>
-        총 <span style={{ color: "#3269f6" }}>{posts.length}</span> 건
-      </p>
-      <button className="btn btn__primary">등록하기</button>
+      <div className="set-flex" style={{ margin: "2.5rem 0" }}>
+        <span style={{ fontSize: "1.8rem" }}>
+          총 <span style={{ color: "#3269f6" }}>{posts.length}</span> 건
+        </span>
+        {mypage && (
+          <button className="btn btn__primary btn__small btn__regist-post">
+            등록하기
+          </button>
+        )}
+      </div>
       <div className="post__wrap clear-fix ">
         {posts.length > 0 ? (
           posts.map((post, idx) => (

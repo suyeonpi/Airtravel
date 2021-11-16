@@ -40,7 +40,7 @@ const MyPage = () => {
         </div>
       </div>
       <div className="main-content-wrap">
-        <PostList posts={posts} />
+        <PostList posts={posts} mypage={true} />
       </div>
     </>
   );

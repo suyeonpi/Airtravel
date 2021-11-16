@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/HeaderComponent/Header";
+import Footer from "./components/FooterComponent/Footer";
 import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
@@ -17,6 +18,7 @@ function App() {
           <Route path="signup" element={<SignupPage />} />
         </Routes>
       </BrowserRouter>
+      <Footer />
     </>
   );
 }
