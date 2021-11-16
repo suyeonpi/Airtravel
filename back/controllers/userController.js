@@ -26,7 +26,7 @@ export const signup = async (req, res) => {
     passwordConfirm,
   });
   const token = createJwtToken(userId);
-  res.status(201).json({ token, usernick });
+  res.status(201).json({ token, userId });
 };
 
 export const login = async (req, res) => {
