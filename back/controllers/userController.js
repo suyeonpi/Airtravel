@@ -1,4 +1,5 @@
 import * as userRepository from '../models/userModel.js';
+import jwt from 'jsonwebtoken';
 import {} from 'express-async-errors';
 import { config } from '../config.js';
 
@@ -13,6 +14,10 @@ export const signup = async (req, res) => {
   const found = await userRepository.findByUsername(username);
   if (found) {
     return res.status(409).json({ message: '해당 아이디가 이미 존재 합니다.' });
+  }
+  const foundNick = await userRepository.findByUsernick(usernick);
+  if (foundNick) {
+    return res.status(409).json({ message: '해당 닉네임이 이미 존재 합니다.' });
   }
   const userId = await userRepository.createUser({
     username,
@@ -38,7 +43,13 @@ export const login = async (req, res) => {
   }
 
   const token = createJwtToken(user.id);
-  res.status(200).json({ token });
+  res.status(200).json({ token, usernick: user.usernick });
 };
 
-export const me = async (req, res) => {};
+export const checkme = async (req, res) => {
+  const user = await userRepository.findById(req.userId);
+  if (!user) {
+    return res.status(404).json({ message: '회원 정보가 없습니다' });
+  }
+  res.status(200).json({ token: req.token, usernick: user.usernick });
+};

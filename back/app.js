@@ -16,7 +16,7 @@ app.use(cors());
 app.use(morgan('tiny'));
 
 app.use('/cards', cardRouter);
-app.use('/user', userRouter);
+app.use('/users', userRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

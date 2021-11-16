@@ -59,7 +59,7 @@ export const findByUsername = async (username) => {
   return await User.findOne({ username }).select('+password');
 };
 
-export const findByUsernick = async (nickname) => {
+export const findByUsernick = async (usernick) => {
   return await User.findOne({ usernick });
 };
 

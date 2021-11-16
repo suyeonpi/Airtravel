@@ -1,12 +1,13 @@
 import express from 'express';
 import * as userController from '../controllers/userController.js';
+import { verifyToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
-router.route('/signup', userController.signup);
+router.post('/signup', userController.signup);
 
-router.route('/login', userController.login);
+router.post('/login', userController.login);
 
-router.route('/me', userController.me);
+router.get('/checkme', verifyToken, userController.checkme);
 
 export default router;
