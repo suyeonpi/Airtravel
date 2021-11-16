@@ -5,7 +5,7 @@
 .header {
   width: 100%;
   font-size: 3.2rem;
-
+  border-bottom: 1px solid #dbdbdb;
   height: 8.6rem;
   nav {
     @include utils.setFlex(flex, space-between);
@@ -27,19 +27,24 @@
       background: utils.imgUrl("@ico-logo.svg") no-repeat center / contain;
     }
   }
-  &__mypage {
-    width: 3rem;
+  &__utils {
+    width: 15rem;
+    margin-right: -3rem;
     height: 100%;
+    font-size: 32px;
     overflow: hidden;
+    text-align: center;
     a {
       display: inline-block;
-      width: 100%;
-      height: 100%;
       line-height: 8.6rem;
       overflow: hidden;
-      text-indent: -99999rem;
-      background: utils.imgUrl("@ico-user.svg") no-repeat center / contain;
     }
+  }
+  &__signup {
+    width: 50%;
+  }
+  &__login {
+    width: 50%;
   }
 }
 //:E Header
