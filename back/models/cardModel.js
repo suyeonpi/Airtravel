@@ -1,5 +1,6 @@
 import Mongoose from 'mongoose';
 import { createVirtualId } from '../db/database.js';
+import * as userRepository from './userModel.js';
 
 const cardSchema = new Mongoose.Schema(
   {
@@ -42,6 +43,10 @@ const cardSchema = new Mongoose.Schema(
       type: Number,
       default: 0,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
     usernick: {
       type: String,
       required: true,
@@ -59,6 +64,10 @@ export const getAll = () => {
   return Card.find().sort({ createdAt: -1 });
 };
 
+export const getAllByContinent = (continent) => {
+  return Card.find({ continent }).sort({ createdAt: -1 });
+};
+
 export const getAllByUser = (usernick) => {
   return Card.find({ usernick }).sort({ createdAt: -1 });
 };
@@ -67,12 +76,27 @@ export const getById = (id) => {
   return Card.findById(id);
 };
 
-export const create = (card) => {
-  return new Card(card).save();
+export const create = async (card, userId) => {
+  const { usernick, user_url } = await userRepository.findById(userId);
+  return new Card({
+    ...card,
+    like_count: 0,
+    userId,
+    usernick,
+    user_url,
+  }).save();
 };
 
 export const update = (id, card) => {
-  return Card.findByIdAndUpdate(id, { card }, { returnOriginal: false });
+  const { picture_url, userId, usernick, user_url } = Card.findById(id);
+  return Card.findByIdAndUpdate(
+    id,
+    { ...card, picture_url, like_count: 0, userId, usernick, user_url },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 };
 
 export const remove = (id) => {

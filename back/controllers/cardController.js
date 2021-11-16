@@ -1,10 +1,16 @@
 import * as cardRepository from '../models/cardModel.js';
 
 export const getCards = async (req, res) => {
-  const usernick = req.query.usernick;
-  const cards = await (usernick
-    ? cardRepository.getAllByUser(usernick)
+  const { continent } = req.query;
+  const cards = await (continent
+    ? cardRepository.getAllByContinent(continent)
     : cardRepository.getAll());
+  res.status(200).json(cards);
+};
+
+export const getCardsByUser = async (req, res) => {
+  const { usernick } = req.query;
+  const cards = await cardRepository.getAllByUser(usernick);
   res.status(200).json(cards);
 };
 
@@ -19,28 +25,7 @@ export const getCard = async (req, res) => {
 };
 
 export const createCard = async (req, res) => {
-  const {
-    title,
-    location,
-    continent,
-    date,
-    content,
-    picture_url,
-    usernick,
-    user_url,
-  } = req.body;
-
-  const card = {
-    title,
-    location,
-    continent,
-    date,
-    content,
-    picture_url,
-    usernick,
-    user_url,
-  };
-  const newCard = await cardRepository.create(card);
+  const newCard = await cardRepository.create(req.body, req.userId);
   res.status(201).json(newCard);
 };
 
@@ -50,28 +35,10 @@ export const updateCard = async (req, res) => {
   if (!card) {
     return res.status(404).json({ message: `Card id(${id}) not found` });
   }
-  const {
-    title,
-    location,
-    continent,
-    date,
-    content,
-    picture_url,
-    usernick,
-    user_url,
-  } = req.body;
-
-  const mewCard = {
-    title,
-    location,
-    continent,
-    date,
-    content,
-    picture_url,
-    usernick,
-    user_url,
-  };
-  const newCard = await cardRepository.update(id, newCard);
+  if (card.userId !== req.userId) {
+    return res.sendStatus(403).json({ message: '권한이 없습니다' });
+  }
+  const newCard = await cardRepository.update(id, req.body);
   res.status(201).json(newCard);
 };
 
@@ -80,6 +47,9 @@ export const deleteCard = async (req, res) => {
   const card = await cardRepository.getById(id);
   if (!card) {
     return res.status(404).json({ message: `Card id(${id}) not found` });
+  }
+  if (card.userId !== req.userId) {
+    return res.sendStatus(403).json({ message: '권한이 없습니다' });
   }
   await cardRepository.remove(id);
   res.sendStatus(204);
