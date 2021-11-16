@@ -22,3 +22,11 @@ export const verifyToken = async (req, res, next) => {
     next();
   });
 };
+
+export const checkId = async (req, res, next) => {
+  const { username } = req.body;
+  const user = await userRepository.findByUsername(username);
+  if (user) {
+    return res.status(409).json({ message: '해당 아이디가 이미 존재 합니다.' });
+  }
+};

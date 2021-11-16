@@ -88,10 +88,9 @@ export const create = async (card, userId) => {
 };
 
 export const update = (id, card) => {
-  const { picture_url, userId, usernick, user_url } = Card.findById(id);
   return Card.findByIdAndUpdate(
     id,
-    { ...card, picture_url, like_count: 0, userId, usernick, user_url },
+    { ...card, like_count: 0 },
     {
       new: true,
       runValidators: true,
