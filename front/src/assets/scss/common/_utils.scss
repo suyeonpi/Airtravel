@@ -23,6 +23,17 @@
     border: 3px solid var(--main-blue-color);
     color: #fff;
   }
+  &__primary-outline {
+    &:hover {
+      transition: 0.3s;
+      color: #fff;
+      background-color: var(--main-blue-color);
+    }
+    background-color: #fff;
+    border-style: solid;
+    border-color: var(--main-blue-color);
+    color: var(--main-blue-color);
+  }
   &__light {
     background-color: #fff;
     border: 2px solid #191919;
@@ -38,7 +49,8 @@
     height: 5.0666rem;
   }
   &__small {
-    width: 8.0666rem;
+    border-width: 2px;
+    width: 9.0666rem;
     height: 4rem;
   }
 }
