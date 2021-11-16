@@ -4,9 +4,10 @@ import PostCard from "../PostComponent/PostCard";
 const PostList = ({ posts }) => {
   return (
     <>
-      <p style={{ fontSize: "1.8rem", margin: "2rem  0" }}>
+      <p style={{ fontSize: "1.8rem", margin: "2rem  0 6rem" }}>
         총 <span style={{ color: "#3269f6" }}>{posts.length}</span> 건
       </p>
+      <button className="btn btn__primary">등록하기</button>
       <div className="post__wrap clear-fix ">
         {posts.length > 0 ? (
           posts.map((post, idx) => (

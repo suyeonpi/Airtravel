@@ -90,3 +90,54 @@
   color: #191919;
   margin-bottom: 4.8rem;
 }
+
+.profile {
+  &__bg {
+    width: 100%;
+    height: 45.6rem;
+    overflow: hidden;
+    text-align: center;
+    img {
+      transform: translateY(-50%);
+      width: 100%;
+    }
+  }
+
+  &__info {
+    width: 120rem;
+    margin: 0 auto;
+    text-align: center;
+    height: auto;
+    button:hover {
+      transition: 0.5s;
+      background-color: #191919;
+      color: #fff;
+    }
+    padding-bottom: 5rem;
+    border-bottom: 2px solid #dbdbdb;
+  }
+
+  &__img {
+    width: 16.2rem;
+    height: 16.2rem;
+    margin: 0 auto;
+    background-color: #dbdbdb;
+    border-radius: 50%;
+    transform: translateY(-50%);
+    a {
+      display: inline-block;
+      width: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      height: 100%;
+    }
+  }
+
+  &__nick {
+    font-size: 3.6rem;
+    color: #191919;
+    font-weight: 700;
+    margin-top: -4rem;
+    margin-bottom: 2.8rem;
+  }
+}
