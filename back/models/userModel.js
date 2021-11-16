@@ -29,11 +29,16 @@ const userSchema = new Mongoose.Schema({
       validator: function (el) {
         return el === this.password;
       },
+      message: '비밀번호가 일치하지 않습니다',
     },
-    message: '비밀번호가 일치하지 않습니다',
   },
   user_url: String,
   back_url: String,
+  active: {
+    type: Boolean,
+    default: true,
+    select: false,
+  },
 });
 
 createVirtualId(userSchema);
@@ -44,6 +49,11 @@ userSchema.pre('save', async function (next) {
   this.password = await bcrypt.hash(this.password, config.bcrypt.saltRounds);
 
   this.passwordConfirm = undefined;
+});
+
+userSchema.pre('/^find/', function (next) {
+  this.find({ active: { $ne: false } });
+  next();
 });
 
 userSchema.methods.correctPassword = async function (
@@ -69,4 +79,19 @@ export const findById = async (id) => {
 
 export const createUser = async (user) => {
   return new User(user).save().then((data) => data.id);
+};
+
+export const updateUser = async (id, user) => {
+  return await User.findByIdAndUpdate(
+    id,
+    { ...user },
+    {
+      new: true,
+      runValidator: true,
+    }
+  );
+};
+
+export const deleteUser = async (id) => {
+  return await User.findByIdAndUpdate(id, { active: false });
 };

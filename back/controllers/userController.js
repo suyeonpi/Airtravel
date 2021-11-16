@@ -53,3 +53,18 @@ export const checkme = async (req, res) => {
   }
   res.status(200).json({ token: req.token, usernick: user.usernick });
 };
+
+export const updateMe = async (req, res) => {
+  const { usernick, user_url, back_url } = req.body;
+  const updatedUser = await userRepository.updateUser(req.userId, {
+    usernick,
+    user_url,
+    back_url,
+  });
+  res.status(200).json(updatedUser);
+};
+
+export const deleteMe = async (req, res) => {
+  await userRepository.deleteUser(req.userId);
+  res.sendStatus(204);
+};
