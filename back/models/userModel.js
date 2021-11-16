@@ -56,7 +56,7 @@ userSchema.methods.correctPassword = async function (
 export const User = Mongoose.model('User', userSchema);
 
 export const findByUsername = async (username) => {
-  return await User.findOne({ username });
+  return await User.findOne({ username }).select('+password');
 };
 
 export const findByUsernick = async (nickname) => {
@@ -64,7 +64,7 @@ export const findByUsernick = async (nickname) => {
 };
 
 export const findById = async (id) => {
-  return User.findById(id);
+  return User.findById(id).select('+password');
 };
 
 export const createUser = async (user) => {
