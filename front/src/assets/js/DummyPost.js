@@ -1,7 +1,7 @@
 const posts = [
   {
     id: 0,
-    continent: "동유럽",
+    continent: "남아메리카",
     location: "동유럽 중 한 곳",
     date: "02.11.21",
     title: "게시물 테스트입니다.",
@@ -10,7 +10,7 @@ const posts = [
   },
   {
     id: 1,
-    continent: "대륙대륙대륙",
+    continent: "아프리카",
     location: "지역입니다",
     date: "02.11.21",
     title: "또 가고 싶은 뉴욕 보고싶어라~~~",
@@ -20,7 +20,7 @@ const posts = [
   },
   {
     id: 2,
-    continent: "2222",
+    continent: "아프리카",
     location: "2222222",
     date: "02.11.21",
     title: "긴 제목 테스트입니다. 긴 제목 테스트입니다. 긴 제목 테스트입니다.",
@@ -30,7 +30,7 @@ const posts = [
   },
   {
     id: 3,
-    continent: "333",
+    continent: "아시아",
     location: "33333",
     date: "02.11.21",
     title: "세번째 포스트입니다.",
@@ -39,7 +39,7 @@ const posts = [
   },
   {
     id: 4,
-    continent: "4444",
+    continent: "아시아",
     location: "444444",
     date: "02.11.21",
     title: "네번째 포스팅",
@@ -49,7 +49,7 @@ const posts = [
   },
   {
     id: 5,
-    continent: "동유럽",
+    continent: "유럽",
     location: "동유럽 중 한 곳",
     date: "02.11.21",
     title: "게시물 테스트입니다.",
@@ -58,7 +58,7 @@ const posts = [
   },
   {
     id: 6,
-    continent: "대륙대륙대륙",
+    continent: "아프리카",
     location: "지역입니다",
     date: "02.11.21",
     title: "또 가고 싶은 뉴욕 보고싶어라~~~",
