@@ -71,3 +71,79 @@
     }
   }
 }
+
+.signup {
+  &-container {
+    margin-top: 11rem;
+    display: flex;
+    justify-content: center;
+  }
+
+  &-form {
+    width: 38.6666rem;
+
+    &.title {
+      margin-bottom: 3.2rem;
+      text-align: center;
+      font-size: 3.2rem;
+      font-weight: 700;
+    }
+
+    & .id__wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 3.4666rem;
+    }
+
+    input[type="text"] {
+      width: 28.6666rem;
+    }
+
+    input[type="password"] {
+      width: 38.6666rem;
+      margin-top: 2.1333rem;
+    }
+  }
+
+  input[type="submit"] {
+    margin-top: 3.4666rem;
+    margin-bottom: 6.6666rem;
+  }
+
+  input[type="text"],
+  input[type="password"] {
+    padding: 1.3333rem;
+    font-size: 1.6rem;
+    height: 5.0666rem;
+    background-color: #f1f1f5;
+    border: 2px solid #f1f1f5;
+    border-radius: 8px;
+    &:focus {
+      border: 2px solid #dbdbdb;
+    }
+  }
+
+  &__question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-text {
+      margin-top: 2rem;
+      font-size: 1.6rem;
+      line-height: 1;
+      font-weight: 400;
+      color: #000000;
+    }
+
+    input[type="button"] {
+      margin-top: 2rem;
+      &:hover {
+        transition: 0.5s;
+        color: #ffffff;
+        background-color: #000000;
+      }
+    }
+  }
+}
