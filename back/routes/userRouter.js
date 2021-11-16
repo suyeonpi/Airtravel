@@ -10,9 +10,11 @@ router.post('/signup', userController.signup);
 
 router.post('/login', userController.login);
 
-router.get('/checkme', verifyToken, userController.checkme);
+router.get('/checkMe', verifyToken, userController.checkMe);
 
 router.patch('/updateMe', verifyToken, userController.updateMe);
+
+router.patch('/updatePW', verifyToken, userController.updatePassword);
 
 router.delete('/deleteMe', verifyToken, userController.deleteMe);
 

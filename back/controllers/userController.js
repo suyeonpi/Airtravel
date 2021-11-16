@@ -46,7 +46,7 @@ export const login = async (req, res) => {
   res.status(200).json({ token, usernick: user.usernick });
 };
 
-export const checkme = async (req, res) => {
+export const checkMe = async (req, res) => {
   const user = await userRepository.findById(req.userId);
   if (!user) {
     return res.status(404).json({ message: '회원 정보가 없습니다' });
@@ -67,4 +67,26 @@ export const updateMe = async (req, res) => {
 export const deleteMe = async (req, res) => {
   await userRepository.deleteUser(req.userId);
   res.sendStatus(204);
+};
+
+export const updatePassword = async (req, res) => {
+  const user = await userRepository.findById(req.userId);
+  const { currentPassword, password, passwordConfirm } = req.body;
+
+  if (!(await user.correctPassword(currentPassword, user.password))) {
+    return res.status(401).json({ message: '비밀번호가 일치하지 않습니다' });
+  }
+  if (currentPassword === password) {
+    return res
+      .status(401)
+      .json({ message: '같은 비밀번호를 설정할 수 없습니다' });
+  }
+  const newUser = await userRepository.updateUserPassword(
+    req.userId,
+    password,
+    passwordConfirm
+  );
+
+  const newToken = createJwtToken(newUser.id);
+  res.status(200).json({ newToken, usernick: newUser.usernick });
 };

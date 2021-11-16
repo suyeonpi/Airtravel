@@ -81,15 +81,22 @@ export const createUser = async (user) => {
   return new User(user).save().then((data) => data.id);
 };
 
-export const updateUser = async (id, user) => {
+export const updateUser = async (id, userinfo) => {
   return await User.findByIdAndUpdate(
     id,
-    { ...user },
+    { ...userinfo },
     {
       new: true,
       runValidator: true,
     }
   );
+};
+
+export const updateUserPassword = async (userId, pw, pwc) => {
+  const user = await User.findById(userId).select('+password');
+  user.password = pw;
+  user.passwordConfirm = pwc;
+  return await user.save();
 };
 
 export const deleteUser = async (id) => {
