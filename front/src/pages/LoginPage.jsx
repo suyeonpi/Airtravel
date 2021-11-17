@@ -57,9 +57,9 @@ function LoginPage(props) {
       return false;
     }
 
-    if (userPW.length > 8) {
+    if (userPW.length < 8) {
       setInputError(true);
-      setErrMsg("비밀번호가 8자리를 초과했습니다.");
+      setErrMsg("비밀번호는 최소 8자 이상 입력해주세요.");
       return false;
     }
 
