@@ -54,7 +54,8 @@
     border: 2px solid #f1f1f5;
     border-radius: 8px;
     &:focus {
-      border: 2px solid #dbdbdb;
+      border: 2px solid var(--main-blue-color);
+      caret-color: var(--main-blue-color);
     }
   }
 }
@@ -135,7 +136,8 @@
     border: 2px solid #f1f1f5;
     border-radius: 8px;
     &:focus {
-      border: 2px solid #dbdbdb;
+      border: 2px solid var(--main-blue-color);
+      caret-color: var(--main-blue-color);
     }
   }
 
