@@ -24,9 +24,24 @@
     }
   }
 
+  & .err-msg-active {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    height: 3rem;
+    color: #ff3120;
+  }
+
+  & .err-msg-inactive {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: 3rem;
+    visibility: hidden;
+  }
+
   input[type="submit"] {
-    margin-top: 3.4666rem;
-    margin-bottom: 6.6666rem;
+    // margin-top: 3.4666rem;
+    margin-bottom: 3.6666rem;
   }
 
   input[type="text"],
@@ -39,7 +54,8 @@
     border: 2px solid #f1f1f5;
     border-radius: 8px;
     &:focus {
-      border: 2px solid #dbdbdb;
+      border: 2px solid var(--main-blue-color);
+      caret-color: var(--main-blue-color);
     }
   }
 }
@@ -120,7 +136,8 @@
     border: 2px solid #f1f1f5;
     border-radius: 8px;
     &:focus {
-      border: 2px solid #dbdbdb;
+      border: 2px solid var(--main-blue-color);
+      caret-color: var(--main-blue-color);
     }
   }
 
