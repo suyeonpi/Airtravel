@@ -28,5 +28,9 @@ export const checkId = async (req, res, next) => {
   const user = await userRepository.findByUsername(username);
   if (user) {
     return res.status(409).json({ message: '해당 아이디가 이미 존재 합니다.' });
+  } else {
+    return res
+      .status(200)
+      .json({ message: '해당 아이디를 사용할 수 있습니다.' });
   }
 };
