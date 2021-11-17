@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage(props) {
@@ -8,6 +8,7 @@ function LoginPage(props) {
   const [inputError, setInputError] = useState(false);
   const [errMsg, setErrMsg] = useState("");
   const idInput = useRef();
+  const pwInput = useRef();
   const navigate = useNavigate();
 
   const onSubmit = (event) => {
@@ -41,7 +42,24 @@ function LoginPage(props) {
 
   const validateLoginForm = () => {
     //더 강한 클라이언트 사이드 Validation 로직 필요.
-    if (userID.length > 0 && userPW.length > 0) return true;
+    if (!(userID.length > 0 && userPW.length > 0)) {
+      setInputError(true);
+      if (userID.length === 0) {
+        idInput.current.focus();
+      } else {
+        pwInput.current.focus();
+      }
+      setErrMsg("아이디와 비밀번호를 모두 입력해주세요.");
+      return false;
+    }
+
+    if (userPW.length > 8) {
+      setInputError(true);
+      setErrMsg("비밀번호가 8자리를 초과했습니다.");
+      return false;
+    }
+
+    return true;
   };
 
   const onChangeUserID = (event) => {
@@ -69,6 +87,7 @@ function LoginPage(props) {
         />
         <input
           value={userPW}
+          ref={pwInput}
           type="password"
           placeholder="비밀번호"
           onChange={onChangeUserPW}
@@ -86,11 +105,13 @@ function LoginPage(props) {
           <div className="question__text">
             <span>아직 회원이 아니신가요?</span>
           </div>
-          <input
-            className="btn btn__light btn__large"
-            type="button"
-            value="회원가입"
-          />
+          <Link to="/signup">
+            <input
+              className="btn btn__light btn__large"
+              type="button"
+              value="회원가입"
+            />
+          </Link>
         </div>
       </form>
     </div>
