@@ -12,6 +12,8 @@ import profileImg from "../assets/images/@img-user-profile.png";
 
 const MyPage = () => {
   const [userInfo, setUserInfo] = useState({ ...userDummy });
+  const [newInfo, setNewInfo] = useState(userInfo.usernick);
+
   const [posts, setPosts] = useState([...DummyPost]);
   const [activeEditModal, setActiveEditModal] = useState(true);
   const [activeAddModal, setactiveAddModal] = useState(false);
@@ -20,10 +22,22 @@ const MyPage = () => {
     alert("포스트 등록");
   };
 
-  const onChangeUser = (newData) => {
-    const [name, value] = newData;
-    console.log(name, value);
+  const onChangeUser = () => {
+    setUserInfo({
+      ...userInfo,
+      ["usernick"]: newInfo,
+    });
+    onEditProfile();
   };
+
+  const onChangeNick = (e) => {
+    const { name, value } = e.target;
+    setNewInfo((prev) => (prev = value));
+  };
+
+  useEffect(() => {
+    console.log(userInfo);
+  }, [userInfo]);
 
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
@@ -65,9 +79,19 @@ const MyPage = () => {
           onAddPostHandler={onAddPostHandler}
         />
       </div>
+
       {/* 프로필 수정 모달 */}
       {activeEditModal && (
-        <EditModal userInfo={userInfo} onChangeUser={onChangeUser} />
+        <div className="modal-back">
+          <EditModal
+            newInfo={newInfo}
+            onChangeUser={onChangeUser}
+            profileImg={profileImg}
+            banner={profileBg}
+            onChangeNick={onChangeNick}
+            onCloseModal={onEditProfile}
+          />
+        </div>
       )}
     </>
   );

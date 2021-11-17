@@ -66,6 +66,7 @@
     cursor: pointer;
     overflow: hidden;
     font-size: 0;
+    vertical-align: middle;
     &.like {
       background: util.imgUrl("@ico-like.png") no-repeat center/ contain;
     }
@@ -93,7 +94,6 @@
 }
 
 //S: MYPAGE
-
 .profile {
   &__bg {
     width: 100%;
