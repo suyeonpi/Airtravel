@@ -7,6 +7,7 @@ import { connectDB } from './db/database.js';
 import { config } from './config.js';
 import cardRouter from './routes/cardRouter.js';
 import userRouter from './routes/userRouter.js';
+import likeRouter from './routes/likeRouter.js';
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(morgan('tiny'));
 
 app.use('/cards', cardRouter);
 app.use('/users', userRouter);
+app.use('/like', likeRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);

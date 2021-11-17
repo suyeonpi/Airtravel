@@ -1,6 +1,6 @@
 .login {
   &-container {
-    margin-top: 11rem;
+    margin-top: 8rem;
     display: flex;
     justify-content: center;
   }
@@ -90,7 +90,7 @@
 
 .signup {
   &-container {
-    margin-top: 11rem;
+    margin-top: 8rem;
     display: flex;
     justify-content: center;
   }
@@ -112,23 +112,47 @@
       margin-top: 3.4666rem;
     }
 
-    input[type="text"] {
+    .id__wrap input[type="text"] {
+      margin-top: 0;
       width: 28.6666rem;
     }
 
     input[type="password"] {
-      width: 38.6666rem;
       margin-top: 2.1333rem;
     }
   }
 
+  & .msg-active {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-size: 1.6rem;
+    height: 3rem;
+  }
+
+  & .msg-inactive {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    height: 3rem;
+    visibility: hidden;
+  }
+
+  & .err-msg-active {
+    color: #ff3120;
+  }
+
+  & .pos-msg-active {
+    color: var(--main-blue-color);
+  }
+
   input[type="submit"] {
-    margin-top: 3.4666rem;
-    margin-bottom: 6.6666rem;
+    // margin-top: 3.4666rem;
+    margin-bottom: 3.4666rem;
   }
 
   input[type="text"],
   input[type="password"] {
+    margin-top: 2.1333rem;
+    width: 38.6666rem;
     padding: 1.3333rem;
     font-size: 1.6rem;
     height: 5.0666rem;
