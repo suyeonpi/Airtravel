@@ -26,9 +26,9 @@ const MainPage = () => {
   return (
     <>
       <SliderList />
-      <div className="main-content-wrap">
+      <div className="content-wrap">
         <CategoryList categories={categories} onPageTurn={onPageTurn} />
-        <div className="section-title">
+        <div className="title title__large" style={{ marginBottom: "4.8rem" }}>
           <strong>{label}</strong>
         </div>
         <PostList posts={posts} />
