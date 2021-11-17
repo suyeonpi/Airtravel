@@ -51,7 +51,7 @@ userSchema.pre('save', async function (next) {
   this.passwordConfirm = undefined;
 });
 
-userSchema.pre('/^find/', function (next) {
+userSchema.pre(/^find/, function (next) {
   this.find({ active: { $ne: false } });
   next();
 });
@@ -87,7 +87,7 @@ export const updateUser = async (id, userinfo) => {
     { ...userinfo },
     {
       new: true,
-      runValidator: true,
+      runValidators: true,
     }
   );
 };
