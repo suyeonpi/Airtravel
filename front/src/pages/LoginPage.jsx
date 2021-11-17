@@ -32,7 +32,11 @@ function LoginPage(props) {
         .catch((err) => {
           setInputError(true);
           idInput.current.focus();
-          setErrMsg(err.response.data.message);
+          if (err.response) {
+            setErrMsg(err.response.data.message);
+          } else {
+            setErrMsg("서버 요청에 실패하였습니다.");
+          }
         });
     } else {
       console.log("input error!");

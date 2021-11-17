@@ -35,7 +35,11 @@ function SignupPage(props) {
         .catch((err) => {
           setInputAlertMsg(true);
           idInput.current.focus();
-          setInputAlertMsgContent(err.response.data.message);
+          if (err.response) {
+            setInputAlertMsgContent(err.response.data.message);
+          } else {
+            setInputAlertMsgContent("서버 요청에 문제가 있습니다.");
+          }
         });
     }
   };
@@ -75,7 +79,11 @@ function SignupPage(props) {
         })
         .catch((err) => {
           setInputAlertMsg(true);
-          setInputAlertMsgContent(err.response.data.message);
+          if (err.response) {
+            setInputAlertMsgContent(err.response.data.message);
+          } else {
+            setInputAlertMsgContent("서버 요청에 문제가 있습니다.");
+          }
         });
     } else {
       // console.log("input error!");
