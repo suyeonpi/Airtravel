@@ -58,7 +58,7 @@ const MyPage = () => {
           </button>
         </div>
       </div>
-      <div className="main-content-wrap">
+      <div className="content-wrap">
         <PostList
           posts={posts}
           mypage={true}

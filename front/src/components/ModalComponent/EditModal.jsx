@@ -14,7 +14,7 @@ const EditModal = ({ userInfo, onChangeUser }) => {
         {/*  */}
         <div className="modal-content">
           <div className="input-util input__edit-nick">
-            <span className="modal__label">닉네임</span>
+            <span className="title title__small">닉네임</span>
             <input
               id="editNick"
               name="usernick"
@@ -26,7 +26,7 @@ const EditModal = ({ userInfo, onChangeUser }) => {
           {/*  */}
 
           <div className="input-util input__edit-img">
-            <span className="modal__label">프로필 사진</span>
+            <span className="title title__small">프로필 사진</span>
             <div className="">
               <label htmlFor="editProfileImg">수정</label>
               <input type="file" name="" id="editProfileImg" />
@@ -34,7 +34,7 @@ const EditModal = ({ userInfo, onChangeUser }) => {
           </div>
           {/*  */}
           <div className="input-util input__edit-banner">
-            <label className="modal__label">배너 사진</label>
+            <label className="title title__small">배너 사진</label>
             <div className="">
               <label htmlFor="editBanner">수정</label>
               <input id="editBanner" type="file" />
