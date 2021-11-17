@@ -19,17 +19,26 @@ const likeSchema = new Mongoose.Schema(
   }
 );
 
-likeSchema.pre(/^find/, function (next) {
-  this.populate({
-    path: 'card',
-    select: 'title like_count',
-  }).populate({
-    path: 'user',
-    select: 'usernick',
-  });
-});
+// likeSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'card',
+//     select: 'title like_count',
+//   }).populate({
+//     path: 'user',
+//     select: 'usernick',
+//   });
+// });
 
 export const Like = Mongoose.model('Like', likeSchema);
+
+export const getAllCardsLiked = async (user) => {
+  return await Like.find({ user })
+    .populate({
+      path: 'card',
+      select: '-__v -userId',
+    })
+    .sort({ createdAt: -1 });
+};
 
 export const likeCard = async (cardId, userId) => {
   // const likeId = await Like.findOne({ card: cardId, user: userId });

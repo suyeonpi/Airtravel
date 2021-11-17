@@ -4,11 +4,6 @@ import * as userRepository from './userModel.js';
 
 const cardSchema = new Mongoose.Schema(
   {
-    title: {
-      type: String,
-      required: [true, '제목을 입력해주세요'],
-      maxlength: [15, '제목은 15자 이하로 적어주세요'],
-    },
     location: {
       type: String,
       required: [true, '위치를 입력해주세요'],
@@ -44,14 +39,9 @@ const cardSchema = new Mongoose.Schema(
       default: 0,
     },
     userId: {
-      type: String,
-      required: true,
+      type: Mongoose.Schema.ObjectId,
+      ref: 'User',
     },
-    usernick: {
-      type: String,
-      required: true,
-    },
-    user_url: String,
   },
   { timestamps: true }
 );
@@ -73,17 +63,17 @@ export const getAllByUser = (usernick) => {
 };
 
 export const getById = (id) => {
-  return Card.findById(id);
+  return Card.findById(id).populate({
+    path: 'userId',
+    select: 'usernick user_url',
+  });
 };
 
 export const create = async (card, userId) => {
-  const { usernick, user_url } = await userRepository.findById(userId);
   return new Card({
     ...card,
     like_count: 0,
     userId,
-    usernick,
-    user_url,
   }).save();
 };
 
