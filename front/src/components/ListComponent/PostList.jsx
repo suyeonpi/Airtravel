@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PostCard from "../PostComponent/PostCard";
 
-const PostList = ({ posts, mypage }) => {
+const PostList = ({ posts, mypage, onAddPostHandler }) => {
   return (
     <>
       <div className="set-flex" style={{ margin: "2.5rem 0" }}>
@@ -9,7 +9,10 @@ const PostList = ({ posts, mypage }) => {
           총 <span style={{ color: "#3269f6" }}>{posts.length}</span> 건
         </span>
         {mypage && (
-          <button className="btn btn__primary btn__small btn__regist-post">
+          <button
+            className="btn btn__primary btn__small btn__regist-post"
+            onClick={onAddPostHandler}
+          >
             등록하기
           </button>
         )}
@@ -20,6 +23,7 @@ const PostList = ({ posts, mypage }) => {
             <PostCard post={post} key={idx + Math.random().toString()} />
           ))
         ) : (
+          //선택한 필터의 게시물이 없을 경우에 나타낼 문구
           <div className="post__noresult ">
             <p>아직 게시물이 없네요!</p>
           </div>
