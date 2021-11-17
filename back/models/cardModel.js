@@ -87,8 +87,8 @@ export const create = async (card, userId) => {
   }).save();
 };
 
-export const update = (id, card) => {
-  return Card.findByIdAndUpdate(
+export const update = async (id, card) => {
+  return await Card.findByIdAndUpdate(
     id,
     { ...card, like_count: 0 },
     {
@@ -100,4 +100,17 @@ export const update = (id, card) => {
 
 export const remove = (id) => {
   return Card.findByIdAndDelete(id);
+};
+
+export const updateLike = async (id, count) => {
+  return await Card.findByIdAndUpdate(
+    id,
+    {
+      like_count: count,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
 };

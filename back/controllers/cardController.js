@@ -33,7 +33,7 @@ export const updateCard = async (req, res) => {
   const { id } = req.params;
   const card = await cardRepository.getById(id);
   if (!card) {
-    return res.status(404).json({ message: `Card id(${id}) not found` });
+    return res.status(404).json({ message: '해당 카드를 찾을 수 없습니다.' });
   }
   if (card.userId !== req.userId) {
     return res.sendStatus(403).json({ message: '권한이 없습니다' });
