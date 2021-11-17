@@ -6,7 +6,7 @@ const router = express.Router();
 
 router //
   .route('/')
-  .get(verifyToken, likeController.getAllLike);
+  .get(verifyToken, likeController.getAllLiked);
 
 router //
   .route('/:id')

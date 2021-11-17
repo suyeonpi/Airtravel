@@ -1,7 +1,10 @@
 import * as likeRepository from '../models/likeModel.js';
 import * as cardRepository from '../models/cardModel.js';
 
-export const getAllLike = async (req, res, next) => {};
+export const getAllLiked = async (req, res, next) => {
+  const cards = await likeRepository.getAllCardsLiked(req.userId);
+  res.status(200).json({ cards });
+};
 
 export const addLike = async (req, res, next) => {
   const { id } = req.params;
