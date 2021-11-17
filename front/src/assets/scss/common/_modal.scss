@@ -1,1 +1,70 @@
 @use 'variables' as var;
+
+.modal {
+  position: absolute;
+  top: calc(50vh - 22.4rem);
+  left: calc(50% - 29rem);
+  width: 58rem;
+  max-height: 99rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #fefefe;
+  border: 1px solid black;
+
+  padding: 3rem;
+  z-index: 10;
+  &-content {
+    width: 80%;
+  }
+  & > .divider {
+    width: 100%;
+    margin: 5.2rem 0;
+  }
+  &__label,
+  &-title {
+    font-size: 2.8rem;
+    line-height: 1;
+    font-weight: 700;
+    color: #191919;
+  }
+
+  &__label {
+    font-size: 1.8rem;
+  }
+}
+
+input[type="file"] {
+  display: none;
+}
+
+label[for="editProfileImg"],
+label[for="editBanner"] {
+  color: var(--main-blue-color);
+  font-size: 1.8rem;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+// TODO: jsh.scss 파일에서 가져옴 나중에 클래스 수정해서 합칠 것...
+input[type="text"]:not(.login input) {
+  padding: 1.3333rem;
+  font-size: 1.6rem;
+  width: calc(100% - 7rem);
+  margin-left: 2.5rem;
+  height: 5.0666rem;
+  background-color: #f1f1f5;
+  border: 2px solid #f1f1f5;
+  border-radius: 8px;
+
+  &:focus {
+    border: 2px solid #dbdbdb;
+  }
+}
+.input-util {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4.2666rem;
+}
