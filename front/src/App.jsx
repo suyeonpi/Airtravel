@@ -11,7 +11,7 @@ const PrivateRoute = ({ children }) => {
   if (localStorage.token) {
     return children;
   } else {
-    <Navigate to="/login" />;
+    return <Navigate to="/login" />;
   }
 };
 
