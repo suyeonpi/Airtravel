@@ -6,7 +6,7 @@ const posts = [
     date: "2021.11.21",
     title: "게시물 테스트입니다.",
     content: "",
-    url: "",
+    url: "@img-temp1",
   },
   {
     id: 1,
@@ -16,7 +16,7 @@ const posts = [
     title: "또 가고 싶은 뉴욕 보고싶어라~~~",
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae rem repellendus omnis reprehenderit provident deleniti vitae nulla consectetur aperiam, itaque perspiciatis excepturi nemo culpa quaerat dolorem quodebitis quos eos?",
-    url: "",
+    url: "@img-temp2",
   },
   {
     id: 2,
@@ -26,7 +26,7 @@ const posts = [
     title: "긴 제목 테스트입니다. 긴 제목 테스트입니다. 긴 제목 테스트입니다.",
     content:
       "긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.",
-    url: "",
+    url: "@img-temp3",
   },
   {
     id: 3,
@@ -35,7 +35,7 @@ const posts = [
     date: "2021.11.21",
     title: "세번째 포스트입니다.",
     content: "세번째 포스트입니다.세번째 포스트입니다.세번째 포스트입니다.",
-    url: "",
+    url: "@img-temp4",
   },
   {
     id: 4,
@@ -45,7 +45,7 @@ const posts = [
     title: "네번째 포스팅",
     content:
       "네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅",
-    url: "",
+    url: "@img-temp5",
   },
   {
     id: 5,
@@ -54,7 +54,7 @@ const posts = [
     date: "2021.11.21",
     title: "게시물 테스트입니다.",
     content: "",
-    url: "",
+    url: "@img-temp1",
   },
   {
     id: 6,
@@ -64,7 +64,7 @@ const posts = [
     title: "또 가고 싶은 뉴욕 보고싶어라~~~",
     content:
       "Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae rem repellendus omnis reprehenderit provident deleniti vitae nulla consectetur aperiam, itaque perspiciatis excepturi nemo culpa quaerat dolorem quodebitis quos eos?",
-    url: "",
+    url: "@img-temp1",
   },
   {
     id: 7,
@@ -74,7 +74,7 @@ const posts = [
     title: "긴 제목 테스트입니다. 긴 제목 테스트입니다. 긴 제목 테스트입니다.",
     content:
       "긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.긴 제목 테스트입니다.",
-    url: "",
+    url: "@img-temp1",
   },
   {
     id: 8,
@@ -83,7 +83,7 @@ const posts = [
     date: "2021.11.21",
     title: "세번째 포스트입니다.",
     content: "세번째 포스트입니다.세번째 포스트입니다.세번째 포스트입니다.",
-    url: "",
+    url: "@img-temp1",
   },
   {
     id: 9,
@@ -93,7 +93,7 @@ const posts = [
     title: "네번째 포스팅",
     content:
       "네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅네번째 포스팅",
-    url: "",
+    url: "@img-temp1",
   },
 ];
 export default posts;
