@@ -39,6 +39,11 @@ const userSchema = new Mongoose.Schema({
     default: true,
     select: false,
   },
+  deactivatedOn: {
+    type: Date,
+    index: true,
+    select: false,
+  },
 });
 
 createVirtualId(userSchema);
@@ -100,5 +105,8 @@ export const updateUserPassword = async (userId, pw, pwc) => {
 };
 
 export const deleteUser = async (id) => {
-  return await User.findByIdAndUpdate(id, { active: false });
+  return await User.findByIdAndUpdate(id, {
+    active: false,
+    deactivatedOn: Date.now(),
+  });
 };
