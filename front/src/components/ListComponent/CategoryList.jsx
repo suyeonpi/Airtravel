@@ -37,6 +37,7 @@ const CategoryList = ({ categories, onPageTurn }) => {
       },
     ],
   };
+  console.log(Array.isArray(categories));
 
   return (
     <>
@@ -47,13 +48,13 @@ const CategoryList = ({ categories, onPageTurn }) => {
             return (
               <div
                 className="categories__item"
-                onClick={() => onPageTurn(category.continent)}
-                key={`${idx}-${category.continent}`}
+                onClick={() => onPageTurn(idx)}
+                key={`${idx}-${category}`}
               >
                 <span className="categories__thumbnail">
                   <img src={All} alt="" />
                 </span>
-                <strong>{category.continent}</strong>
+                <strong>{category}</strong>
               </div>
             );
           })}

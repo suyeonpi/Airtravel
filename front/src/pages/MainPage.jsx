@@ -1,47 +1,45 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 
 import PostList from "../components/ListComponent/PostList";
 import CategoryList from "../components/ListComponent/CategoryList";
 import SliderList from "../components/ListComponent/SliderList";
-import continents from "../assets/js/continentsDummy";
-import DummyPost from "../assets/js/DummyPost";
+
+import { getCards, continents } from "../apis/cards";
 
 const MainPage = () => {
-  const categories = [...continents];
-  const [label, setLabel] = useState(categories[0].continent);
-  const onPageTurn = (title) => setLabel((prev) => (prev = title));
-  const [posts, setPosts] = useState([]);
+  const [label, setLabel] = useState([...continents]);
+  const [title, setTitle] = useState(label[0]);
+  const [cards, setCards] = useState([]); // DB에서 가져옴
+  const [posts, setPosts] = useState([]); //
 
-  const onFilterPosts = (label) =>
-    DummyPost.filter((item) => item.continent === label);
-  const baseUrl = "http://localhost:3000";
+  const onPageTurn = (idx) => setTitle((prev) => (prev = label[idx]));
+  const onFilterPosts = (title) =>
+    posts.filter((item) => item.continent === title);
+  // console.log(Array.isArray(label));
+
   // API 호출 용
   useEffect(() => {
-    const loadPost = async () =>
-      await axios.get(`${baseUrl}/cards`).then((res) => {
-        console.log("data", res.data.data.cards);
-        setPosts([...res.data.data.cards]);
-      });
-    loadPost();
-    return () => {};
+    getCards().then((res) => {
+      setCards([...res]);
+      setPosts([...cards]);
+    });
   }, []);
 
   useEffect(() => {
-    if (label === "전체") {
-      setPosts((prev) => [...DummyPost]);
+    if (title === "전체") {
+      setPosts((prev) => [...cards]);
     } else {
-      setPosts(onFilterPosts(label));
+      setPosts(onFilterPosts(title));
     }
-  }, [label, setPosts]);
+  }, [title, cards]);
 
   return (
     <>
       <SliderList />
       <div className="content-wrap">
-        <CategoryList categories={categories} onPageTurn={onPageTurn} />
+        <CategoryList categories={label} onPageTurn={onPageTurn} />
         <div className="title title__large" style={{ marginBottom: "4.8rem" }}>
-          <strong>{label}</strong>
+          <strong>{title}</strong>
         </div>
         <PostList posts={posts} />
       </div>
@@ -49,4 +47,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default React.memo(MainPage);
