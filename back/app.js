@@ -8,6 +8,7 @@ import { config } from './config.js';
 import cardRouter from './routes/cardRouter.js';
 import userRouter from './routes/userRouter.js';
 import likeRouter from './routes/likeRouter.js';
+import globalErrorHandler from './middleware/errorHandler.js';
 
 const app = express();
 
@@ -31,15 +32,8 @@ app.all('*', (req, res, next) => {
   next(err);
 });
 
-app.use((err, req, res, next) => {
-  err.statusCode = err.statusCode || 500;
-  err.status = err.status || 'error';
+app.use(globalErrorHandler);
 
-  res.status(err.statusCode).json({
-    status: err.status,
-    message: err.message,
-  });
-});
 connectDB().then(() => {
   console.log('DB connect!');
   app.listen(config.host.port);

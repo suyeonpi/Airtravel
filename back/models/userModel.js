@@ -79,11 +79,11 @@ export const findByUsernick = async (usernick) => {
 };
 
 export const findById = async (id) => {
-  return User.findById(id).select('+password');
+  return await User.findById(id).select('+password');
 };
 
 export const createUser = async (user) => {
-  return new User(user).save().then((data) => data.id);
+  return await new User(user).save().then((data) => data.id);
 };
 
 export const updateUser = async (id, userinfo) => {
