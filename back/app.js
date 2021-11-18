@@ -24,11 +24,22 @@ app.use((req, res, next) => {
   res.sendStatus(404);
 });
 
-app.use((error, req, res, next) => {
-  console.error(error);
-  res.sendStatus(500);
+app.all('*', (req, res, next) => {
+  const err = new Error('Invalid route');
+  err.status = 'fail';
+  err.statusCode = 404;
+  next(err);
 });
 
+app.use((err, req, res, next) => {
+  err.statusCode = err.statusCode || 500;
+  err.status = err.status || 'error';
+
+  res.status(err.statusCode).json({
+    status: err.status,
+    message: err.message,
+  });
+});
 connectDB().then(() => {
   console.log('DB connect!');
   app.listen(config.host.port);
