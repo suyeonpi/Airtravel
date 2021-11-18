@@ -129,7 +129,10 @@
     background-color: #dbdbdb;
     border-radius: 50%;
     transform: translateY(-50%);
-    a {
+    img {
+      height: 100%;
+    }
+    span {
       display: inline-block;
       width: 100%;
       border-radius: 50%;

@@ -7,7 +7,8 @@ import {
 } from "@fortawesome/free-regular-svg-icons";
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
-const Header = () => {
+const Header = ({ auth }) => {
+  console.log("auth", auth);
   const [userInfo, setuserInfo] = useState(userDummy);
   return (
     <>
@@ -17,7 +18,7 @@ const Header = () => {
             <a href="/">logo</a>
           </h1>
           <span className="header__utils">
-            {userInfo.length === 0 ? (
+            {auth ? (
               <>
                 <a href="/signup" className="header__signup" title="회원가입">
                   <FontAwesomeIcon icon={faSignInAlt} />

@@ -6,12 +6,14 @@ const PostCard = ({ post, idx, postImage }) => {
   return (
     <>
       <div className="post">
-        <div className="post__thumb-nail">
-          <img
-            src={require("../../assets/images/@img-temp2.jpg").default}
-            alt=""
-          />
-        </div>
+        <a href="">
+          <div className="post__thumb-nail">
+            <img
+              src={require("../../assets/images/@img-temp2.jpg").default}
+              alt=""
+            />
+          </div>
+        </a>
       </div>
     </>
   );
