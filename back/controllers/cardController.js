@@ -1,4 +1,5 @@
 import * as cardRepository from '../models/cardModel.js';
+import * as userRepository from '../models/userModel.js';
 import AppError from '../utils/AppError.js';
 import { catchAsync } from '../utils/catchAsync.js';
 
@@ -19,6 +20,10 @@ export const getCards = catchAsync(async (req, res, next) => {
 
 export const getCardsByUser = catchAsync(async (req, res, next) => {
   const { usernick } = req.query;
+  const deactivatedUser = await userRepository.findDeactivedNick(usernick);
+  if (deactivatedUser) {
+    return next(new AppError('비활성화된 계정입니다', 403));
+  }
   const cards = await cardRepository.getAllByUser(usernick);
 
   res.status(200).json({
