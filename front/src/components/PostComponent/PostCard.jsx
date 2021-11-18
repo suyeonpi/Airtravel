@@ -7,7 +7,7 @@ const PostCard = ({ post, idx, postImage }) => {
     <>
       <div className="post">
         <div className="post__thumb-nail">
-          <img src={require(`${"" + postImage}`)} alt="" />
+          <img src="" alt="" />
         </div>
       </div>
     </>
