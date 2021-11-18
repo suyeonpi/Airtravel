@@ -6,3 +6,10 @@
 // <input id="likeBtn" type="button" onClick={onLikeHandler} />
 // <label htmlFor="likeBtn">{like}</label>
 // </div>
+span.divider {
+  display: block;
+}
+
+.modal-edit__img img {
+  height: 100%;
+}

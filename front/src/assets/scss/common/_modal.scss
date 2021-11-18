@@ -2,7 +2,7 @@
 
 .modal {
   position: fixed;
-  top: calc(50vh - 22.4rem);
+  top: calc(50vh - 45rem);
   left: calc(50% - 29rem);
   width: 58rem;
   max-height: 99rem;
@@ -12,14 +12,25 @@
   align-items: center;
   background-color: #fefefe;
   border-radius: 1.5rem;
-  padding: 3rem;
+  padding: 3rem 0;
   z-index: 10;
-  &-content {
-    width: 80%;
+
+  &-back {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba($color: #000000, $alpha: 0.4);
+    z-index: 9;
+  }
+
+  &-body {
+    width: 85%;
   }
   & > .divider {
     width: 100%;
-    margin: 5.2rem 0;
+    margin: 3.4666rem 0;
   }
   &__label,
   &-title {
@@ -32,18 +43,83 @@
   &__label {
     font-size: 1.8rem;
   }
+
+  &-edit__img {
+    width: 16.2rem;
+    height: 16.2rem;
+    margin: 0 auto;
+    background-color: #dbdbdb;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  .btn__regist {
+    width: calc(50% - 1rem);
+  }
+  header {
+    position: relative;
+    button {
+      color: transparent;
+    }
+    .btn-close::before {
+      position: absolute;
+      top: 5.5px;
+      right: 0;
+      margin-right: 9px;
+      display: block;
+      content: "";
+      width: 2px;
+      height: 25px;
+      background-color: #333;
+      transform: rotate(40deg);
+    }
+
+    .btn-close::after {
+      position: absolute;
+      top: 5.5px;
+      right: 0;
+      margin-right: 9px;
+      display: block;
+      content: "";
+      width: 2px;
+      height: 25px;
+      background-color: #333;
+      transform: rotate(-40deg);
+    }
+  }
+  footer {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    margin: 2rem 0 0;
+    a {
+      text-align: right;
+      display: inline-block;
+      font-size: 1.4rem;
+      padding: 2rem 2rem 0 0;
+    }
+  }
 }
 
-input[type="file"] {
-  display: none;
-}
-
-label[for="editProfileImg"],
-label[for="editBanner"] {
-  color: var(--main-blue-color);
-  font-size: 1.8rem;
-  font-weight: 400;
-  cursor: pointer;
+.input {
+  &-util {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  &__bind-label {
+    input[type="file"] {
+      display: none;
+    }
+    label[for="editProfileImg"],
+    label[for="editBanner"] {
+      color: var(--main-blue-color);
+      font-size: 1.8rem;
+      font-weight: 400;
+      cursor: pointer;
+    }
+  }
 }
 
 // TODO: jsh.scss 파일에서 가져옴 나중에 클래스 수정해서 합칠 것...
@@ -60,10 +136,4 @@ input[type="text"]:not(.login input) {
   &:focus {
     border: 2px solid #dbdbdb;
   }
-}
-.input-util {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 4.2666rem;
 }

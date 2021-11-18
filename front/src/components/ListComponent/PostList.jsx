@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import PostCard from "../PostComponent/PostCard";
 
 const PostList = ({ posts, mypage, onAddPostHandler }) => {
+  const baseUrl = "../../assets/images/";
+
   return (
     <>
       <div className="float-clear" style={{ margin: "2.5rem 0" }}>
@@ -20,7 +22,12 @@ const PostList = ({ posts, mypage, onAddPostHandler }) => {
       <div className="post__wrap float-clear ">
         {posts.length > 0 ? (
           posts.map((post, idx) => (
-            <PostCard post={post} key={idx + Math.random().toString()} />
+            <PostCard
+              post={post}
+              postImage={baseUrl + post.url + ".jpg"}
+              idx={idx}
+              key={idx + Math.random().toString()}
+            />
           ))
         ) : (
           //선택한 필터의 게시물이 없을 경우에 나타낼 문구

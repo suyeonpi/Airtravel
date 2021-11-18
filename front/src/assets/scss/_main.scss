@@ -66,6 +66,7 @@
     cursor: pointer;
     overflow: hidden;
     font-size: 0;
+    vertical-align: middle;
     &.like {
       background: util.imgUrl("@ico-like.png") no-repeat center/ contain;
     }
@@ -77,6 +78,8 @@
 }
 
 .footer {
+  position: absolute;
+  bottom: 0;
   width: 100%;
   height: 100px;
   background-color: #000;
@@ -93,7 +96,6 @@
 }
 
 //S: MYPAGE
-
 .profile {
   &__bg {
     width: 100%;
@@ -127,7 +129,10 @@
     background-color: #dbdbdb;
     border-radius: 50%;
     transform: translateY(-50%);
-    a {
+    img {
+      height: 100%;
+    }
+    span {
       display: inline-block;
       width: 100%;
       border-radius: 50%;
