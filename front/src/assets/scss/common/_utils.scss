@@ -27,6 +27,10 @@
   cursor: pointer;
   border-radius: 0.8rem;
 
+  &__disabled {
+    background-color: rgb(149, 144, 144);
+    pointer-events: none;
+  }
   &__primary {
     background-color: var(--main-blue-color);
     border: 3px solid var(--main-blue-color);
