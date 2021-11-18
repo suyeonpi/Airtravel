@@ -24,7 +24,7 @@ export const addLike = catchAsync(async (req, res, next) => {
   await likeRepository.likeCard(id, req.userId);
 
   const like = card.like_count + 1;
-  const newCard = await cardRepository.updateLike(id, like);
+  const newCard = await cardRepository.updateLikeCount(id, like);
 
   res.status(201).json({
     status: 'success',
@@ -44,7 +44,7 @@ export const removeLike = catchAsync(async (req, res, next) => {
   await likeRepository.dislikeCard(id, req.userId);
 
   const dislike = card.like_count - 1;
-  await cardRepository.updateLike(id, dislike);
+  await cardRepository.updateLikeCount(id, dislike);
 
   res.status(204).json({
     status: 'success',

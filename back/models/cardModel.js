@@ -42,11 +42,21 @@ const cardSchema = new Mongoose.Schema(
       type: Mongoose.Schema.ObjectId,
       ref: 'User',
     },
+    heart: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
 
 createVirtualId(cardSchema);
+
+cardSchema.virtual('likes', {
+  ref: 'Like',
+  foreignField: 'card',
+  localField: '_id',
+});
 
 export const Card = Mongoose.model('Card', cardSchema);
 
@@ -54,19 +64,28 @@ export const getAll = () => {
   return Card.find().sort({ createdAt: -1 });
 };
 
-export const getAllByContinent = (continent) => {
-  return Card.find({ continent }).sort({ createdAt: -1 });
+export const getAllByContinent = async (continent) => {
+  return await Card.find({ continent }).sort({ createdAt: -1 });
 };
 
-export const getAllByUser = (usernick) => {
-  return Card.find({ usernick }).sort({ createdAt: -1 });
+export const getAllByUser = async (usernick) => {
+  return await Card.find({ usernick }).sort({ createdAt: -1 });
 };
 
-export const getById = (id) => {
-  return Card.findById(id).populate({
-    path: 'userId',
-    select: 'usernick user_url',
-  });
+export const getById = async (id) => {
+  return await Card.findById(id);
+};
+
+export const getDetail = async (id) => {
+  return await Card.findById(id)
+    .populate({
+      path: 'userId',
+      select: 'usernick user_url',
+    })
+    .populate({
+      path: 'likes',
+      select: '-__v',
+    });
 };
 
 export const create = async (card, userId) => {
@@ -92,7 +111,7 @@ export const remove = (id) => {
   return Card.findByIdAndDelete(id);
 };
 
-export const updateLike = async (id, count) => {
+export const updateLikeCount = async (id, count) => {
   return await Card.findByIdAndUpdate(
     id,
     {

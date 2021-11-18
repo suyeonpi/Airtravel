@@ -19,16 +19,6 @@ const likeSchema = new Mongoose.Schema(
   }
 );
 
-// likeSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: 'card',
-//     select: 'title like_count',
-//   }).populate({
-//     path: 'user',
-//     select: 'usernick',
-//   });
-// });
-
 export const Like = Mongoose.model('Like', likeSchema);
 
 export const getAllCardsLiked = async (user) => {
@@ -41,10 +31,10 @@ export const getAllCardsLiked = async (user) => {
 };
 
 export const likeCard = async (cardId, userId) => {
-  // const likeId = await Like.findOne({ card: cardId, user: userId });
-  // if (likeId) {
-  //   throw new Error('좋아요는 한번만 가능합니다');
-  // }
+  const likeId = await Like.findOne({ card: cardId, user: userId });
+  if (likeId) {
+    throw new Error('좋아요는 한번만 가능합니다');
+  }
   return await Like.create({ card: cardId, user: userId });
 };
 

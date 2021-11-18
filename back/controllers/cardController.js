@@ -32,9 +32,14 @@ export const getCardsByUser = catchAsync(async (req, res, next) => {
 
 export const getCard = catchAsync(async (req, res, next) => {
   const { id } = req.params;
-  const card = await cardRepository.getById(id);
+  const card = await cardRepository.getDetail(id);
   if (!card) {
     return next(new AppError('해당 카드를 찾을 수 없습니다', 404));
+  }
+
+  // 로그인한 사람이 해당 게시물 좋아했을 시? heart
+  if (card.likes.find((like) => like.user.toString() === req.userId)) {
+    card.heart = true;
   }
 
   res.status(200).json({
