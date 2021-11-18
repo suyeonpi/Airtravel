@@ -5,12 +5,13 @@ import MainPage from "./pages/MainPage";
 import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
+import PasswordChange from "./pages/PasswordChange";
 
 const PrivateRoute = ({ children }) => {
   if (localStorage.token) {
     return children;
   } else {
-    <Navigate to="/login" />;
+    return <Navigate to="/login" />;
   }
 };
 
@@ -34,6 +35,14 @@ function App() {
             element={
               <PrivateRoute>
                 <MyPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="passwordchange"
+            element={
+              <PrivateRoute>
+                <PasswordChange />
               </PrivateRoute>
             }
           />
