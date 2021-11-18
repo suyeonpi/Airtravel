@@ -26,9 +26,10 @@ export const verifyToken = catchAsync(async (req, res, next) => {
 
 export const checkId = catchAsync(async (req, res, next) => {
   const { username } = req.body;
-  const user = await userRepository.findByUsername(username);
-  if (user) {
-    return next(new AppError('해당 아이디가 이미 존재 합니다.', 409));
+  const found = await userRepository.findByUsername(username);
+  const deactivedUser = await userRepository.findDeactivedId(username);
+  if (found || deactivedUser) {
+    return next(new AppError('해당 아이디가 이미 존재합니다', 409));
   }
   res.status(200).json({
     status: 'success',

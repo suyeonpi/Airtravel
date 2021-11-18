@@ -19,10 +19,13 @@ export const signup = catchAsync(async (req, res, next) => {
   if (found || deactivedUser) {
     return next(new AppError('해당 아이디가 이미 존재합니다', 409));
   }
+
   const foundNick = await userRepository.findByUsernick(usernick);
-  if (foundNick) {
+  const deactivedNick = await userRepository.findByUsernick(usernick);
+  if (foundNick || deactivedNick) {
     return next(new AppError('해당 닉네임이 이미 존재합니다', 409));
   }
+
   const userId = await userRepository.create({
     username,
     usernick,

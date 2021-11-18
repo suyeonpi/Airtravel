@@ -56,10 +56,10 @@ userSchema.pre('save', async function (next) {
   this.passwordConfirm = undefined;
 });
 
-userSchema.pre(/^find/, function (next) {
-  this.find({ active: { $ne: false } });
-  next();
-});
+// userSchema.pre(/^find/, function (next) {
+//   this.find({ active: { $ne: false } });
+//   next();
+// });
 
 userSchema.methods.correctPassword = async function (
   inputpassword,
@@ -111,6 +111,10 @@ export const deactive = async (id) => {
   });
 };
 
-export const findDeactivedId = async (id) => {
-  return await User.find({ active: false });
+export const findDeactivedId = async (username) => {
+  return await User.findOne({ active: false, username });
+};
+
+export const findDeactivedNick = async (usernick) => {
+  return await User.findOne({ active: false, usernick });
 };
