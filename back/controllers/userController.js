@@ -13,15 +13,17 @@ const createJwtToken = (id) => {
 
 export const signup = catchAsync(async (req, res, next) => {
   const { username, usernick, password, passwordConfirm } = req.body;
+
   const found = await userRepository.findByUsername(username);
-  if (found) {
+  const deactivedUser = await userRepository.findDeactivedId(username);
+  if (found || deactivedUser) {
     return next(new AppError('해당 아이디가 이미 존재합니다', 409));
   }
   const foundNick = await userRepository.findByUsernick(usernick);
   if (foundNick) {
     return next(new AppError('해당 닉네임이 이미 존재합니다', 409));
   }
-  const userId = await userRepository.createUser({
+  const userId = await userRepository.create({
     username,
     usernick,
     password,
@@ -85,7 +87,7 @@ export const updateMe = catchAsync(async (req, res, next) => {
     return next(new AppError('회원 정보가 없습니다', 404));
   }
   const { usernick, user_url, back_url } = req.body;
-  const updatedUser = await userRepository.updateUser(req.userId, {
+  const updatedUser = await userRepository.update(req.userId, {
     usernick,
     user_url,
     back_url,
@@ -108,7 +110,7 @@ export const deleteMe = catchAsync(async (req, res, next) => {
   if (!(await user.correctPassword(password, user.password))) {
     return next(new AppError('비밀번호가 일치하지 않습니다', 401));
   }
-  await userRepository.deleteUser(req.userId);
+  await userRepository.deactive(req.userId);
 
   res.status(204).json({
     status: 'success',
@@ -117,6 +119,7 @@ export const deleteMe = catchAsync(async (req, res, next) => {
     },
   });
 });
+
 export const updatePassword = catchAsync(async (req, res, next) => {
   const user = await userRepository.findById(req.userId);
   if (!user) {
