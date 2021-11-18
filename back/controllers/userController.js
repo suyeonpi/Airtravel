@@ -36,12 +36,14 @@ export const login = async (req, res) => {
     return res.status(400).json({ message: '아이디와 비밀번호를 입력하세요' });
   }
   const user = await userRepository.findByUsername(username);
+  if (!user) {
+    res.status(403).json({ message: '회원 정보가 없습니다' });
+  }
   if (!user || !(await user.correctPassword(password, user.password))) {
     res
       .status(401)
       .json({ message: '아이디 또는 비밀번호가 잘못 입력 되었습니다.' });
   }
-
   const token = createJwtToken(user.id);
   res.status(200).json({ token, usernick: user.usernick });
 };
@@ -65,6 +67,12 @@ export const updateMe = async (req, res) => {
 };
 
 export const deleteMe = async (req, res) => {
+  const user = await userRepository.findById(req.userId);
+  const { password } = req.body;
+
+  if (!(await user.correctPassword(password, user.password))) {
+    return res.status(401).json({ message: '비밀번호가 일치하지 않습니다' });
+  }
   await userRepository.deleteUser(req.userId);
   res.sendStatus(204);
 };
