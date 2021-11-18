@@ -48,12 +48,13 @@ export const login = async (req, res) => {
   res.status(200).json({ token, usernick: user.usernick });
 };
 
-export const checkMe = async (req, res) => {
+export const getMe = async (req, res) => {
   const user = await userRepository.findById(req.userId);
   if (!user) {
     return res.status(404).json({ message: '회원 정보가 없습니다' });
   }
-  res.status(200).json({ token: req.token, usernick: user.usernick });
+  const { usernick, user_url, back_url } = user;
+  res.status(200).json({ token: req.token, usernick, user_url, back_url });
 };
 
 export const updateMe = async (req, res) => {

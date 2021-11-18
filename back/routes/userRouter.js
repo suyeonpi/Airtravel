@@ -10,7 +10,7 @@ router.post('/signup', userController.signup);
 
 router.post('/login', userController.login);
 
-router.get('/checkMe', verifyToken, userController.checkMe);
+router.get('/getMe', verifyToken, userController.getMe);
 
 router.patch('/updateMe', verifyToken, userController.updateMe);
 
