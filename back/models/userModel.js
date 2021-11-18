@@ -82,11 +82,11 @@ export const findById = async (id) => {
   return await User.findById(id).select('+password');
 };
 
-export const createUser = async (user) => {
+export const create = async (user) => {
   return await new User(user).save().then((data) => data.id);
 };
 
-export const updateUser = async (id, userinfo) => {
+export const update = async (id, userinfo) => {
   return await User.findByIdAndUpdate(
     id,
     { ...userinfo },
@@ -104,9 +104,13 @@ export const updateUserPassword = async (userId, pw, pwc) => {
   return await user.save();
 };
 
-export const deleteUser = async (id) => {
+export const deactive = async (id) => {
   return await User.findByIdAndUpdate(id, {
     active: false,
     deactivatedOn: Date.now(),
   });
+};
+
+export const findDeactivedId = async (id) => {
+  return await User.find({ active: false });
 };
