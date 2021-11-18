@@ -188,3 +188,61 @@
     }
   }
 }
+
+.password__change {
+  margin-top: 8rem;
+  display: flex;
+  justify-content: center;
+
+  &-form {
+    width: 38.6666rem;
+
+    & .title {
+      margin-bottom: 3.2rem;
+      text-align: center;
+      font-size: 3.2rem;
+      font-weight: 700;
+    }
+
+    input[type="password"] {
+      padding: 1.3333rem;
+      font-size: 1.6rem;
+      width: 38.6666rem;
+      height: 5.0666rem;
+      margin-top: 2.1333rem;
+      background-color: #f1f1f5;
+      border: 2px solid #f1f1f5;
+      border-radius: 8px;
+      &:focus {
+        border: 2px solid var(--main-blue-color);
+        caret-color: var(--main-blue-color);
+      }
+    }
+    input[type="submit"] {
+      // margin-top: 3.4666rem;
+      margin-bottom: 3.6666rem;
+    }
+
+    & .msg-active {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      font-size: 1.6rem;
+      height: 3rem;
+    }
+
+    & .msg-inactive {
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      height: 3rem;
+      visibility: hidden;
+    }
+
+    & .err-msg-active {
+      color: #ff3120;
+    }
+
+    & .pos-msg-active {
+      color: var(--main-blue-color);
+    }
+  }
+}
