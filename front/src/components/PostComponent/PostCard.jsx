@@ -7,7 +7,10 @@ const PostCard = ({ post, idx, postImage }) => {
     <>
       <div className="post">
         <div className="post__thumb-nail">
-          <img src="" alt="" />
+          <img
+            src={require("../../assets/images/@img-temp2.jpg").default}
+            alt=""
+          />
         </div>
       </div>
     </>
