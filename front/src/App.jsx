@@ -6,6 +6,7 @@ import MyPage from "./pages/MyPage";
 import LoginPage from "./pages/LoginPage";
 import SignupPage from "./pages/SignupPage";
 import PasswordChange from "./pages/PasswordChange";
+import DeleteAccountPage from "./pages/DeleteAccountPage";
 
 const PrivateRoute = ({ children }) => {
   if (localStorage.token) {
@@ -43,6 +44,14 @@ function App() {
             element={
               <PrivateRoute>
                 <PasswordChange />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="deleteaccount"
+            element={
+              <PrivateRoute>
+                <DeleteAccountPage />
               </PrivateRoute>
             }
           />
