@@ -46,6 +46,7 @@ export const getCard = catchAsync(async (req, res, next) => {
   if (card.likes.find((like) => like.user.toString() === req.userId)) {
     card.heart = true;
   }
+  card.likes = undefined;
 
   res.status(200).json({
     status: 'success',
