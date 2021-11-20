@@ -14,7 +14,7 @@ router //
 router //
   .route('/:id')
   .get(verifyToken, cardController.getCard)
-  .put(verifyToken, cardController.updateCard)
+  .patch(verifyToken, cardController.updateCard)
   .delete(verifyToken, cardController.deleteCard);
 
 export default router;

@@ -1,6 +1,5 @@
 import Mongoose from 'mongoose';
 import { createVirtualId } from '../db/database.js';
-import * as userRepository from './userModel.js';
 
 const cardSchema = new Mongoose.Schema(
   {
@@ -52,6 +51,7 @@ const cardSchema = new Mongoose.Schema(
 
 createVirtualId(cardSchema);
 
+// Virtual Populate
 cardSchema.virtual('likes', {
   ref: 'Like',
   foreignField: 'card',
@@ -60,8 +60,8 @@ cardSchema.virtual('likes', {
 
 export const Card = Mongoose.model('Card', cardSchema);
 
-export const getAll = () => {
-  return Card.find().sort({ createdAt: -1 });
+export const getAll = async () => {
+  return await Card.find().sort({ createdAt: -1 });
 };
 
 export const getAllByContinent = async (continent) => {
