@@ -89,8 +89,10 @@ export const updateMe = catchAsync(async (req, res, next) => {
   if (!user) {
     return next(new AppError('회원 정보가 없습니다', 404));
   }
-  if (req.files.user_url) req.body.user_url = req.files.user_url[0].location;
-  if (req.files.back_url) req.body.back_url = req.files.back_url[0].location;
+  if (req.files.user_url)
+    req.body.user_url = req.files.user_url[0].transforms[0].location;
+  if (req.files.back_url)
+    req.body.back_url = req.files.back_url[0].transforms[0].location;
 
   const { usernick, user_url, back_url } = req.body;
   const updatedUser = await userRepository.update(req.userId, {

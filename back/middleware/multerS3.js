@@ -1,7 +1,8 @@
 import aws from 'aws-sdk';
 import { config } from '../config.js';
 import multer from 'multer';
-import multerS3 from 'multer-s3';
+import multerS3 from 'multer-s3-transform';
+import sharp from 'sharp';
 import AppError from '../utils/AppError.js';
 
 const { bucketName, bucketRegion, accessKey, secretKey } = config.s3;
@@ -27,14 +28,29 @@ const upload = (prefix) =>
       s3,
       bucket: bucketName,
       acl: 'public-read',
-      key: function (req, file, cb) {
-        const strOne = `${prefix}-`;
-        const userId = `${req.userId}-`;
-        const todaysDate = `${Date.now().toString()}.`;
-        const extension = file.mimetype.split('/')[1];
-        const finalStr = strOne.concat(userId, todaysDate, extension);
-        cb(null, finalStr);
+      contentType: multerS3.AUTO_CONTENT_TYPE,
+      shouldTransform: function (req, file, cb) {
+        cb(null, /^image/i.test(file.mimetype));
       },
+      transforms: [
+        {
+          id: 'resized',
+          key: function (req, file, cb) {
+            const strOne = `${prefix}-`;
+            const userId = `${req.userId}-`;
+            const todaysDate = `${Date.now().toString()}.`;
+            const extension = file.mimetype.split('/')[1];
+            const finalStr = strOne.concat(userId, todaysDate, extension);
+            cb(null, finalStr);
+          },
+          transform: function (req, file, cb) {
+            cb(
+              null,
+              sharp().resize(1200, null).toFormat('jpg').jpeg({ quality: 90 })
+            );
+          },
+        },
+      ],
     }),
   });
 
