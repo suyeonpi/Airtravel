@@ -46,6 +46,7 @@ export const getCard = catchAsync(async (req, res, next) => {
   if (card.likes.find((like) => like.user.toString() === req.userId)) {
     card.heart = true;
   }
+  card.likes = undefined;
 
   res.status(200).json({
     status: 'success',
@@ -56,6 +57,10 @@ export const getCard = catchAsync(async (req, res, next) => {
 });
 
 export const createCard = catchAsync(async (req, res, next) => {
+  if (!req.file) {
+    return next(new AppError('사진을 등록해 주십시오', 400));
+  }
+  req.body.picture_url = req.file.transforms[0].location;
   const newCard = await cardRepository.create(req.body, req.userId);
 
   res.status(201).json({

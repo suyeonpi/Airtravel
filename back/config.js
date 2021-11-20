@@ -23,4 +23,10 @@ export const config = {
   db: {
     host: required('DB_HOST'),
   },
+  s3: {
+    bucketName: required('AWS_BUCKET_NAME'),
+    bucketRegion: required('AWS_BUCKET_REGION'),
+    accessKey: required('AWS_ACCESS_KEY'),
+    secretKey: required('AWS_SECRET_KEY'),
+  },
 };
