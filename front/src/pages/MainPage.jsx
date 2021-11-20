@@ -14,8 +14,7 @@ const MainPage = () => {
 
   const onPageTurn = (idx) => setTitle((prev) => (prev = label[idx]));
   const onFilterPosts = (title) =>
-    posts.filter((item) => item.continent === title);
-  // console.log(Array.isArray(label));
+    cards.filter((item) => item.continent === title);
 
   // API 호출 용
   useEffect(() => {
@@ -24,7 +23,6 @@ const MainPage = () => {
       setPosts([...cards]);
     });
   }, []);
-
   useEffect(() => {
     if (title === "전체") {
       setPosts((prev) => [...cards]);

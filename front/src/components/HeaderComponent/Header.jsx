@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import userDummy from "../../assets/js/userDummy";
+import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPaperPlane,
@@ -8,8 +7,6 @@ import {
 import { faSignInAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Header = ({ auth }) => {
-  console.log("auth", auth);
-  const [userInfo, setuserInfo] = useState(userDummy);
   return (
     <>
       <header className="header">
@@ -18,7 +15,7 @@ const Header = ({ auth }) => {
             <a href="/">logo</a>
           </h1>
           <span className="header__utils">
-            {auth ? (
+            {!auth ? (
               <>
                 <a href="/signup" className="header__signup" title="회원가입">
                   <FontAwesomeIcon icon={faSignInAlt} />

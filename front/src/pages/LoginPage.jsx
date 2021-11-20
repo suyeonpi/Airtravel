@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
-function LoginPage(props) {
+function LoginPage({ saveUserInfo }) {
   const [userID, setuserID] = useState("");
   const [userPW, setuserPW] = useState("");
   const [inputError, setInputError] = useState(false);
@@ -25,6 +25,7 @@ function LoginPage(props) {
         .then((res) => {
           console.log("res", res);
           localStorage.token = res.data.token;
+          saveUserInfo(res.data);
           setuserID("");
           setuserPW("");
           navigate("/");

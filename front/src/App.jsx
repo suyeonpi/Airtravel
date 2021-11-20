@@ -27,7 +27,7 @@ const IfAlreadyLoggedIn = ({ children }) => {
 function App() {
   return (
     <>
-      <Header />
+      <Header auth={localStorage.token} />
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<MainPage />} />

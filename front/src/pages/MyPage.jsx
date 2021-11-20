@@ -22,10 +22,6 @@ const MyPage = () => {
 
   const onApiHandler = () => onEditProfile();
 
-  const onAddPostHandler = () => {
-    alert("포스트 등록");
-  };
-
   const onChangeUser = () => {
     setUserInfo({
       ...userInfo,
@@ -39,6 +35,7 @@ const MyPage = () => {
     setNewInfo((prev) => (prev = value));
   };
 
+  //수정모달 활성 비활성
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
   const onChangeImg = (e) => {
@@ -83,11 +80,8 @@ const MyPage = () => {
         </div>
       </div>
       <div className="content-wrap">
-        <PostList
-          posts={posts}
-          mypage={true}
-          onAddPostHandler={onAddPostHandler}
-        />
+        {/* TODO: 게시글 등록 페이지 띄우는 핸들러 필요 */}
+        <PostList posts={posts} mypage={true} />
       </div>
 
       {/* 프로필 수정 모달 */}
