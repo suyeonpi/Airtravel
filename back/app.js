@@ -8,6 +8,7 @@ import { config } from './config.js';
 import cardRouter from './routes/cardRouter.js';
 import userRouter from './routes/userRouter.js';
 import likeRouter from './routes/likeRouter.js';
+import commentRouter from './routes/commentRouter.js';
 import globalErrorHandler from './middleware/errorHandler.js';
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(morgan('tiny'));
 app.use('/cards', cardRouter);
 app.use('/users', userRouter);
 app.use('/like', likeRouter);
+app.use('/comments', commentRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
