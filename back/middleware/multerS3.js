@@ -46,7 +46,7 @@ const upload = (prefix) =>
           transform: function (req, file, cb) {
             cb(
               null,
-              sharp().resize(1200, null).toFormat('jpg').jpeg({ quality: 90 })
+              sharp().resize(700, null).toFormat('jpg').jpeg({ quality: 90 })
             );
           },
         },
