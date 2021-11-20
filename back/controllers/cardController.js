@@ -57,6 +57,10 @@ export const getCard = catchAsync(async (req, res, next) => {
 });
 
 export const createCard = catchAsync(async (req, res, next) => {
+  if (!req.file) {
+    return next(new AppError('사진을 등록해 주십시오', 400));
+  }
+  req.body.picture_url = req.file.location;
   const newCard = await cardRepository.create(req.body, req.userId);
 
   res.status(201).json({

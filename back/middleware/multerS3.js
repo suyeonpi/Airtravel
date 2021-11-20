@@ -20,7 +20,7 @@ const multerFilter = (req, file, cb) => {
   }
 };
 
-export const upload = (prefix) =>
+const upload = (prefix) =>
   multer({
     fileFilter: multerFilter,
     storage: multerS3({
@@ -28,7 +28,7 @@ export const upload = (prefix) =>
       bucket: bucketName,
       acl: 'public-read',
       key: function (req, file, cb) {
-        const strOne = `${prefix}`;
+        const strOne = `${prefix}-`;
         const userId = `${req.userId}-`;
         const todaysDate = `${Date.now().toString()}.`;
         const extension = file.mimetype.split('/')[1];
@@ -42,3 +42,5 @@ export const uploadUserPhoto = upload('user').fields([
   { name: 'user_url', maxCount: 1 },
   { name: 'back_url', maxCount: 1 },
 ]);
+
+export const uploadCardPhoto = upload('card').single('picture_url');

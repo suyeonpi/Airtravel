@@ -1,6 +1,7 @@
 import express from 'express';
 import * as cardController from '../controllers/cardController.js';
 import { verifyToken } from '../middleware/auth.js';
+import { uploadCardPhoto } from '../middleware/multerS3.js';
 
 const router = express.Router();
 
@@ -8,7 +9,7 @@ router //
   .route('/')
   .get(cardController.getCards)
   .get(verifyToken, cardController.getCardsByUser)
-  .post(verifyToken, cardController.createCard);
+  .post(verifyToken, uploadCardPhoto, cardController.createCard);
 
 router //
   .route('/:id')

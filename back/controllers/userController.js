@@ -4,7 +4,6 @@ import {} from 'express-async-errors';
 import { config } from '../config.js';
 import { catchAsync } from '../utils/catchAsync.js';
 import AppError from '../utils/AppError.js';
-import { uploadUserPhoto } from '../middleware/multerS3.js';
 
 const createJwtToken = (id) => {
   return jwt.sign({ id }, config.jwt.secretKey, {
