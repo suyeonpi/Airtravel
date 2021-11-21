@@ -11,17 +11,12 @@ router.post('/signup', userController.signup);
 
 router.post('/login', userController.login);
 
-router.get('/getMe', verifyToken, userController.getMe);
+router.get('/myinfo', verifyToken, userController.getMe);
 
-router.patch(
-  '/updateMe',
-  verifyToken,
-  uploadUserPhoto,
-  userController.updateMe
-);
+router.patch('/myinfo', verifyToken, uploadUserPhoto, userController.updateMe);
 
-router.patch('/updatePW', verifyToken, userController.updatePassword);
+router.patch('/password', verifyToken, userController.updatePassword);
 
-router.delete('/deleteMe', verifyToken, userController.deleteMe);
+router.delete('/myinfo', verifyToken, userController.deleteMe);
 
 export default router;

@@ -11,6 +11,16 @@ const createJwtToken = (id) => {
   });
 };
 
+const setCookie = (res, token) => {
+  const options = {
+    maxAge: config.jwt.expiresInSec * 1000,
+    httpOnly: true,
+    sameSite: 'none',
+    secure: ture,
+  };
+  res.cookie('token', token, options);
+};
+
 export const signup = catchAsync(async (req, res, next) => {
   const { username, usernick, password, passwordConfirm } = req.body;
 
@@ -33,9 +43,10 @@ export const signup = catchAsync(async (req, res, next) => {
     passwordConfirm,
   });
   const token = createJwtToken(userId);
+  setCookie(res, token);
+
   res.status(201).json({
     status: 'success',
-    token,
     data: {
       userId,
     },
@@ -59,7 +70,6 @@ export const login = catchAsync(async (req, res, next) => {
 
   res.status(200).json({
     status: 'success',
-    token,
     data: {
       usernick: user.usernick,
     },
@@ -147,10 +157,10 @@ export const updatePassword = catchAsync(async (req, res, next) => {
     passwordConfirm
   );
   const newToken = createJwtToken(newUser.id);
+  setCookie(res, newToken);
 
   res.status(200).json({
     status: 'success',
-    token: newToken,
     data: {
       usernick: newUser.usernick,
     },

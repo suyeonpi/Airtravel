@@ -6,12 +6,15 @@ import AppError from '../utils/AppError.js';
 import { promisify } from 'util';
 
 export const verifyToken = catchAsync(async (req, res, next) => {
-  const authHeader = req.get('Authorization');
-  if (!(authHeader && authHeader.startsWith('Bearer '))) {
+  // const authHeader = req.get('Authorization');
+  // if (!(authHeader && authHeader.startsWith('Bearer '))) {
+  //   return next(new AppError('로그인을 먼저 해주세요', 401));
+  // }
+  // const token = authHeader.split(' ')[1];
+  const token = req.cookies['token'];
+  if (!token) {
     return next(new AppError('로그인을 먼저 해주세요', 401));
   }
-  const token = authHeader.split(' ')[1];
-
   const decoded = await promisify(jwt.verify)(token, config.jwt.secretKey);
 
   const currentUser = await userRepository.findById(decoded.id);
