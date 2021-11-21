@@ -15,6 +15,8 @@ function AddPostPage(props) {
 
   const [showPicName, setShowPicName] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     if (selectedFile) {
       const reader = new FileReader();
@@ -32,27 +34,20 @@ function AddPostPage(props) {
 
     const fd = new FormData();
 
-    fd.append("image", selectedFile, selectedFile.name);
-    fd.append("location", setDiaryLocation);
-    fd.append("date", setDiaryDate);
-    fd.append("content", setDiaryContent);
-    fd.append("continet", setDiaryContinent);
+    fd.append("picture_url", selectedFile, selectedFile.name);
+    fd.append("location", diaryLocation);
+    fd.append("date", diaryDate);
+    fd.append("content", diaryContent);
+    fd.append("continet", diaryContinent);
 
     axios
-      .post("http://localhost:3000/cards/createCard", fd, {
+      .post("http://localhost:3000/cards", fd, {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       })
       .then((res) => {
         console.log("file upload!");
+        navigate("/mypage");
       });
-
-    // console.log(
-    //   selectedFile,
-    //   diaryContinent,
-    //   diaryLocation,
-    //   diaryDate,
-    //   diaryContent
-    // );
   };
 
   const onChangeContinent = (event) => {
