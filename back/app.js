@@ -5,6 +5,7 @@ import helmet from 'helmet';
 import 'express-async-errors';
 import { connectDB } from './db/database.js';
 import { config } from './config.js';
+import authRouter from './routes/authRouter.js';
 import cardRouter from './routes/cardRouter.js';
 import userRouter from './routes/userRouter.js';
 import likeRouter from './routes/likeRouter.js';
@@ -24,10 +25,11 @@ app.use(helmet());
 app.use(cors(corsOptions));
 app.use(morgan('tiny'));
 
-app.use('/cards', cardRouter);
-app.use('/users', userRouter);
-app.use('/like', likeRouter);
-app.use('/comments', commentRouter);
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/cards', cardRouter);
+app.use('/api/v1/users', userRouter);
+app.use('/api/v1/likes', likeRouter);
+app.use('/api/v1/comments', commentRouter);
 
 app.use((req, res, next) => {
   res.sendStatus(404);
