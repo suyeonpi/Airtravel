@@ -13,9 +13,15 @@ import globalErrorHandler from './middleware/errorHandler.js';
 
 const app = express();
 
+const corsOptions = {
+  origin: config.cors.allowedOrigin,
+  optionSuccessStatus: 200,
+  credentials: true,
+};
+
 app.use(express.json());
 app.use(helmet());
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(morgan('tiny'));
 
 app.use('/cards', cardRouter);
