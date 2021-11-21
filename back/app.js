@@ -3,6 +3,11 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 import 'express-async-errors';
+import xss from 'xss-clean';
+import mongoSanitize from 'express-mongo-sanitize';
+import cookieParser from 'cookie-parser';
+import hpp from 'hpp';
+
 import { connectDB } from './db/database.js';
 import { config } from './config.js';
 import authRouter from './routes/authRouter.js';
@@ -11,6 +16,7 @@ import userRouter from './routes/userRouter.js';
 import likeRouter from './routes/likeRouter.js';
 import commentRouter from './routes/commentRouter.js';
 import globalErrorHandler from './middleware/errorHandler.js';
+import rateLimit from './middleware/rateLimit.js';
 
 const app = express();
 
@@ -21,9 +27,15 @@ const corsOptions = {
 };
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(morgan('tiny'));
+app.use(mongoSanitize());
+app.use(xss());
+app.use(hpp());
+
+app.use('/api', rateLimit);
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/cards', cardRouter);
