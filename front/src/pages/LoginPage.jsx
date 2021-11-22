@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 
-function LoginPage({ saveUserInfo }) {
+function LoginPage({ loginHandler }) {
   const [userID, setuserID] = useState("");
   const [userPW, setuserPW] = useState("");
   const [inputError, setInputError] = useState(false);
@@ -18,14 +18,18 @@ function LoginPage({ saveUserInfo }) {
     if (validateLoginForm()) {
       //[API] [GET] 로그인 요청 보내는 작업.
       axios
-        .post("http://localhost:3000/users/login", {
-          username: userID,
-          password: userPW,
-        })
+        .post(
+          "http://localhost:8080/api/v1/auth/login",
+          {
+            username: userID,
+            password: userPW,
+          },
+          { withCredentials: true }
+        )
         .then((res) => {
-          console.log("res", res);
+          console.log("실행순서 테스트 loginPage.js");
           localStorage.token = res.data.token;
-          saveUserInfo(res.data);
+          loginHandler(res.data);
           setuserID("");
           setuserPW("");
           navigate("/");

@@ -16,7 +16,7 @@ function DeleteAccountPage(props) {
 
     if (validateDeleteAccountForm()) {
       axios
-        .delete("http://localhost:3000/users/deleteMe", {
+        .delete("http://localhost:8080/users/deleteMe", {
           headers: { Authorization: `Bearer ${localStorage.token}` },
           data: {
             password: String(InputPW.current.value),

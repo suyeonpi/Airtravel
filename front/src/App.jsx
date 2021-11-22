@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from "./components/HeaderComponent/Header";
 import Footer from "./components/FooterComponent/Footer";
@@ -26,10 +27,14 @@ const IfAlreadyLoggedIn = ({ children }) => {
 };
 
 function App() {
+  const loginHandler = (loginData) => {
+    localStorage.usernick = loginData.usernick;
+  };
+
   return (
     <>
-      <Header auth={localStorage.token} />
       <BrowserRouter>
+        <Header auth={localStorage.token} />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="addpost" element={<AddPostPage />} />
@@ -37,7 +42,7 @@ function App() {
             path="mypage"
             element={
               <PrivateRoute>
-                <MyPage loginInfo={localStorage} />
+                <MyPage loginInfo={localStorage.usernick} />
               </PrivateRoute>
             }
           />
@@ -61,7 +66,7 @@ function App() {
             path="login"
             element={
               <IfAlreadyLoggedIn>
-                <LoginPage />
+                <LoginPage loginHandler={loginHandler} />
               </IfAlreadyLoggedIn>
             }
           />

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:8080";
 
 const continents = [
   "전체",
@@ -15,22 +15,21 @@ const continents = [
 // Main페이지에서 모든 카드 가져오기
 const getCards = async () => {
   try {
-    const res = await axios.get(`${baseUrl}/cards`);
-    return [...res.data.data.cards];
+    const res = await axios.get(`${baseUrl}/api/v1/cards`);
+    return res.data;
   } catch (error) {
-    console.error(error);
+    console.error("@@getCards : ", error);
     return error;
   }
 };
 
 //내가 작성한 포스트만 가져오기
 const getMyCards = async (user) => {
-  console.log(user);
   try {
-    const res = await axios.get(`${baseUrl}/?usernick=${user}`);
+    const res = await axios.get(`${baseUrl}/api/v1/cards/?usernick=${user}`);
     return res.data;
   } catch (error) {
-    console.error(error);
+    console.error("@@getMyCards : ", error);
     return error;
   }
 };
@@ -38,12 +37,14 @@ const getMyCards = async (user) => {
 //닉네임 가져오기
 const getMyToken = async () => {
   try {
-    const res = await axios.get(`${baseUrl}/users/getMe`, {
-      headers: { Authorization: `Bearer ${localStorage.token}` },
+    const res = await axios.get(`${baseUrl}/api/v1/users`, {
+      withCredentials: true,
+      // headers: { Authorization: `Bearer ${localStorage.token}` },
     });
+    console.log("@@@@getMyToken", res);
     return res.data;
   } catch (error) {
-    console.error(error);
+    console.error("@@getMyToken : ", error);
     return error;
   }
 };

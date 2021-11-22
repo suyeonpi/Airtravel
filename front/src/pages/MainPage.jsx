@@ -20,11 +20,11 @@ const MainPage = () => {
   // API 호출 용
   useEffect(() => {
     getCards().then((res) => {
-      console.log("@@@RES", res);
-      setCards([...res]);
-      setPosts([...cards]);
+      // setCards([...res]);
+      // setPosts([...cards]);
     });
   }, []);
+
   useEffect(() => {
     if (title === "전체") {
       setPosts((prev) => [...cards]);

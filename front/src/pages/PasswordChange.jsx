@@ -25,7 +25,7 @@ function PasswordChange(props) {
 
       axios
         .patch(
-          "http://localhost:3000/users/updatePW",
+          "http://localhost:8080/users/updatePW",
           {
             currentPassword: userPrePW,
             password: userNewPW,

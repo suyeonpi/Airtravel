@@ -41,7 +41,7 @@ function AddPostPage(props) {
     fd.append("continet", diaryContinent);
 
     axios
-      .post("http://localhost:3000/cards", fd, {
+      .post("http://localhost:8080/cards", fd, {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       })
       .then((res) => {

@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://localhost:3000";
+const baseUrl = "http://localhost:8080";
 
 const updateMe = async ({}) => {
   try {
@@ -9,9 +9,9 @@ const updateMe = async ({}) => {
       back_url: "",
     });
     return res.data;
-  } catch (err) {
-    console.error(err);
-    return err;
+  } catch (error) {
+    console.error("@@updateMe : ", error);
+    return error;
   }
 };
 
