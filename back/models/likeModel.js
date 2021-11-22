@@ -39,5 +39,9 @@ export const likeCard = async (cardId, userId) => {
 };
 
 export const dislikeCard = async (cardId, userId) => {
+  const likeId = await Like.findOne({ card: cardId, user: userId });
+  if (!likeId) {
+    throw new Error('좋아요를 먼저 해주세요');
+  }
   return await Like.deleteOne({ card: cardId, user: userId });
 };
