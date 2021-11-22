@@ -29,4 +29,11 @@ export const config = {
     accessKey: required('AWS_ACCESS_KEY'),
     secretKey: required('AWS_SECRET_KEY'),
   },
+  cors: {
+    allowedOrigin: required('CORS_ALLOW_ORIGIN'),
+  },
+  rateLimit: {
+    windowMs: parseInt(required('RATE_LIMIT_WINDOW_MS')),
+    maxRequest: parseInt(required('RATE_LIMIT_MAX')),
+  },
 };

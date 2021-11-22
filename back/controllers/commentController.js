@@ -11,10 +11,7 @@ export const getAllComments = catchAsync(async (req, res, next) => {
   }
   const comments = await commentRepository.getAllbyCard(card.id);
   res.status(200).json({
-    status: 'success',
-    data: {
-      comments,
-    },
+    comments,
   });
 });
 
@@ -29,10 +26,7 @@ export const createComment = catchAsync(async (req, res, next) => {
 
   console.log(newComment);
   res.status(201).json({
-    status: 'succss',
-    data: {
-      comment: newComment,
-    },
+    comment: newComment,
   });
 });
 
@@ -53,10 +47,7 @@ export const updateComment = catchAsync(async (req, res, next) => {
   const updatedComment = await commentRepository.update(id, text);
 
   res.status(200).json({
-    status: 'success',
-    data: {
-      comment: updatedComment,
-    },
+    comment: updatedComment,
   });
 });
 
@@ -76,9 +67,6 @@ export const deleteComment = catchAsync(async (req, res, next) => {
   await await commentRepository.remove(id);
 
   res.status(204).json({
-    status: 'success',
-    data: {
-      comment: null,
-    },
+    comment: null,
   });
 });

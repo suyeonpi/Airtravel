@@ -10,11 +10,7 @@ export const getCards = catchAsync(async (req, res, next) => {
     : cardRepository.getAll());
 
   res.status(200).json({
-    status: 'success',
-    result: cards.length,
-    data: {
-      cards,
-    },
+    cards,
   });
 });
 
@@ -27,11 +23,7 @@ export const getCardsByUser = catchAsync(async (req, res, next) => {
   const cards = await cardRepository.getAllByUser(usernick);
 
   res.status(200).json({
-    status: 'success',
-    result: cards.length,
-    data: {
-      cards,
-    },
+    cards,
   });
 });
 
@@ -49,9 +41,15 @@ export const getCard = catchAsync(async (req, res, next) => {
   card.likes = undefined;
 
   res.status(200).json({
-    status: 'success',
-    data: {
-      card,
+    card: {
+      id: card.id,
+      location: card.location,
+      continent: card.continent,
+      date: card.date,
+      picture_url: card.picture_url,
+      like_count: card.like_count,
+      heart: card.heart,
+      userId: card.userId,
     },
   });
 });
@@ -64,10 +62,7 @@ export const createCard = catchAsync(async (req, res, next) => {
   const newCard = await cardRepository.create(req.body, req.userId);
 
   res.status(201).json({
-    status: 'success',
-    data: {
-      card: newCard,
-    },
+    card: newCard,
   });
 });
 
@@ -83,10 +78,7 @@ export const updateCard = catchAsync(async (req, res, next) => {
   const newCard = await cardRepository.update(id, req.body);
 
   res.status(201).json({
-    status: 'success',
-    data: {
-      card: newCard,
-    },
+    card: newCard,
   });
 });
 
@@ -102,9 +94,6 @@ export const deleteCard = catchAsync(async (req, res, next) => {
   await cardRepository.remove(id);
 
   res.status(204).json({
-    status: 'success',
-    data: {
-      tour: null,
-    },
+    message: '삭제 완료',
   });
 });

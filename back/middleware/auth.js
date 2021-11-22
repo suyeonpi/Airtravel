@@ -6,11 +6,19 @@ import AppError from '../utils/AppError.js';
 import { promisify } from 'util';
 
 export const verifyToken = catchAsync(async (req, res, next) => {
+  let token;
+  // header 먼저 확인
   const authHeader = req.get('Authorization');
-  if (!(authHeader && authHeader.startsWith('Bearer '))) {
+  if (authHeader && authHeader.startsWith('Bearer ')) {
+    token = authHeader.split(' ')[1];
+  }
+  // header에 없을시, 쿠키 확인
+  if (!token) {
+    token = req.cookies['token'];
+  }
+  if (!token) {
     return next(new AppError('로그인을 먼저 해주세요', 401));
   }
-  const token = authHeader.split(' ')[1];
 
   const decoded = await promisify(jwt.verify)(token, config.jwt.secretKey);
 
@@ -32,7 +40,6 @@ export const checkId = catchAsync(async (req, res, next) => {
     return next(new AppError('해당 아이디가 이미 존재합니다', 409));
   }
   res.status(200).json({
-    status: 'success',
     message: '해당 아이디를 사용할 수 있습니다',
   });
 });
