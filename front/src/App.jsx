@@ -50,7 +50,14 @@ function App() {
         <Header auth={localStorage.token} />
         <Routes>
           <Route path="/" element={<MainPage />} />
-          <Route path="addpost" element={<AddPostPage />} />
+          <Route
+            path="addpost"
+            element={
+              <PrivateRoute>
+                <AddPostPage />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="mypage"
             element={
