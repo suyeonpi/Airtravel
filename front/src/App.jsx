@@ -1,4 +1,15 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+/* global history */
+/* global location */
+/* global window */
+
+/* eslint no-restricted-globals: ["off"] */
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import Header from "./components/HeaderComponent/Header";
 import Footer from "./components/FooterComponent/Footer";
 import MainPage from "./pages/MainPage";
@@ -10,10 +21,12 @@ import DeleteAccountPage from "./pages/DeleteAccountPage";
 import AddPostPage from "./pages/AddPostPage";
 
 const PrivateRoute = ({ children }) => {
+  const location = useLocation();
+  // console.log(location);
   if (localStorage.token) {
     return children;
   } else {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" state={{ from: location }} />;
   }
 };
 
