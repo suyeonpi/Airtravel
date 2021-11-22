@@ -4,7 +4,7 @@ import { catchAsync } from '../utils/catchAsync.js';
 import AppError from '../utils/AppError.js';
 
 export const getUser = catchAsync(async (req, res, next) => {
-  const { usernick } = req.query;
+  const { usernick } = decodeURIComponent(req.query);
   let user;
 
   if (usernick) {
