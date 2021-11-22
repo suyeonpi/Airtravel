@@ -3,13 +3,18 @@ import * as cardRepository from '../models/cardModel.js';
 import AppError from '../utils/AppError.js';
 import { catchAsync } from '../utils/catchAsync.js';
 
-export const getAllComments = catchAsync(async (req, res, next) => {
+export const getComments = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const card = await cardRepository.getById(id);
   if (!card) {
     return next(new AppError('해당 카드를 찾을 수 없습니다', 404));
   }
-  const comments = await commentRepository.getAllbyCard(card.id);
+
+  const { page } = req.query;
+  const comments = await (page
+    ? commentRepository.getSome(card.id, page)
+    : commentRepository.getAll(card.id));
+
   res.status(200).json({
     comments,
   });

@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
   .route('/:id') // 카드 id
-  .get(verifyToken, commentController.getAllComments)
+  .get(verifyToken, commentController.getComments)
   .post(verifyToken, commentController.createComment);
 
 router

@@ -36,8 +36,16 @@ commentSchema.pre(/^find/, function (next) {
 
 export const Comment = Mongoose.model('Comment', commentSchema);
 
-export const getAllbyCard = async (cardId) => {
+export const getAll = async (cardId) => {
   return await Comment.find({ cardId });
+};
+
+export const getSome = async (cardId, page) => {
+  const skip = (page - 1) * 5;
+  const numComment = await Comment.countDocuments({ cardId });
+  if (skip >= numComment) throw new Error('더이상 댓글이 존재하지 않습니다');
+
+  return await Comment.find({ cardId }).skip(skip).limit(5);
 };
 
 export const getById = async (id) => {
