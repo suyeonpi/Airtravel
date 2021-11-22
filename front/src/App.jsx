@@ -35,7 +35,7 @@ function App() {
             path="mypage"
             element={
               <PrivateRoute>
-                <MyPage />
+                <MyPage loginInfo={localStorage} />
               </PrivateRoute>
             }
           />

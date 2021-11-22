@@ -9,6 +9,7 @@ import { getCards, continents } from "../apis/cards";
 const MainPage = () => {
   const [label, setLabel] = useState([...continents]);
   const [title, setTitle] = useState(label[0]);
+
   const [cards, setCards] = useState([]); // DB에서 가져옴
   const [posts, setPosts] = useState([]); //
 
@@ -19,6 +20,7 @@ const MainPage = () => {
   // API 호출 용
   useEffect(() => {
     getCards().then((res) => {
+      console.log("@@@RES", res);
       setCards([...res]);
       setPosts([...cards]);
     });

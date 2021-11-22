@@ -12,31 +12,6 @@ const EditModal = ({
 }) => {
   const onEditImg = () => {};
 
-  //첨부파일 뱃지 추가
-  //  inputs.addEventListener("change", () => {
-  //   const file = inputs.value.split("\\"); //경로
-  //   const baseUrl = '../images/'
-  //   //preview
-  //   const [image] = inputs.files
-  //   if (image) {
-  //     const preView = document.querySelector('#addPost .thumbnail-area');
-  //     preView.style = `background-image: url(${URL.createObjectURL(image)})`
-  //   }
-
-  //   if (!file[0].length) return;
-  //   $(".file-badge").length > 0 && $(".file-badge").remove(); // 사진 첨부되었는데 또 했을 경우 새로 추가한 사진만 남기기
-
-  //   const fileBadge_element =
-  //     '<span class="file-badge ellipse"><a href="#">' +
-  //     file[file.length - 1] +
-  //     "</a></span >";
-  //   $(".js-form-file").append(fileBadge_element);
-  //   $(".empty-input").removeClass("empty-input");
-  //   //formData에 저장된 이미지 경로는 백엔드에서만 확인 가능
-  //   const formData = new FormData();
-  //   formData.set("file_", file);
-  // });
-
   return (
     <>
       <div className="modal modal-edit">

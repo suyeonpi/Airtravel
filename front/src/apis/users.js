@@ -8,8 +8,11 @@ const updateMe = async ({}) => {
       user_url: "",
       back_url: "",
     });
+    return res.data;
   } catch (err) {
     console.error(err);
     return err;
   }
 };
+
+export { updateMe };

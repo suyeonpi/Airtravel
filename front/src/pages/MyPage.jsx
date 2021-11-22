@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import PostList from "../components/ListComponent/PostList";
 import EditModal from "../components/ModalComponent/EditModal";
 
+import { updateMe } from "../apis/users";
+
 // dummy data import
 import userDummy from "../assets/js/userDummy";
 import DummyPost from "../assets/js/DummyPost";
@@ -10,8 +12,8 @@ import DummyPost from "../assets/js/DummyPost";
 import profileBg from "../assets/images/@img-profile-bg.jpg";
 import profile_Img from "../assets/images/@img-user-profile.png";
 
-const MyPage = () => {
-  const [userInfo, setUserInfo] = useState({ ...userDummy });
+const MyPage = ({ loginInfo }) => {
+  const [userInfo, setUserInfo] = useState();
   const [newInfo, setNewInfo] = useState(userInfo.usernick);
 
   const [posts, setPosts] = useState([...DummyPost]);
@@ -23,10 +25,7 @@ const MyPage = () => {
   const onApiHandler = () => onEditProfile();
 
   const onChangeUser = () => {
-    setUserInfo({
-      ...userInfo,
-      ["usernick"]: newInfo,
-    });
+    updateMe().then((res) => {});
     onApiHandler();
   };
 
