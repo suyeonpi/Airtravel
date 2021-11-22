@@ -24,7 +24,7 @@ function SignupPage(props) {
       setPositiveMsg(false);
 
       axios
-        .post("http://localhost:3000/users/checkid", {
+        .post("http://localhost:8080/api/v1/auth/checkid", {
           username: userID,
         })
         .then((res) => {
@@ -62,7 +62,7 @@ function SignupPage(props) {
     if (validateLoginForm()) {
       //[API] [POST] 회원가입 요청 보내는 작업.
       axios
-        .post("http://localhost:3000/users/signup", {
+        .post("http://localhost:8080/api/v1/auth/signup", {
           username: userID,
           usernick: userNick,
           password: userPW2,
