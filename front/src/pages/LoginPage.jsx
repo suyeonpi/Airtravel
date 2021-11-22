@@ -7,7 +7,7 @@ import React, { useState, useRef } from "react";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
-function LoginPage(props) {
+function LoginPage({ loginHandler }) {
   const [userID, setuserID] = useState("");
   const [userPW, setuserPW] = useState("");
   const [inputError, setInputError] = useState(false);
@@ -33,6 +33,7 @@ function LoginPage(props) {
           let { from } = location.state || { from: { pathname: "/" } };
 
           localStorage.token = res.data.token;
+          loginHandler(res.data);
           setuserID("");
           setuserPW("");
           navigate(from);

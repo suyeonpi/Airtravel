@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 /* global history */
 /* global location */
 /* global window */
@@ -39,10 +40,14 @@ const IfAlreadyLoggedIn = ({ children }) => {
 };
 
 function App() {
+  const loginHandler = (loginData) => {
+    localStorage.usernick = loginData.usernick;
+  };
+
   return (
     <>
-      <Header />
       <BrowserRouter>
+        <Header auth={localStorage.token} />
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="addpost" element={<AddPostPage />} />
@@ -50,7 +55,7 @@ function App() {
             path="mypage"
             element={
               <PrivateRoute>
-                <MyPage />
+                <MyPage loginInfo={localStorage.usernick} />
               </PrivateRoute>
             }
           />
@@ -74,7 +79,7 @@ function App() {
             path="login"
             element={
               <IfAlreadyLoggedIn>
-                <LoginPage />
+                <LoginPage loginHandler={loginHandler} />
               </IfAlreadyLoggedIn>
             }
           />

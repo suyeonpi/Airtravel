@@ -3,18 +3,20 @@ import React, { useState, useEffect } from "react";
 import PostList from "../components/ListComponent/PostList";
 import EditModal from "../components/ModalComponent/EditModal";
 
+import { updateMe } from "../apis/users";
+import { getCards } from "../apis/cards";
+
 // dummy data import
-import userDummy from "../assets/js/userDummy";
 import DummyPost from "../assets/js/DummyPost";
 //이미지import
 import profileBg from "../assets/images/@img-profile-bg.jpg";
 import profile_Img from "../assets/images/@img-user-profile.png";
 
-const MyPage = () => {
-  const [userInfo, setUserInfo] = useState({ ...userDummy });
-  const [newInfo, setNewInfo] = useState(userInfo.usernick);
+const MyPage = ({ loginInfo }) => {
+  const [userInfo, setUserInfo] = useState("");
+  const [newInfo, setNewInfo] = useState();
 
-  const [posts, setPosts] = useState([...DummyPost]);
+  const [posts, setPosts] = useState();
   const [activeEditModal, setActiveEditModal] = useState(false);
   const [activeAddModal, setactiveAddModal] = useState(false);
   const [profileImg, setprofileImg] = useState(profile_Img);
@@ -22,15 +24,8 @@ const MyPage = () => {
 
   const onApiHandler = () => onEditProfile();
 
-  const onAddPostHandler = () => {
-    alert("포스트 등록");
-  };
-
   const onChangeUser = () => {
-    setUserInfo({
-      ...userInfo,
-      ["usernick"]: newInfo,
-    });
+    updateMe().then((res) => {});
     onApiHandler();
   };
 
@@ -39,6 +34,15 @@ const MyPage = () => {
     setNewInfo((prev) => (prev = value));
   };
 
+  useEffect(() => {
+    setUserInfo((prev) => (prev = loginInfo));
+    getCards(loginInfo).then((res) => {
+      console.log("안녕하세여!", res);
+      setPosts(res);
+    });
+  }, [loginInfo]);
+
+  //수정모달 활성 비활성
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
   const onChangeImg = (e) => {
@@ -67,7 +71,7 @@ const MyPage = () => {
             </span>
           </div>
           {/* 유저 닉네임 */}
-          <p className="profile__nick">{userInfo.usernick}</p>
+          <p className="profile__nick">{loginInfo}</p>
           <button
             type="button"
             onClick={onEditProfile}
@@ -83,11 +87,8 @@ const MyPage = () => {
         </div>
       </div>
       <div className="content-wrap">
-        <PostList
-          posts={posts}
-          mypage={true}
-          onAddPostHandler={onAddPostHandler}
-        />
+        {/* TODO: 게시글 등록 페이지 띄우는 핸들러 필요 */}
+        {/* <PostList posts={posts} mypage={true} /> */}
       </div>
 
       {/* 프로필 수정 모달 */}
