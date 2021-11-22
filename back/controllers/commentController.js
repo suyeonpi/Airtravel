@@ -29,7 +29,6 @@ export const createComment = catchAsync(async (req, res, next) => {
   const { text } = req.body;
   const newComment = await commentRepository.create(text, req.userId, card.id);
 
-  console.log(newComment);
   res.status(201).json({
     comment: newComment,
   });
