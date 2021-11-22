@@ -107,8 +107,8 @@ export const update = async (id, card) => {
   );
 };
 
-export const remove = (id) => {
-  return Card.findByIdAndDelete(id);
+export const remove = async (id) => {
+  return await Card.findByIdAndDelete(id);
 };
 
 export const updateLikeCount = async (id, count) => {
