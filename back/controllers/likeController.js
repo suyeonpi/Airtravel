@@ -6,11 +6,7 @@ import AppError from '../utils/AppError.js';
 export const getAllLiked = catchAsync(async (req, res, next) => {
   const cards = await likeRepository.getAllCardsLiked(req.userId);
   res.status(200).json({
-    status: 'success',
-    result: cards.length,
-    data: {
-      cards,
-    },
+    cards,
   });
 });
 
@@ -27,10 +23,7 @@ export const addLike = catchAsync(async (req, res, next) => {
   const newCard = await cardRepository.updateLikeCount(id, like);
 
   res.status(201).json({
-    status: 'success',
-    data: {
-      card: newCard,
-    },
+    card: newCard,
   });
 });
 
@@ -47,9 +40,6 @@ export const removeLike = catchAsync(async (req, res, next) => {
   await cardRepository.updateLikeCount(id, dislike);
 
   res.status(204).json({
-    status: 'success',
-    data: {
-      tour: null,
-    },
+    message: '좋아요 취소완료',
   });
 });
