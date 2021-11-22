@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 const EditModal = ({
-  onChangeNick,
-  onChangeUser,
+  onSaveUserInfo,
   profileImg,
   banner,
-  newInfo,
+  oldNick,
+  changeOldNick,
   onCloseModal,
   onChangeImg,
   onChangeBanner,
@@ -34,8 +34,8 @@ const EditModal = ({
               id="editNick"
               name="usernick"
               type="text"
-              value={newInfo}
-              onChange={onChangeNick}
+              value={oldNick}
+              onChange={changeOldNick}
             />
           </div>
 
@@ -72,7 +72,7 @@ const EditModal = ({
           <button
             className="btn btn__primary btn__large "
             style={{ width: "100%" }}
-            onClick={onChangeUser}
+            onClick={() => onSaveUserInfo("", "")}
           >
             완료
           </button>

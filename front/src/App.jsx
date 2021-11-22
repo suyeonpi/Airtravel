@@ -20,6 +20,7 @@ import SignupPage from "./pages/SignupPage";
 import PasswordChange from "./pages/PasswordChange";
 import DeleteAccountPage from "./pages/DeleteAccountPage";
 import AddPostPage from "./pages/AddPostPage";
+import { getMyCards } from "./apis/cards";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
@@ -40,9 +41,20 @@ const IfAlreadyLoggedIn = ({ children }) => {
 };
 
 function App() {
+  const [posts, setPosts] = useState([{}]);
+
   const loginHandler = (loginData) => {
     localStorage.usernick = loginData.usernick;
   };
+  // 내가 작성한 포스트 api 호출
+  useEffect(() => {
+    getMyCards(localStorage.usernick).then((res) => {
+      setPosts([...res]);
+    });
+    return {
+      posts,
+    };
+  }, []);
 
   return (
     <>
@@ -62,7 +74,7 @@ function App() {
             path="mypage"
             element={
               <PrivateRoute>
-                <MyPage loginInfo={localStorage.usernick} />
+                <MyPage loginInfo={localStorage.usernick} posts={posts} />
               </PrivateRoute>
             }
           />

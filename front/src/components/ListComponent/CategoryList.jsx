@@ -37,7 +37,6 @@ const CategoryList = ({ categories, onPageTurn }) => {
       },
     ],
   };
-  console.log(Array.isArray(categories));
 
   return (
     <>
