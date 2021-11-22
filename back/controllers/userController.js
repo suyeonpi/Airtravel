@@ -26,12 +26,13 @@ export const getUser = catchAsync(async (req, res, next) => {
   res.status(200).json({
     usernick: user.usernick,
     user_url,
-    back_url,
+    back_url
   });
 });
 
 export const updateMe = catchAsync(async (req, res, next) => {
   const user = await userRepository.findById(req.userId);
+  console.log('@@@@@@@@@@@@@@@@test', req.files.back_url);
   if (!user) {
     return next(new AppError('회원 정보가 없습니다', 404));
   }
@@ -50,11 +51,11 @@ export const updateMe = catchAsync(async (req, res, next) => {
   const updatedUser = await userRepository.update(req.userId, {
     usernick,
     user_url,
-    back_url,
+    back_url
   });
 
   res.status(200).json({
-    user: updatedUser,
+    user: updatedUser
   });
 });
 
@@ -70,6 +71,6 @@ export const deleteMe = catchAsync(async (req, res, next) => {
   await userRepository.deactive(req.userId);
 
   res.status(204).json({
-    user: null,
+    user: null
   });
 });

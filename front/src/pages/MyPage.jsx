@@ -7,8 +7,12 @@ import { updateMe, getMyInfo } from "../apis/users";
 
 const MyPage = ({ posts }) => {
   const fd = new FormData();
+
   const [oldNick, setOldNick] = useState(localStorage.usernick);
   const [newInfo, setNewInfo] = useState(localStorage.usernick);
+
+  const [dbuser_url, setDbUser_url] = useState(); //업로드 용
+  const [dbBack_url, seDbBack_url] = useState(); //업로드 용
 
   const [activeEditModal, setActiveEditModal] = useState(false);
   const [profileImg, setprofileImg] = useState(); //preview 용
@@ -16,22 +20,26 @@ const MyPage = ({ posts }) => {
 
   const onSaveUserInfo = () => {
     setNewInfo(oldNick);
-    fd.append("usernick", oldNick);
+    newInfo !== oldNick && fd.append("usernick", oldNick);
+    fd.append("back_url", dbBack_url, dbBack_url.name);
+    fd.append("user_url", dbuser_url, dbuser_url.name);
     onEditProfile();
     onSubmit();
   };
 
   const onSubmit = () => {
     updateMe(fd).then((res) => {
-      if (res.user.usernick === oldNick) {
-        localStorage.usernick = oldNick;
-      }
+      console.log("onSubmitonSubmitonSubmitonSubmit", res);
+      getMyInfo().then((res) => {
+        console.log("Mypage getMyInfo 가져옴", res);
+      });
     });
   };
 
   useEffect(() => {
     getMyInfo().then((res) => {
-      console.log("가져옴1", res);
+      console.log("Mypage getMyInfo 가져옴", res);
+      localStorage.usernick = res.usernick;
     });
     return () => {};
   }, []);
@@ -43,16 +51,20 @@ const MyPage = ({ posts }) => {
   //수정모달 활성 비활성
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
+  const [selectedFile, setSelectedFile] = useState();
+
   const onChangeImg = (val, file) => {
-    const [image] = file;
+    if (file[0].type.substr(0, 5) !== "image") return;
+    const image = file[0];
     if (image) setprofileImg(URL.createObjectURL(image));
-    fd.append("user_url", image);
+    setDbUser_url(image);
   };
 
   const onChangeBanner = (val, file) => {
-    const [image] = file;
+    if (file[0].type.substr(0, 5) !== "image") return;
+    const image = file[0];
     if (image) setBanner(URL.createObjectURL(image));
-    fd.append("back_url", image);
+    seDbBack_url(image);
   };
 
   const onImageHandler = (e) => {

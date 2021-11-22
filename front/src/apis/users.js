@@ -1,5 +1,4 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8080";
 
 const updateMe = async (fd) => {
   try {
@@ -18,7 +17,7 @@ const updateMe = async (fd) => {
 const getMyInfo = async () => {
   try {
     const res = await axios.get("http://localhost:8080/api/v1/users", {
-      withCredentials: true,
+      headers: { Authorization: `Bearer ${localStorage.token}` },
     });
     console.log("내정보 가져오기 getMyInfo", res);
     return res.data;

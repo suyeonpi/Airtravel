@@ -9,7 +9,6 @@ export const verifyToken = catchAsync(async (req, res, next) => {
   let token;
   // header 먼저 확인
   const authHeader = req.get('Authorization');
-  console.log('@@@@test', authHeader);
   if (authHeader && authHeader.startsWith('Bearer ')) {
     token = authHeader.split(' ')[1];
   }
