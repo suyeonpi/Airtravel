@@ -18,7 +18,7 @@ function LoginPage(props) {
     if (validateLoginForm()) {
       //[API] [GET] 로그인 요청 보내는 작업.
       axios
-        .post("http://localhost:3000/users/login", {
+        .post("http://localhost:8080/api/v1/auth/login", {
           username: userID,
           password: userPW,
         })
