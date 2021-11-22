@@ -79,7 +79,7 @@ export const updateCard = catchAsync(async (req, res, next) => {
   if (!card) {
     return next(new AppError('해당 카드를 찾을 수 없습니다', 404));
   }
-  if (card.userId !== req.userId) {
+  if (card.userId.toString() !== req.userId) {
     return next(new AppError('권한이 없습니다', 403));
   }
   const newCard = await cardRepository.update(id, req.body);
