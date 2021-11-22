@@ -62,14 +62,6 @@ cardSchema.virtual('likes', {
   localField: '_id',
 });
 
-// cardSchema.pre(/^find/, function (next) {
-//   this.populate({
-//     path: 'userId',
-//     select: '-__v',
-//   });
-//   next();
-// });
-
 export const Card = Mongoose.model('Card', cardSchema);
 
 export const getAll = async () => {
@@ -80,12 +72,10 @@ export const getAllByContinent = async (continent) => {
   return await Card.find({ continent }).sort({ createdAt: -1 });
 };
 
-export const getAllByUser = async (usernick) => {
-  return await Card.find()
-    .populate({ path: 'userId', match: { usernick } })
-    .sort({
-      createdAt: -1,
-    });
+export const getAllByUser = async (userId) => {
+  return await Card.find({ userId }).sort({
+    createdAt: -1,
+  });
 };
 
 export const getById = async (id) => {

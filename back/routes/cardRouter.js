@@ -10,8 +10,7 @@ router //
   .get(cardController.getCards)
   .post(verifyToken, uploadCardPhoto, cardController.createCard);
 
-router.get('/', verifyToken, cardController.getCardsByUser);
-
+router.get('/user', verifyToken, cardController.getCardsByUser);
 router //
   .route('/:id')
   .get(verifyToken, cardController.getCard)
