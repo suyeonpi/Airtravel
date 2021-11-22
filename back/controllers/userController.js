@@ -1,19 +1,29 @@
 import * as userRepository from '../models/userModel.js';
-import jwt from 'jsonwebtoken';
 import {} from 'express-async-errors';
-import { config } from '../config.js';
 import { catchAsync } from '../utils/catchAsync.js';
 import AppError from '../utils/AppError.js';
 
-export const getMe = catchAsync(async (req, res, next) => {
-  const user = await userRepository.findById(req.userId);
+export const getUser = catchAsync(async (req, res, next) => {
+  const { usernick } = req.query;
+  let user;
+
+  if (usernick) {
+    if (await userRepository.findDeactivedNick(usernick)) {
+      return next(new AppError('비활성화된 계정입니다', 403));
+    }
+    user = await userRepository.findByUsernick(usernick);
+  } else {
+    user = await userRepository.findById(req.userId);
+  }
+
   if (!user) {
     return next(new AppError('회원 정보가 없습니다', 404));
   }
-  const { usernick, user_url, back_url } = user;
+
+  const { user_url, back_url } = user;
 
   res.status(200).json({
-    usernick,
+    usernick: user.usernick,
     user_url,
     back_url,
   });

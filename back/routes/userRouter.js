@@ -7,7 +7,7 @@ const router = express.Router();
 
 router
   .route('/') //
-  .get(verifyToken, userController.getMe)
+  .get(verifyToken, userController.getUser)
   .patch(verifyToken, uploadUserPhoto, userController.updateMe)
   .delete(verifyToken, userController.deleteMe);
 
