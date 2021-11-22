@@ -1,5 +1,10 @@
+/* global history */
+/* global location */
+/* global window */
+
+/* eslint no-restricted-globals: ["off"] */
 import React, { useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage(props) {
@@ -10,6 +15,7 @@ function LoginPage(props) {
   const idInput = useRef();
   const pwInput = useRef();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -23,11 +29,13 @@ function LoginPage(props) {
           password: userPW,
         })
         .then((res) => {
-          console.log("res", res);
+          console.log("location", location);
+          let { from } = location.state || { from: { pathname: "/" } };
+
           localStorage.token = res.data.token;
           setuserID("");
           setuserPW("");
-          navigate("/");
+          navigate(from);
         })
         .catch((err) => {
           setInputError(true);
