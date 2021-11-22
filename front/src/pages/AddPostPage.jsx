@@ -18,6 +18,16 @@ function AddPostPage(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setDiaryContinent("아시아");
+    setDiaryLocation("");
+    setDiaryDate("");
+    setDiaryContent("");
+    setSelectedFile();
+    setPreview();
+    setShowPicName(false);
+  }, []);
+
+  useEffect(() => {
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
