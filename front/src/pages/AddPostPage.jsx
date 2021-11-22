@@ -18,6 +18,16 @@ function AddPostPage(props) {
   const navigate = useNavigate();
 
   useEffect(() => {
+    setDiaryContinent("아시아");
+    setDiaryLocation("");
+    setDiaryDate("");
+    setDiaryContent("");
+    setSelectedFile();
+    setPreview();
+    setShowPicName(false);
+  }, []);
+
+  useEffect(() => {
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -41,7 +51,7 @@ function AddPostPage(props) {
     fd.append("continet", diaryContinent);
 
     axios
-      .post("http://localhost:8080/cards", fd, {
+      .post("http://localhost:8080/api/v1/cards", fd, {
         headers: { Authorization: `Bearer ${localStorage.token}` },
       })
       .then((res) => {

@@ -1,5 +1,10 @@
+/* global history */
+/* global location */
+/* global window */
+
+/* eslint no-restricted-globals: ["off"] */
 import React, { useState, useRef } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 function LoginPage({ loginHandler }) {
@@ -10,6 +15,7 @@ function LoginPage({ loginHandler }) {
   const idInput = useRef();
   const pwInput = useRef();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -18,21 +24,19 @@ function LoginPage({ loginHandler }) {
     if (validateLoginForm()) {
       //[API] [GET] 로그인 요청 보내는 작업.
       axios
-        .post(
-          "http://localhost:8080/api/v1/auth/login",
-          {
-            username: userID,
-            password: userPW,
-          },
-          { withCredentials: true }
-        )
+        .post("http://localhost:8080/api/v1/auth/login", {
+          username: userID,
+          password: userPW,
+        })
         .then((res) => {
-          console.log("실행순서 테스트 loginPage.js");
+          console.log("location", location);
+          let { from } = location.state || { from: { pathname: "/" } };
+
           localStorage.token = res.data.token;
           loginHandler(res.data);
           setuserID("");
           setuserPW("");
-          navigate("/");
+          navigate(from);
         })
         .catch((err) => {
           setInputError(true);
