@@ -8,8 +8,9 @@ const router = express.Router();
 router //
   .route('/')
   .get(cardController.getCards)
-  .get(verifyToken, cardController.getCardsByUser)
   .post(verifyToken, uploadCardPhoto, cardController.createCard);
+
+router.get('/', verifyToken, cardController.getCardsByUser);
 
 router //
   .route('/:id')

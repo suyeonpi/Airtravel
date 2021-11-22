@@ -4,7 +4,9 @@ import AppError from '../utils/AppError.js';
 import { catchAsync } from '../utils/catchAsync.js';
 
 export const getCards = catchAsync(async (req, res, next) => {
-  const { continent } = decodeURIComponent(req.query);
+  let { continent } = req.query;
+  if (continent) continent = decodeURIComponent(continent);
+  console.log(continent);
   const cards = await (continent
     ? cardRepository.getAllByContinent(continent)
     : cardRepository.getAll());
@@ -15,7 +17,9 @@ export const getCards = catchAsync(async (req, res, next) => {
 });
 
 export const getCardsByUser = catchAsync(async (req, res, next) => {
-  const { usernick } = decodeURIComponent(req.query);
+  let { usernick } = req.query;
+  if (usernick) usernick = decodeURIComponent(usernick);
+  console.log(usernick);
   const deactivatedUser = await userRepository.findDeactivedNick(usernick);
   if (deactivatedUser) {
     return next(new AppError('비활성화된 계정입니다', 403));
