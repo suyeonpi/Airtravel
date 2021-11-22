@@ -41,12 +41,14 @@ export const updateMe = catchAsync(async (req, res, next) => {
     req.body.back_url = req.files.back_url[0].transforms[0].location;
 
   const { usernick, user_url, back_url } = req.body;
-
-  const foundNick = await userRepository.findByUsernick(usernick);
-  const deactivedNick = await userRepository.findByUsernick(usernick);
-  if (foundNick || deactivedNick) {
-    return next(new AppError('해당 닉네임이 이미 존재합니다', 409));
+  if (usernick) {
+    const foundNick = await userRepository.findByUsernick(usernick);
+    const deactivedNick = await userRepository.findByUsernick(usernick);
+    if (foundNick || deactivedNick) {
+      return next(new AppError('해당 닉네임이 이미 존재합니다', 409));
+    }
   }
+
   const updatedUser = await userRepository.update(req.userId, {
     usernick,
     user_url,
