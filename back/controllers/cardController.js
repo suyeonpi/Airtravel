@@ -6,7 +6,6 @@ import { catchAsync } from '../utils/catchAsync.js';
 export const getCards = catchAsync(async (req, res, next) => {
   let { continent } = req.query;
   if (continent) continent = decodeURIComponent(continent);
-  console.log(continent);
   const cards = await (continent
     ? cardRepository.getAllByContinent(continent)
     : cardRepository.getAll());
@@ -19,12 +18,15 @@ export const getCards = catchAsync(async (req, res, next) => {
 export const getCardsByUser = catchAsync(async (req, res, next) => {
   let { usernick } = req.query;
   if (usernick) usernick = decodeURIComponent(usernick);
-  console.log(usernick);
   const deactivatedUser = await userRepository.findDeactivedNick(usernick);
   if (deactivatedUser) {
     return next(new AppError('비활성화된 계정입니다', 403));
   }
-  const cards = await cardRepository.getAllByUser(usernick);
+  const user = await userRepository.findByUsernick(usernick);
+  if (!user) {
+    return next(new AppError('회원 정보가 없습니다', 404));
+  }
+  const cards = await cardRepository.getAllByUser(user.id);
 
   res.status(200).json({
     cards,
@@ -50,6 +52,7 @@ export const getCard = catchAsync(async (req, res, next) => {
       location: card.location,
       continent: card.continent,
       date: card.date,
+      content: card.content,
       picture_url: card.picture_url,
       like_count: card.like_count,
       heart: card.heart,
