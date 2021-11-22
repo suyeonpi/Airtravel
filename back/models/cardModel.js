@@ -46,7 +46,11 @@ const cardSchema = new Mongoose.Schema(
       default: false,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
+  {
+    toJSON: { virtuals: true },
+    toOBject: { virtuals: true },
+  }
 );
 
 createVirtualId(cardSchema);
@@ -57,6 +61,14 @@ cardSchema.virtual('likes', {
   foreignField: 'card',
   localField: '_id',
 });
+
+// cardSchema.pre(/^find/, function (next) {
+//   this.populate({
+//     path: 'userId',
+//     select: '-__v',
+//   });
+//   next();
+// });
 
 export const Card = Mongoose.model('Card', cardSchema);
 
@@ -69,7 +81,11 @@ export const getAllByContinent = async (continent) => {
 };
 
 export const getAllByUser = async (usernick) => {
-  return await Card.find({ usernick }).sort({ createdAt: -1 });
+  return await Card.find()
+    .populate({ path: 'userId', match: { usernick } })
+    .sort({
+      createdAt: -1,
+    });
 };
 
 export const getById = async (id) => {
