@@ -9,6 +9,7 @@ const EditModal = ({
   onCloseModal,
   onChangeImg,
   onChangeBanner,
+  onImageHandler,
 }) => {
   const onEditImg = () => {};
 
@@ -45,9 +46,10 @@ const EditModal = ({
               <label htmlFor="editProfileImg">수정</label>
               <input
                 type="file"
-                name=""
+                name="profileImg"
                 id="editProfileImg"
-                onChange={onChangeImg}
+                // onChange={onChangeImg}
+                onChange={onImageHandler}
               />
             </div>
           </div>
@@ -60,7 +62,13 @@ const EditModal = ({
             <label className="title title__small">배너 사진</label>
             <div className="input__bind-label">
               <label htmlFor="editBanner">수정</label>
-              <input id="editBanner" type="file" onChange={onChangeBanner} />
+              <input
+                id="editBanner"
+                type="file"
+                name="backImg"
+                // onChange={onChangeBanner}
+                onChange={onImageHandler}
+              />
             </div>
           </div>
           <div>

@@ -9,6 +9,7 @@ export const verifyToken = catchAsync(async (req, res, next) => {
   let token;
   // header 먼저 확인
   const authHeader = req.get('Authorization');
+  console.log('@@@@test', authHeader);
   if (authHeader && authHeader.startsWith('Bearer ')) {
     token = authHeader.split(' ')[1];
   }
@@ -40,6 +41,6 @@ export const checkId = catchAsync(async (req, res, next) => {
     return next(new AppError('해당 아이디가 이미 존재합니다', 409));
   }
   res.status(200).json({
-    message: '해당 아이디를 사용할 수 있습니다',
+    message: '해당 아이디를 사용할 수 있습니다'
   });
 });

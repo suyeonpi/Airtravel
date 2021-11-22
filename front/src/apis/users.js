@@ -1,23 +1,11 @@
 import axios from "axios";
 const baseUrl = "http://localhost:8080";
 
-const updateMe = async (new_usernick) => {
-  console.log("@@@updateMe API", new_usernick);
+const updateMe = async (fd) => {
   try {
-    const res = await axios.patch(
-      `${baseUrl}/api/v1/users`,
-      {
-        headers: { Authorization: `Bearer ${localStorage.token}` },
-      },
-      {
-        usernick: new_usernick,
-        user_url:
-          "@/Users/pisuyeon/Desktop/projects/Udemy/node-js/4-natours/starter/public/img/users/user-6194adc75de259185392296b-1637336899210.jpeg",
-        back_url:
-          "@/Users/pisuyeon/Desktop/projects/Udemy/node-js/4-natours/starter/public/img/tours/tour-4-cover.jpg",
-      }
-    );
-
+    const res = await axios.patch("http://localhost:8080/api/v1/users", fd, {
+      headers: { Authorization: `Bearer ${localStorage.token}` },
+    });
     return res.data;
   } catch (error) {
     console.error("@@updateMe API fail: ", error.response.data);
@@ -25,4 +13,18 @@ const updateMe = async (new_usernick) => {
   }
 };
 
-export { updateMe };
+// localhost:8080/api/v1/users
+
+const getMyInfo = async () => {
+  try {
+    const res = await axios.get("http://localhost:8080/api/v1/users", {
+      withCredentials: true,
+    });
+    console.log("내정보 가져오기 getMyInfo", res);
+    return res.data;
+  } catch (error) {
+    console.error(error.response.data);
+  }
+};
+
+export { updateMe, getMyInfo };

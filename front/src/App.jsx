@@ -43,9 +43,6 @@ const IfAlreadyLoggedIn = ({ children }) => {
 function App() {
   const [posts, setPosts] = useState([{}]);
 
-  const loginHandler = (loginData) => {
-    localStorage.usernick = loginData.usernick;
-  };
   // 내가 작성한 포스트 api 호출
   useEffect(() => {
     getMyCards(localStorage.usernick).then((res) => {
@@ -98,7 +95,7 @@ function App() {
             path="login"
             element={
               <IfAlreadyLoggedIn>
-                <LoginPage loginHandler={loginHandler} />
+                <LoginPage />
               </IfAlreadyLoggedIn>
             }
           />

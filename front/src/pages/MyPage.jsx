@@ -3,34 +3,38 @@ import React, { useState, useEffect } from "react";
 import PostList from "../components/ListComponent/PostList";
 import EditModal from "../components/ModalComponent/EditModal";
 
-import { updateMe } from "../apis/users";
-
-//이미지import
-import profileBg from "../assets/images/@img-profile-bg.jpg";
-import profile_Img from "../assets/images/@img-user-profile.png";
+import { updateMe, getMyInfo } from "../apis/users";
 
 const MyPage = ({ posts }) => {
+  const fd = new FormData();
   const [oldNick, setOldNick] = useState(localStorage.usernick);
   const [newInfo, setNewInfo] = useState(localStorage.usernick);
 
   const [activeEditModal, setActiveEditModal] = useState(false);
-  const [profileImg, setprofileImg] = useState(profile_Img);
-  const [banner, setBanner] = useState(profileBg);
+  const [profileImg, setprofileImg] = useState(); //preview 용
+  const [banner, setBanner] = useState(); //preview 용
 
   const onSaveUserInfo = () => {
     setNewInfo(oldNick);
+    fd.append("usernick", oldNick);
     onEditProfile();
+    onSubmit();
+  };
+
+  const onSubmit = () => {
+    updateMe(fd).then((res) => {
+      if (res.user.usernick === oldNick) {
+        localStorage.usernick = oldNick;
+      }
+    });
   };
 
   useEffect(() => {
-    console.log("mypage updateMe 실행");
-
-    updateMe(newInfo, "", "").then((res) => {
-      console.log("mypage updateMe", res);
-      // localStorage.usernick = res.
+    getMyInfo().then((res) => {
+      console.log("가져옴1", res);
     });
     return () => {};
-  }, [newInfo]);
+  }, []);
 
   const changeOldNick = (e) => {
     setOldNick(e.target.value);
@@ -39,16 +43,29 @@ const MyPage = ({ posts }) => {
   //수정모달 활성 비활성
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
-  const onChangeImg = (e) => {
-    const fileName = e.target.value.split("\\").pop(); //이미지 이름
-    const [image] = e.target.files;
+  const onChangeImg = (val, file) => {
+    const [image] = file;
     if (image) setprofileImg(URL.createObjectURL(image));
+    fd.append("user_url", image);
   };
-  const onChangeBanner = (e) => {
-    const fileName = e.target.value.split("\\").pop(); //이미지 이름
-    const [image] = e.target.files;
+
+  const onChangeBanner = (val, file) => {
+    const [image] = file;
     if (image) setBanner(URL.createObjectURL(image));
+    fd.append("back_url", image);
   };
+
+  const onImageHandler = (e) => {
+    switch (e.target.name) {
+      case "backImg":
+        return onChangeBanner(e.target.value, e.target.files);
+      case "profileImg":
+        return onChangeImg(e.target.value, e.target.files);
+      default:
+        return "none";
+    }
+  };
+
   return (
     <>
       <div className="profile">
@@ -97,6 +114,7 @@ const MyPage = ({ posts }) => {
             onCloseModal={onEditProfile}
             onChangeImg={onChangeImg}
             onChangeBanner={onChangeBanner}
+            onImageHandler={onImageHandler}
           />
         </div>
       )}
