@@ -16,7 +16,7 @@ const continents = [
 const getCards = async () => {
   try {
     const res = await axios.get(`${baseUrl}/api/v1/cards`);
-    return res.data;
+    return res.data.cards;
   } catch (error) {
     console.error("@@getCards : ", error);
     return error;

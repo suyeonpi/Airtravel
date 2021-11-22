@@ -20,8 +20,9 @@ const MainPage = () => {
   // API 호출 용
   useEffect(() => {
     getCards().then((res) => {
-      // setCards([...res]);
-      // setPosts([...cards]);
+      console.log(res);
+      setCards([...res]);
+      setPosts([...cards]);
     });
   }, []);
 
