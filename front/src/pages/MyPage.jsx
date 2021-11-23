@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-
 import PostList from "../components/ListComponent/PostList";
 import EditModal from "../components/ModalComponent/EditModal";
 
@@ -9,16 +8,17 @@ const MyPage = ({ posts }) => {
   const fd = new FormData();
 
   const [oldNick, setOldNick] = useState(localStorage.usernick);
-  const [newInfo, setNewInfo] = useState(localStorage.usernick);
+  const [newNick, setNewNick] = useState(localStorage.usernick);
 
   const [dbuser_url, setDbUser_url] = useState(); //업로드 용
   const [dbBack_url, seDbBack_url] = useState(); //업로드 용
 
-  const [activeEditModal, setActiveEditModal] = useState(false);
   const [profileImg, setprofileImg] = useState(); //preview 용
   const [banner, setBanner] = useState(); //preview 용
 
   //수정모달 활성 비활성
+  const [activeEditModal, setActiveEditModal] = useState(false);
+
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
   const changeOldNick = (e) => setOldNick(e.target.value);
@@ -38,15 +38,15 @@ const MyPage = ({ posts }) => {
   const onSubmit = () => updateMe(fd).then((res) => console.log(res));
 
   useEffect(() => {
-    if (newInfo !== oldNick) {
+    if (newNick !== oldNick) {
       fd.append("usernick", oldNick);
       localStorage.usernick = oldNick;
     }
-  }, [fd, newInfo, oldNick]);
+  }, [fd, newNick, oldNick]);
 
   // 프로필 수정 창 완료 누를 때 실행
   const onSaveUserInfo = () => {
-    setNewInfo(oldNick);
+    setNewNick(oldNick);
     onEditProfile();
     dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
     dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
@@ -94,7 +94,7 @@ const MyPage = ({ posts }) => {
             </span>
           </div>
           {/* 유저 닉네임 */}
-          <p className="profile__nick">{newInfo}</p>
+          <p className="profile__nick">{newNick}</p>
           <button
             type="button"
             onClick={onEditProfile}
