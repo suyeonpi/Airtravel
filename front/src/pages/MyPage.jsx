@@ -21,7 +21,9 @@ const MyPage = ({ posts }) => {
   //수정모달 활성 비활성
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
-  //
+  const changeOldNick = (e) => setOldNick(e.target.value);
+
+  //페이지 랜더링 후, 내 정보 가져오는 API 호출
   useEffect(() => {
     getMyInfo().then((res) => {
       setBanner(res.back_url);
@@ -31,8 +33,6 @@ const MyPage = ({ posts }) => {
       }
     });
   }, []);
-
-  const changeOldNick = (e) => setOldNick(e.target.value);
 
   //업데이트 API 호출
   const onSubmit = () => updateMe(fd).then((res) => console.log(res));
