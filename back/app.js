@@ -7,6 +7,7 @@ import xss from 'xss-clean';
 import mongoSanitize from 'express-mongo-sanitize';
 import cookieParser from 'cookie-parser';
 import hpp from 'hpp';
+import multer from 'multer';
 
 import { connectDB } from './db/database.js';
 import { config } from './config.js';
@@ -19,6 +20,7 @@ import globalErrorHandler from './middleware/errorHandler.js';
 import rateLimit from './middleware/rateLimit.js';
 
 const app = express();
+const upload = multer();
 
 const corsOptions = {
   origin: config.cors.allowedOrigin,
@@ -27,7 +29,11 @@ const corsOptions = {
 };
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(upload.array());
+app.use(express.static('public'));
 app.use(cookieParser());
+
 app.use(helmet());
 app.use(cors(corsOptions));
 app.use(morgan('tiny'));
