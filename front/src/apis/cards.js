@@ -25,9 +25,12 @@ const getCards = async () => {
 
 //내가 작성한 포스트만 가져오기
 const getMyCards = async (user) => {
+  console.log("getMYcards", user);
   try {
-    const res = await axios.get(`${baseUrl}/api/v1/cards/?usernick=${user}`);
-    return res.data;
+    const res = await axios.get(
+      `${baseUrl}/api/v1/cards/?usernick=${encodeURIComponent(user)}`
+    );
+    return res.data.cards;
   } catch (error) {
     console.error("@@getMyCards : ", error);
     return error;
@@ -39,7 +42,6 @@ const getMyToken = async () => {
   try {
     const res = await axios.get(`${baseUrl}/api/v1/users`, {
       withCredentials: true,
-      // headers: { Authorization: `Bearer ${localStorage.token}` },
     });
     console.log("@@@@getMyToken", res);
     return res.data;

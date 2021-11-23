@@ -26,6 +26,7 @@ const MainPage = () => {
     });
   }, []);
 
+  //카테고리 선택 시 리렌더링 용
   useEffect(() => {
     if (title === "전체") {
       setPosts((prev) => [...cards]);
