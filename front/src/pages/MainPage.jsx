@@ -4,8 +4,6 @@ import PostList from "../components/ListComponent/PostList";
 import CategoryList from "../components/ListComponent/CategoryList";
 import SliderList from "../components/ListComponent/SliderList";
 
-import PostMenu from "../components/ModalComponent/PostMenu";
-
 import { getCards, continents } from "../apis/cards";
 
 const MainPage = () => {
@@ -47,8 +45,6 @@ const MainPage = () => {
         </div>
         <PostList posts={posts} />
       </div>
-
-      <PostMenu />
     </>
   );
 };
