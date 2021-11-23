@@ -33,7 +33,7 @@ function LoginPage({ loginHandler }) {
           let { from } = location.state || { from: { pathname: "/" } };
 
           localStorage.token = res.data.token;
-          loginHandler(res.data);
+          localStorage.usernick = res.data.usernick;
           setuserID("");
           setuserPW("");
           navigate(from);

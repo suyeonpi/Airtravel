@@ -1,17 +1,14 @@
-import React, { useState } from "react";
-
 const EditModal = ({
-  onChangeNick,
-  onChangeUser,
+  onSaveUserInfo,
   profileImg,
   banner,
-  newInfo,
+  oldNick,
+  changeOldNick,
   onCloseModal,
   onChangeImg,
   onChangeBanner,
+  onImageHandler,
 }) => {
-  const onEditImg = () => {};
-
   return (
     <>
       <div className="modal modal-edit">
@@ -34,8 +31,8 @@ const EditModal = ({
               id="editNick"
               name="usernick"
               type="text"
-              value={newInfo}
-              onChange={onChangeNick}
+              value={oldNick}
+              onChange={changeOldNick}
             />
           </div>
 
@@ -45,9 +42,9 @@ const EditModal = ({
               <label htmlFor="editProfileImg">수정</label>
               <input
                 type="file"
-                name=""
+                name="profileImg"
                 id="editProfileImg"
-                onChange={onChangeImg}
+                onChange={onImageHandler}
               />
             </div>
           </div>
@@ -60,7 +57,12 @@ const EditModal = ({
             <label className="title title__small">배너 사진</label>
             <div className="input__bind-label">
               <label htmlFor="editBanner">수정</label>
-              <input id="editBanner" type="file" onChange={onChangeBanner} />
+              <input
+                id="editBanner"
+                type="file"
+                name="backImg"
+                onChange={onImageHandler}
+              />
             </div>
           </div>
           <div>
@@ -72,7 +74,7 @@ const EditModal = ({
           <button
             className="btn btn__primary btn__large "
             style={{ width: "100%" }}
-            onClick={onChangeUser}
+            onClick={onSaveUserInfo}
           >
             완료
           </button>

@@ -3,58 +3,81 @@ import React, { useState, useEffect } from "react";
 import PostList from "../components/ListComponent/PostList";
 import EditModal from "../components/ModalComponent/EditModal";
 
-import { updateMe } from "../apis/users";
-import { getCards } from "../apis/cards";
+import { updateMe, getMyInfo } from "../apis/users";
 
-// dummy data import
-import DummyPost from "../assets/js/DummyPost";
-//이미지import
-import profileBg from "../assets/images/@img-profile-bg.jpg";
-import profile_Img from "../assets/images/@img-user-profile.png";
+const MyPage = ({ posts }) => {
+  const fd = new FormData();
 
-const MyPage = ({ loginInfo }) => {
-  const [userInfo, setUserInfo] = useState("");
-  const [newInfo, setNewInfo] = useState();
+  const [oldNick, setOldNick] = useState(localStorage.usernick);
+  const [newInfo, setNewInfo] = useState(localStorage.usernick);
 
-  const [posts, setPosts] = useState();
+  const [dbuser_url, setDbUser_url] = useState(); //업로드 용
+  const [dbBack_url, seDbBack_url] = useState(); //업로드 용
+
   const [activeEditModal, setActiveEditModal] = useState(false);
-  const [activeAddModal, setactiveAddModal] = useState(false);
-  const [profileImg, setprofileImg] = useState(profile_Img);
-  const [banner, setBanner] = useState(profileBg);
-
-  const onApiHandler = () => onEditProfile();
-
-  const onChangeUser = () => {
-    updateMe().then((res) => {});
-    onApiHandler();
-  };
-
-  const onChangeNick = (e) => {
-    const { name, value } = e.target;
-    setNewInfo((prev) => (prev = value));
-  };
-
-  useEffect(() => {
-    setUserInfo((prev) => (prev = loginInfo));
-    getCards(loginInfo).then((res) => {
-      console.log("안녕하세여!", res);
-      setPosts(res);
-    });
-  }, [loginInfo]);
+  const [profileImg, setprofileImg] = useState(); //preview 용
+  const [banner, setBanner] = useState(); //preview 용
 
   //수정모달 활성 비활성
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
-  const onChangeImg = (e) => {
-    const fileName = e.target.value.split("\\").pop(); //이미지 이름
-    const [image] = e.target.files;
-    if (image) setprofileImg(URL.createObjectURL(image));
+  //
+  useEffect(() => {
+    getMyInfo().then((res) => {
+      setBanner(res.back_url);
+      setprofileImg(res.user_url);
+      if (res.usernick !== localStorage.usernick) {
+        localStorage.usernick = res.usernick;
+      }
+    });
+  }, []);
+
+  const changeOldNick = (e) => setOldNick(e.target.value);
+
+  //업데이트 API 호출
+  const onSubmit = () => updateMe(fd).then((res) => console.log(res));
+
+  useEffect(() => {
+    if (newInfo !== oldNick) {
+      fd.append("usernick", oldNick);
+      localStorage.usernick = oldNick;
+    }
+  }, [fd, newInfo, oldNick]);
+
+  // 프로필 수정 창 완료 누를 때 실행
+  const onSaveUserInfo = () => {
+    setNewInfo(oldNick);
+    onEditProfile();
+    dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
+    dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
+    onSubmit();
   };
-  const onChangeBanner = (e) => {
-    const fileName = e.target.value.split("\\").pop(); //이미지 이름
-    const [image] = e.target.files;
-    if (image) setBanner(URL.createObjectURL(image));
+
+  const onImageHandler = (e) => {
+    switch (e.target.name) {
+      case "backImg":
+        return onChangeBanner(e.target.value, e.target.files);
+      case "profileImg":
+        return onChangeImg(e.target.value, e.target.files);
+      default:
+        return "none";
+    }
   };
+
+  const onChangeImg = (val, file) => {
+    if (file[0].type.substr(0, 5) !== "image") return;
+    const image = file[0];
+    if (image) setprofileImg(URL.createObjectURL(image)); //이미지 preview
+    setDbUser_url(image);
+  };
+
+  const onChangeBanner = (val, file) => {
+    if (file[0].type.substr(0, 5) !== "image") return;
+    const image = file[0];
+    if (image) setBanner(URL.createObjectURL(image)); //이미지 preview
+    seDbBack_url(image);
+  };
+
   return (
     <>
       <div className="profile">
@@ -71,7 +94,7 @@ const MyPage = ({ loginInfo }) => {
             </span>
           </div>
           {/* 유저 닉네임 */}
-          <p className="profile__nick">{loginInfo}</p>
+          <p className="profile__nick">{newInfo}</p>
           <button
             type="button"
             onClick={onEditProfile}
@@ -88,21 +111,22 @@ const MyPage = ({ loginInfo }) => {
       </div>
       <div className="content-wrap">
         {/* TODO: 게시글 등록 페이지 띄우는 핸들러 필요 */}
-        {/* <PostList posts={posts} mypage={true} /> */}
+        <PostList posts={posts} mypage={true} />
       </div>
 
       {/* 프로필 수정 모달 */}
       {activeEditModal && (
         <div className="modal-back">
           <EditModal
-            newInfo={newInfo}
-            onChangeUser={onChangeUser}
+            oldNick={oldNick}
+            changeOldNick={changeOldNick}
+            onSaveUserInfo={onSaveUserInfo}
             profileImg={profileImg}
             banner={banner}
-            onChangeNick={onChangeNick}
             onCloseModal={onEditProfile}
             onChangeImg={onChangeImg}
             onChangeBanner={onChangeBanner}
+            onImageHandler={onImageHandler}
           />
         </div>
       )}
