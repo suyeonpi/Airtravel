@@ -20,6 +20,7 @@ import SignupPage from "./pages/SignupPage";
 import PasswordChange from "./pages/PasswordChange";
 import DeleteAccountPage from "./pages/DeleteAccountPage";
 import AddPostPage from "./pages/AddPostPage";
+import EditPostPage from "./pages/EditPostPage";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
@@ -55,6 +56,14 @@ function App() {
             element={
               <PrivateRoute>
                 <AddPostPage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="editpost/:id"
+            element={
+              <PrivateRoute>
+                <EditPostPage />
               </PrivateRoute>
             }
           />
