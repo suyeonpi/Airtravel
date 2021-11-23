@@ -48,7 +48,7 @@ function AddPostPage(props) {
     fd.append("location", diaryLocation);
     fd.append("date", diaryDate);
     fd.append("content", diaryContent);
-    fd.append("continet", diaryContinent);
+    fd.append("continent", diaryContinent);
 
     axios
       .post("http://localhost:8080/api/v1/cards", fd, {
