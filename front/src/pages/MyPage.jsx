@@ -3,6 +3,7 @@ import PostList from "../components/ListComponent/PostList";
 import EditModal from "../components/ModalComponent/EditModal";
 
 import { updateMe, getMyInfo } from "../apis/users";
+import { getMyCards } from "../apis/cards";
 
 const MyPage = ({ posts }) => {
   const fd = new FormData();
@@ -25,13 +26,19 @@ const MyPage = ({ posts }) => {
 
   //페이지 랜더링 후, 내 정보 가져오는 API 호출
   useEffect(() => {
-    getMyInfo().then((res) => {
-      setBanner(res.back_url);
-      setprofileImg(res.user_url);
-      if (res.usernick !== localStorage.usernick) {
-        localStorage.usernick = res.usernick;
-      }
-    });
+    getMyInfo()
+      .then((res) => {
+        setBanner(res.back_url);
+        setprofileImg(res.user_url);
+        if (res.usernick !== localStorage.usernick) {
+          localStorage.usernick = res.usernick;
+        }
+      })
+      .then(() => {
+        getMyCards(localStorage.usernick).then((res) => {
+          console.log("get My Cards", res);
+        });
+      });
   }, []);
 
   //업데이트 API 호출
