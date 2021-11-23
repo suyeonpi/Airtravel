@@ -13,3 +13,43 @@ span.divider {
 .modal-edit__img img {
   height: 100%;
 }
+
+.post-menu {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  li {
+    display: inline-block;
+    width: 100%;
+    padding: 1.5rem;
+    font-size: 1.4rem;
+    text-align: center;
+    border-bottom: 1px solid #dbdbdb;
+  }
+  a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.post:hover {
+  &::after {
+    position: absolute;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    content: util.like(22);
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 5;
+    top: 0;
+    left: 0;
+    font-size: 2rem;
+    color: #fff;
+  }
+}

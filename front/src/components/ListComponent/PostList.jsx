@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import PostCard from "../PostComponent/PostCard";
+import PostMenu from "../ModalComponent/PostMenu";
 
 const PostList = ({ posts, mypage, onAddPostHandler }) => {
   const baseUrl = "../../assets/images/";
@@ -36,6 +37,7 @@ const PostList = ({ posts, mypage, onAddPostHandler }) => {
           </div>
         )}
       </div>
+      <PostMenu />
     </>
   );
 };

@@ -124,3 +124,7 @@
 @function imgUrl($filename) {
   @return url("../images/#{$filename}");
 }
+
+@function like($count) {
+  @return "❤ #{$count}";
+}

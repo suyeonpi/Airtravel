@@ -22,6 +22,7 @@ import DeleteAccountPage from "./pages/DeleteAccountPage";
 import AddPostPage from "./pages/AddPostPage";
 import EditPostPage from "./pages/EditPostPage";
 import { getMyCards } from "./apis/cards";
+import PostMenu from "./components/ModalComponent/PostMenu";
 
 const PrivateRoute = ({ children }) => {
   const location = useLocation();
@@ -117,6 +118,8 @@ function App() {
               </IfAlreadyLoggedIn>
             }
           />
+          {/* S: 게시물 메뉴 모달 UI 확인용 임시 코드 */}
+          <Route path="modal" element={<PostMenu />} />
         </Routes>
       </BrowserRouter>
       <Footer />
