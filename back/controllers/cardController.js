@@ -82,7 +82,14 @@ export const updateCard = catchAsync(async (req, res, next) => {
   if (card.userId.toString() !== req.userId) {
     return next(new AppError('권한이 없습니다', 403));
   }
-  const newCard = await cardRepository.update(id, req.body);
+
+  const { location, continent, date, content } = req.body;
+  const newCard = await cardRepository.update(id, {
+    location,
+    continent,
+    date,
+    content,
+  });
 
   res.status(201).json({
     card: newCard,
