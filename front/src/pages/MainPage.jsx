@@ -11,7 +11,7 @@ const MainPage = () => {
   const [title, setTitle] = useState(label[0]);
 
   const [cards, setCards] = useState([]); // DB에서 가져옴
-  const [posts, setPosts] = useState([]); //
+  const [posts, setPosts] = useState([]); // 렌더링 용
 
   const onPageTurn = (idx) => setTitle((prev) => (prev = label[idx]));
   const onFilterPosts = (title) =>
@@ -20,7 +20,6 @@ const MainPage = () => {
   // API 호출 용
   useEffect(() => {
     getCards().then((res) => {
-      console.log(res);
       setCards([...res]);
       setPosts([...cards]);
     });
