@@ -46,6 +46,7 @@ function App() {
 
   // 내가 작성한 포스트 api 호출
   useEffect(() => {
+    if (!localStorage.token) return;
     getMyCards(localStorage.usernick).then((res) => {
       setPosts([...res]);
     });
