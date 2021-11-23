@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 const EditModal = ({
   onSaveUserInfo,
   profileImg,
@@ -11,8 +9,6 @@ const EditModal = ({
   onChangeBanner,
   onImageHandler,
 }) => {
-  const onEditImg = () => {};
-
   return (
     <>
       <div className="modal modal-edit">
@@ -48,7 +44,6 @@ const EditModal = ({
                 type="file"
                 name="profileImg"
                 id="editProfileImg"
-                // onChange={onChangeImg}
                 onChange={onImageHandler}
               />
             </div>
@@ -66,7 +61,6 @@ const EditModal = ({
                 id="editBanner"
                 type="file"
                 name="backImg"
-                // onChange={onChangeBanner}
                 onChange={onImageHandler}
               />
             </div>
@@ -80,7 +74,7 @@ const EditModal = ({
           <button
             className="btn btn__primary btn__large "
             style={{ width: "100%" }}
-            onClick={() => onSaveUserInfo("", "")}
+            onClick={onSaveUserInfo}
           >
             완료
           </button>

@@ -12,17 +12,14 @@ const updateMe = async (fd) => {
   }
 };
 
-// localhost:8080/api/v1/users
-
 const getMyInfo = async () => {
   try {
     const res = await axios.get("http://localhost:8080/api/v1/users", {
       headers: { Authorization: `Bearer ${localStorage.token}` },
     });
-    console.log("내정보 가져오기 getMyInfo", res);
     return res.data;
   } catch (error) {
-    console.error(error.response.data);
+    console.error("@@getMyInfo API fail: ", error.response.data);
   }
 };
 

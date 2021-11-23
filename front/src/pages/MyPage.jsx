@@ -18,53 +18,39 @@ const MyPage = ({ posts }) => {
   const [profileImg, setprofileImg] = useState(); //preview 용
   const [banner, setBanner] = useState(); //preview 용
 
-  const onSaveUserInfo = () => {
-    setNewInfo(oldNick);
-    newInfo !== oldNick && fd.append("usernick", oldNick);
-    fd.append("back_url", dbBack_url, dbBack_url.name);
-    fd.append("user_url", dbuser_url, dbuser_url.name);
-    onEditProfile();
-    onSubmit();
-  };
-
-  const onSubmit = () => {
-    updateMe(fd).then((res) => {
-      console.log("onSubmitonSubmitonSubmitonSubmit", res);
-      getMyInfo().then((res) => {
-        console.log("Mypage getMyInfo 가져옴", res);
-      });
-    });
-  };
-
-  useEffect(() => {
-    getMyInfo().then((res) => {
-      console.log("Mypage getMyInfo 가져옴", res);
-      localStorage.usernick = res.usernick;
-    });
-    return () => {};
-  }, []);
-
-  const changeOldNick = (e) => {
-    setOldNick(e.target.value);
-  };
-
   //수정모달 활성 비활성
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
-  const [selectedFile, setSelectedFile] = useState();
+  //
+  useEffect(() => {
+    getMyInfo().then((res) => {
+      setBanner(res.back_url);
+      setprofileImg(res.user_url);
+      if (res.usernick !== localStorage.usernick) {
+        localStorage.usernick = res.usernick;
+      }
+    });
+  }, []);
 
-  const onChangeImg = (val, file) => {
-    if (file[0].type.substr(0, 5) !== "image") return;
-    const image = file[0];
-    if (image) setprofileImg(URL.createObjectURL(image));
-    setDbUser_url(image);
-  };
+  const changeOldNick = (e) => setOldNick(e.target.value);
 
-  const onChangeBanner = (val, file) => {
-    if (file[0].type.substr(0, 5) !== "image") return;
-    const image = file[0];
-    if (image) setBanner(URL.createObjectURL(image));
-    seDbBack_url(image);
+  //업데이트 API 호출
+  const onSubmit = () => updateMe(fd).then((res) => console.log(res));
+
+  useEffect(() => {
+    if (newInfo !== oldNick) {
+      fd.append("usernick", oldNick);
+      localStorage.usernick = oldNick;
+    }
+  }, [fd, newInfo, oldNick]);
+
+  // 프로필 수정 창 완료 누를 때 실행
+  const onSaveUserInfo = () => {
+    setNewInfo(oldNick);
+    onEditProfile();
+    dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
+    dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
+    onSubmit();
   };
 
   const onImageHandler = (e) => {
@@ -76,6 +62,20 @@ const MyPage = ({ posts }) => {
       default:
         return "none";
     }
+  };
+
+  const onChangeImg = (val, file) => {
+    if (file[0].type.substr(0, 5) !== "image") return;
+    const image = file[0];
+    if (image) setprofileImg(URL.createObjectURL(image)); //이미지 preview
+    setDbUser_url(image);
+  };
+
+  const onChangeBanner = (val, file) => {
+    if (file[0].type.substr(0, 5) !== "image") return;
+    const image = file[0];
+    if (image) setBanner(URL.createObjectURL(image)); //이미지 preview
+    seDbBack_url(image);
   };
 
   return (
