@@ -24,11 +24,14 @@ const getCards = async () => {
 };
 
 //내가 작성한 포스트만 가져오기
-const getMyCards = async (user) => {
-  console.log("getMYcards", user);
+const getMyCards = async (usernick) => {
+  console.log("getMYcards", usernick);
   try {
     const res = await axios.get(
-      `${baseUrl}/api/v1/cards/?usernick=${encodeURIComponent(user)}`
+      `${baseUrl}/api/v1/cards/user?usernick=${encodeURIComponent(usernick)}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      }
     );
     return res.data.cards;
   } catch (error) {

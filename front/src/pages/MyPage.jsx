@@ -1,55 +1,69 @@
 import React, { useState, useEffect } from "react";
-
 import PostList from "../components/ListComponent/PostList";
 import EditModal from "../components/ModalComponent/EditModal";
 
 import { updateMe, getMyInfo } from "../apis/users";
+import { getMyCards } from "../apis/cards";
 
 const MyPage = ({ posts }) => {
   const fd = new FormData();
 
   const [oldNick, setOldNick] = useState(localStorage.usernick);
-  const [newInfo, setNewInfo] = useState(localStorage.usernick);
+  const [newNick, setNewNick] = useState(localStorage.usernick);
 
   const [dbuser_url, setDbUser_url] = useState(); //업로드 용
   const [dbBack_url, seDbBack_url] = useState(); //업로드 용
 
-  const [activeEditModal, setActiveEditModal] = useState(false);
   const [profileImg, setprofileImg] = useState(); //preview 용
   const [banner, setBanner] = useState(); //preview 용
 
   //수정모달 활성 비활성
-  const onEditProfile = () => setActiveEditModal((prev) => !prev);
+  const [activeEditModal, setActiveEditModal] = useState(false);
 
-  //
-  useEffect(() => {
-    getMyInfo().then((res) => {
-      setBanner(res.back_url);
-      setprofileImg(res.user_url);
-      if (res.usernick !== localStorage.usernick) {
-        localStorage.usernick = res.usernick;
-      }
-    });
-  }, []);
+  const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
   const changeOldNick = (e) => setOldNick(e.target.value);
 
+  //페이지 랜더링 후, 내 정보 가져오는 API 호출
+  useEffect(() => {
+    getMyInfo()
+      .then((res) => {
+        setBanner(res.back_url);
+        setprofileImg(res.user_url);
+        if (res.usernick !== localStorage.usernick) {
+          localStorage.usernick = res.usernick;
+        }
+      })
+      .then(() => {
+        getMyCards(localStorage.usernick).then((res) => {
+          console.log("@@@내 카드 가져오기", res);
+          return res;
+        });
+      });
+  }, []);
+
   //업데이트 API 호출
-  const onSubmit = () => updateMe(fd).then((res) => console.log(res));
+  const onSubmit = () => {
+    updateMe(fd).then((res) => {
+      console.log(res);
+    });
+  };
 
   useEffect(() => {
-    if (newInfo !== oldNick) {
-      fd.append("usernick", oldNick);
+    if (newNick !== oldNick) {
       localStorage.usernick = oldNick;
     }
-  }, [fd, newInfo, oldNick]);
+  }, [newNick, oldNick]);
 
   // 프로필 수정 창 완료 누를 때 실행
-  const onSaveUserInfo = () => {
-    setNewInfo(oldNick);
+  const onSaveUserInfo = async () => {
+    setNewNick(oldNick);
     onEditProfile();
-    dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
-    dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
+    await (function() {
+      fd.append("usernick", oldNick);
+      dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
+      dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
+    })();
     onSubmit();
   };
 
@@ -94,7 +108,7 @@ const MyPage = ({ posts }) => {
             </span>
           </div>
           {/* 유저 닉네임 */}
-          <p className="profile__nick">{newInfo}</p>
+          <p className="profile__nick">{newNick}</p>
           <button
             type="button"
             onClick={onEditProfile}

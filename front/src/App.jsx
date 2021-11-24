@@ -43,16 +43,14 @@ const IfAlreadyLoggedIn = ({ children }) => {
 };
 
 function App() {
-  const [posts, setPosts] = useState([{}]);
+  const [posts, setPosts] = useState([]);
 
   // 내가 작성한 포스트 api 호출
   useEffect(() => {
-    getMyCards(localStorage.usernick).then((res) => {
-      setPosts([...res]);
-    });
-    return {
-      posts,
-    };
+    if (localStorage.token) {
+      getMyCards(localStorage.usernick).then((res) => {});
+      return posts;
+    }
   }, []);
 
   return (
@@ -118,7 +116,7 @@ function App() {
             }
           />
           {/* S: 게시물 메뉴 모달 UI 확인용 임시 코드 */}
-          <Route path="modal" element={<PostMenu />} />
+          {/* <Route path="modal" element={<PostMenu />} /> */}
         </Routes>
       </BrowserRouter>
       <Footer />

@@ -37,7 +37,7 @@ const PostList = ({ posts, mypage, onAddPostHandler }) => {
           </div>
         )}
       </div>
-      <PostMenu />
+      {/* <PostMenu /> */}
     </>
   );
 };
