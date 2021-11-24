@@ -42,21 +42,31 @@ const MyPage = ({ posts }) => {
   }, []);
 
   //업데이트 API 호출
-  const onSubmit = () => updateMe(fd).then((res) => console.log(res));
+  const onSubmit = () => {
+    console.log("333");
+    updateMe(fd).then((res) => {
+      console.log(res);
+      console.log(oldNick, newNick);
+    });
+  };
 
   useEffect(() => {
     if (newNick !== oldNick) {
-      fd.append("usernick", oldNick);
       localStorage.usernick = oldNick;
     }
-  }, [fd, newNick, oldNick]);
+  }, [newNick, oldNick]);
 
   // 프로필 수정 창 완료 누를 때 실행
-  const onSaveUserInfo = () => {
+  const onSaveUserInfo = async () => {
     setNewNick(oldNick);
     onEditProfile();
-    dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
-    dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
+    await (function() {
+      console.log("1111");
+      fd.append("usernick", oldNick);
+      dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
+      dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
+      console.log("222");
+    })();
     onSubmit();
   };
 
