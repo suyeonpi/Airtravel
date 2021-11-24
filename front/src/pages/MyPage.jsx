@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import PostList from "../components/ListComponent/PostList";
+import LikedList from "../components/ListComponent/LikedList";
 import EditModal from "../components/ModalComponent/EditModal";
 
 import { updateMe, getMyInfo } from "../apis/users";
-import { getMyCards } from "../apis/cards";
 
-const MyPage = ({ posts }) => {
+const MyPage = ({ posts, likedPosts }) => {
   const fd = new FormData();
 
   const [oldNick, setOldNick] = useState(localStorage.usernick);
@@ -17,6 +17,8 @@ const MyPage = ({ posts }) => {
   const [profileImg, setprofileImg] = useState(); //preview 용
   const [banner, setBanner] = useState(); //preview 용
 
+  const [all, setAll] = useState(true);
+
   //수정모달 활성 비활성
   const [activeEditModal, setActiveEditModal] = useState(false);
 
@@ -26,20 +28,13 @@ const MyPage = ({ posts }) => {
 
   //페이지 랜더링 후, 내 정보 가져오는 API 호출
   useEffect(() => {
-    getMyInfo()
-      .then((res) => {
-        setBanner(res.back_url);
-        setprofileImg(res.user_url);
-        if (res.usernick !== localStorage.usernick) {
-          localStorage.usernick = res.usernick;
-        }
-      })
-      .then(() => {
-        getMyCards(localStorage.usernick).then((res) => {
-          console.log("@@@내 카드 가져오기", res);
-          return res;
-        });
-      });
+    getMyInfo().then((res) => {
+      setBanner(res.back_url);
+      setprofileImg(res.user_url);
+      if (res.usernick !== localStorage.usernick) {
+        localStorage.usernick = res.usernick;
+      }
+    });
   }, []);
 
   //업데이트 API 호출
@@ -92,6 +87,10 @@ const MyPage = ({ posts }) => {
     seDbBack_url(image);
   };
 
+  const onSwitchTabHandler = (boolean) => {
+    setAll(boolean);
+  };
+
   return (
     <>
       <div className="profile">
@@ -124,8 +123,33 @@ const MyPage = ({ posts }) => {
         </div>
       </div>
       <div className="content-wrap">
-        {/* TODO: 게시글 등록 페이지 띄우는 핸들러 필요 */}
-        <PostList posts={posts} mypage={true} />
+        {/* Tab */}
+        <div className="btn-wrap">
+          <button
+            type="button"
+            //
+            className={
+              all ? "btn btn__small btn__black-outline" : "btn btn__small"
+            }
+            onClick={() => onSwitchTabHandler(true)}
+          >
+            전체
+          </button>
+          <button
+            type="button"
+            className={
+              !all ? "btn btn__small btn__black-outline" : "btn btn__small"
+            }
+            onClick={() => onSwitchTabHandler(false)}
+          >
+            좋아요
+          </button>
+        </div>
+        {all ? (
+          <PostList posts={posts} mypage={true} text={"작성한"} />
+        ) : (
+          <PostList posts={likedPosts} mypage={true} text={"좋아한"} />
+        )}
       </div>
 
       {/* 프로필 수정 모달 */}

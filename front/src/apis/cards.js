@@ -40,6 +40,19 @@ const getMyCards = async (usernick) => {
   }
 };
 
+// 내가 좋아요한 카드 모두 가져오기
+const getAllCardsLIked = async () => {
+  try {
+    const res = await axios.get(`${baseUrl}/api/v1/likes`, {
+      headers: { Authorization: `Bearer ${localStorage.token}` },
+    });
+    return res.data.cards;
+  } catch (error) {
+    console.error("@@getAllCardsLIked : ", error);
+    return error;
+  }
+};
+
 //닉네임 가져오기
 const getMyToken = async () => {
   try {
@@ -54,4 +67,4 @@ const getMyToken = async () => {
   }
 };
 
-export { getCards, continents, getMyCards, getMyToken };
+export { getCards, continents, getMyCards, getMyToken, getAllCardsLIked };

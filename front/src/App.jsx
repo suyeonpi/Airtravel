@@ -21,7 +21,7 @@ import PasswordChange from "./pages/PasswordChange";
 import DeleteAccountPage from "./pages/DeleteAccountPage";
 import AddPostPage from "./pages/AddPostPage";
 import EditPostPage from "./pages/EditPostPage";
-import { getMyCards } from "./apis/cards";
+import { getMyCards, getAllCardsLIked } from "./apis/cards";
 import PostMenu from "./components/ModalComponent/PostMenu";
 
 const PrivateRoute = ({ children }) => {
@@ -44,11 +44,17 @@ const IfAlreadyLoggedIn = ({ children }) => {
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const [likedPosts, setLikedPosts] = useState([]);
 
   // 내가 작성한 포스트 api 호출
   useEffect(() => {
     if (localStorage.token) {
-      getMyCards(localStorage.usernick).then((res) => {});
+      getMyCards(localStorage.usernick).then((res) => {
+        setPosts([...res]);
+      });
+      getAllCardsLIked().then((res) => {
+        setLikedPosts([...res]);
+      });
       return posts;
     }
   }, []);
@@ -79,7 +85,11 @@ function App() {
             path="mypage"
             element={
               <PrivateRoute>
-                <MyPage loginInfo={localStorage.usernick} posts={posts} />
+                <MyPage
+                  loginInfo={localStorage.usernick}
+                  posts={posts}
+                  likedPosts={likedPosts}
+                />
               </PrivateRoute>
             }
           />
