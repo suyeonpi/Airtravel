@@ -36,14 +36,14 @@ const MyPage = ({ posts }) => {
       })
       .then(() => {
         getMyCards(localStorage.usernick).then((res) => {
-          console.log("MyPage getMyCards", res);
+          console.log("@@@내 카드 가져오기", res);
+          return res;
         });
       });
   }, []);
 
   //업데이트 API 호출
   const onSubmit = () => {
-    console.log("333");
     updateMe(fd).then((res) => {
       console.log(res);
     });
@@ -60,11 +60,9 @@ const MyPage = ({ posts }) => {
     setNewNick(oldNick);
     onEditProfile();
     await (function() {
-      console.log("1111");
       fd.append("usernick", oldNick);
       dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
       dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
-      console.log("222");
     })();
     onSubmit();
   };

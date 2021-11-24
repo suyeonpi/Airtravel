@@ -43,15 +43,12 @@ const IfAlreadyLoggedIn = ({ children }) => {
 };
 
 function App() {
-  const [posts, setPosts] = useState([{}]);
+  const [posts, setPosts] = useState([]);
 
   // 내가 작성한 포스트 api 호출
   useEffect(() => {
     if (localStorage.token) {
-      getMyCards(localStorage.usernick).then((res) => {
-        console.log(res);
-        // setPosts([...res]);
-      });
+      getMyCards(localStorage.usernick).then((res) => {});
       return posts;
     }
   }, []);
