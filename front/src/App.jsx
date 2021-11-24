@@ -21,6 +21,7 @@ import PasswordChange from "./pages/PasswordChange";
 import DeleteAccountPage from "./pages/DeleteAccountPage";
 import AddPostPage from "./pages/AddPostPage";
 import EditPostPage from "./pages/EditPostPage";
+import DetailViewPage from "./pages/DetailViewPage";
 import { getMyCards, getAllCardsLIked } from "./apis/cards";
 import PostMenu from "./components/ModalComponent/PostMenu";
 
@@ -90,6 +91,14 @@ function App() {
                   posts={posts}
                   likedPosts={likedPosts}
                 />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="detailview/:id"
+            element={
+              <PrivateRoute>
+                <DetailViewPage />
               </PrivateRoute>
             }
           />
