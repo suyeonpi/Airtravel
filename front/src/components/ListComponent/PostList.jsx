@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import PostCard from "../PostComponent/PostCard";
 import PostMenu from "../ModalComponent/PostMenu";
 
-const PostList = ({ posts, mypage, onAddPostHandler }) => {
+const PostList = ({ posts, mypage, onAddPostHandler, text }) => {
   const baseUrl = "../../assets/images/";
 
   return (
@@ -33,7 +33,7 @@ const PostList = ({ posts, mypage, onAddPostHandler }) => {
         ) : (
           //선택한 필터의 게시물이 없을 경우에 나타낼 문구
           <div className="post__noresult ">
-            <p>아직 게시물이 없네요!</p>
+            <p>아직 {text} 게시물이 없네요!</p>
           </div>
         )}
       </div>
