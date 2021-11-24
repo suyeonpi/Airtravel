@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect } from "react";
 import { useNavigate, Link, useParams } from "react-router-dom";
 import axios from "axios";
 import Picker from "emoji-picker-react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart } from "@fortawesome/fontawesome-free-solid";
 
 function DetailViewPage(props) {
   const [CardContent, setCardContent] = useState();
@@ -33,7 +35,7 @@ function DetailViewPage(props) {
       })
       .then((res) => {
         const data = res.data.card;
-        // console.log("data", data);
+        console.log("data", data);
 
         setCardContent(data.content);
         setCardContinent(data.continent);
@@ -114,9 +116,19 @@ function DetailViewPage(props) {
             className="image__selected"
           />
           <div className="diary-subinfo">
-            <div className="subinfo-row">{CardContinent}</div>
-            <div className="subinfo-row">{CardLocation}</div>
-            <div className="subinfo-row">{getDate(CardDate)}</div>
+            <div>
+              <div className="subinfo-row">{CardContinent}</div>
+              <div className="subinfo-row">{CardLocation}</div>
+              <div className="subinfo-row">{getDate(CardDate)}</div>
+            </div>
+            <div style={{ fontSize: "20px" }}>
+              <FontAwesomeIcon
+                style={{ marginRight: "0.8rem" }}
+                icon={["fas", "heart"]}
+                color="red"
+              />
+              <span>{CardLikeCount}</span>
+            </div>
           </div>
         </div>
         {/* content */}
