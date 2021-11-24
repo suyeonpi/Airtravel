@@ -14,7 +14,7 @@ router.post('/checkid', validateUsername, checkId);
 
 router.post('/signup', validateSignup, authController.signup);
 
-router.post('/login', validateCredential, authController.login);
+router.post('/login', authController.login);
 
 router.post('/logout', verifyToken, authController.logout);
 
