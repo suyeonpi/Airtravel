@@ -21,6 +21,7 @@ import PasswordChange from "./pages/PasswordChange";
 import DeleteAccountPage from "./pages/DeleteAccountPage";
 import AddPostPage from "./pages/AddPostPage";
 import EditPostPage from "./pages/EditPostPage";
+import DetailViewPage from "./pages/DetailViewPage";
 import { getMyCards } from "./apis/cards";
 
 const PrivateRoute = ({ children }) => {
@@ -81,6 +82,14 @@ function App() {
             element={
               <PrivateRoute>
                 <MyPage loginInfo={localStorage.usernick} posts={posts} />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="detailview/:id"
+            element={
+              <PrivateRoute>
+                <DetailViewPage />
               </PrivateRoute>
             }
           />

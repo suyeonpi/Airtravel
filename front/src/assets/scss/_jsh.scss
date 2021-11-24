@@ -509,3 +509,208 @@
     justify-content: end;
   }
 }
+
+.detailView {
+  img {
+    max-width: none;
+  }
+
+  .divider {
+    margin-top: 3rem;
+  }
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding-top: 5rem;
+  font-size: 1.6rem;
+  background-color: #39393a;
+
+  .wrapper {
+    display: flex;
+    align-items: stretch;
+    background: #fff;
+    width: 1000px;
+    border-radius: 2rem;
+    overflow: hidden;
+    height: 700px;
+
+    .diary-image {
+      display: flex;
+      flex-direction: column;
+      background: no-repeat center;
+      justify-content: center;
+      object-fit: cover;
+      padding-left: 4rem;
+      padding-right: 2rem;
+
+      .image__selected {
+        object-fit: cover;
+        width: 500px;
+        height: 500px;
+        pointer-events: none;
+      }
+
+      .diary-subinfo {
+        margin-top: 2rem;
+      }
+
+      .subinfo-row {
+        margin-top: 0.3rem;
+      }
+    }
+
+    .content {
+      user-select: none;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      padding-left: 2rem;
+      padding-right: 4rem;
+      padding-top: 3rem;
+      padding-bottom: 3rem;
+
+      .content-innerwrap {
+        height: 100%;
+      }
+
+      .add-form {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .comments-wrap {
+        // height: 100px;
+        overflow-y: scroll; /* Add the ability to scroll y axis*/
+        /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        margin-bottom: 3rem;
+      }
+
+      .owner-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .owner-profile {
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        box-sizing: content-box;
+        border: 2.5px solid transparent;
+        border-radius: 80px;
+        background-image: linear-gradient(white, white),
+          linear-gradient(to right, rgb(255, 0, 157), orange);
+        background-origin: border-box;
+        background-clip: content-box, border-box;
+        margin-right: 1.5rem;
+        object-fit: cover;
+      }
+
+      .owner-img {
+        width: 30px;
+        height: 30px;
+        border-radius: 100%;
+        background-color: peru;
+        margin-right: 2rem;
+      }
+
+      .owner-nickname {
+        font-weight: 400;
+      }
+
+      .owner-content {
+        margin-top: 0.5rem;
+        margin-left: calc(35px + 2rem);
+        font-weight: 300;
+      }
+
+      .content-comment {
+        // border: 2px dashed teal;
+        margin-top: 2.5rem;
+      }
+
+      .commenter-info {
+        display: flex;
+        // align-items: center;
+      }
+
+      .commenter-profile {
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        margin-right: 2rem;
+        object-fit: cover;
+      }
+
+      .commenter-img {
+        width: 35px;
+        height: 35px;
+        border-radius: 100%;
+        background-color: tomato;
+        margin-right: 2rem;
+      }
+
+      .commenter-nickname {
+        font-weight: 400;
+      }
+
+      .commenter-content {
+        margin-top: 0.5rem;
+        margin-left: calc(35px + 2rem);
+        font-weight: 300;
+      }
+
+      .new-commentbox {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+
+      .emoji-picker {
+        cursor: pointer;
+        margin-right: 2rem;
+      }
+
+      textarea {
+        font-family: inherit;
+        max-height: 120px;
+        resize: none;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+        font-size: 1.6rem;
+        overflow-y: scroll; /* Add the ability to scroll y axis*/
+        /* Hide scrollbar for IE, Edge and Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        &::-webkit-scrollbar {
+          display: none;
+        }
+        // width: 15rem;
+        background-color: #f1f1f5;
+        border: 2px solid #f1f1f5;
+        border-radius: 8px;
+        &:focus {
+          border: 2px solid var(--main-blue-color);
+          caret-color: var(--main-blue-color);
+        }
+        margin-right: 2rem;
+      }
+
+      input {
+        font-family: inherit;
+        font-weight: 300;
+      }
+    }
+  }
+}
