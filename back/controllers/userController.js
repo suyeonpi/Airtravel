@@ -41,6 +41,7 @@ export const updateMe = catchAsync(async (req, res, next) => {
     req.body.back_url = req.files.back_url[0].transforms[0].location;
 
   const { usernick, user_url, back_url } = req.body;
+  console.log(usernick, user_url, back_url);
   if (usernick) {
     const foundNick = await userRepository.findByUsernick(usernick);
     const deactivedNick = await userRepository.findByUsernick(usernick);
