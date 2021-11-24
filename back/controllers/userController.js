@@ -4,12 +4,12 @@ import { catchAsync } from '../utils/catchAsync.js';
 import AppError from '../utils/AppError.js';
 
 export const getUser = catchAsync(async (req, res, next) => {
-  const { usernick } = req.query;
+  let { usernick } = req.query;
   let user;
 
   if (usernick) {
-    const decoded = decodeURIComponent(usernick);
-    if (await userRepository.findDeactivedNick(decoded)) {
+    usernick = decodeURIComponent(usernick);
+    if (await userRepository.findDeactivedNick(usernick)) {
       return next(new AppError('비활성화된 계정입니다', 403));
     }
     user = await userRepository.findByUsernick(usernick);
@@ -26,22 +26,22 @@ export const getUser = catchAsync(async (req, res, next) => {
   res.status(200).json({
     usernick: user.usernick,
     user_url,
-    back_url
+    back_url,
   });
 });
 
 export const updateMe = catchAsync(async (req, res, next) => {
   const user = await userRepository.findById(req.userId);
-  console.log('@@@@@@@@@@@@@@@@test', req.files.back_url);
   if (!user) {
     return next(new AppError('회원 정보가 없습니다', 404));
   }
-  if (req.files.user_url)
+  if (req.files && req.files.user_url)
     req.body.user_url = req.files.user_url[0].transforms[0].location;
-  if (req.files.back_url)
+  if (req.files && req.files.back_url)
     req.body.back_url = req.files.back_url[0].transforms[0].location;
 
   const { usernick, user_url, back_url } = req.body;
+
   if (usernick) {
     const foundNick = await userRepository.findByUsernick(usernick);
     const deactivedNick = await userRepository.findByUsernick(usernick);
@@ -53,11 +53,11 @@ export const updateMe = catchAsync(async (req, res, next) => {
   const updatedUser = await userRepository.update(req.userId, {
     usernick,
     user_url,
-    back_url
+    back_url,
   });
 
   res.status(200).json({
-    user: updatedUser
+    user: updatedUser,
   });
 });
 
@@ -73,6 +73,6 @@ export const deleteMe = catchAsync(async (req, res, next) => {
   await userRepository.deactive(req.userId);
 
   res.status(204).json({
-    user: null
+    user: null,
   });
 });

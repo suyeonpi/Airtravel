@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const PostCard = ({ post, idx, postImage }) => {
   const [like, setLike] = useState(false);
   const onToggleHandler = () => setLike((prev) => !prev);
+
   return (
     <>
       <div className="post">

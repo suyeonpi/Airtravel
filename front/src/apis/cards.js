@@ -24,15 +24,31 @@ const getCards = async () => {
 };
 
 //내가 작성한 포스트만 가져오기
-const getMyCards = async (user) => {
-  console.log("getMYcards", user);
+const getMyCards = async (usernick) => {
+  console.log("getMYcards", usernick);
   try {
     const res = await axios.get(
-      `${baseUrl}/api/v1/cards/?usernick=${encodeURIComponent(user)}`
+      `${baseUrl}/api/v1/cards/user?usernick=${encodeURIComponent(usernick)}`,
+      {
+        headers: { Authorization: `Bearer ${localStorage.token}` },
+      }
     );
     return res.data.cards;
   } catch (error) {
     console.error("@@getMyCards : ", error);
+    return error;
+  }
+};
+
+// 내가 좋아요한 카드 모두 가져오기
+const getAllCardsLIked = async () => {
+  try {
+    const res = await axios.get(`${baseUrl}/api/v1/likes`, {
+      headers: { Authorization: `Bearer ${localStorage.token}` },
+    });
+    return res.data.cards;
+  } catch (error) {
+    console.error("@@getAllCardsLIked : ", error);
     return error;
   }
 };
@@ -51,4 +67,4 @@ const getMyToken = async () => {
   }
 };
 
-export { getCards, continents, getMyCards, getMyToken };
+export { getCards, continents, getMyCards, getMyToken, getAllCardsLIked };

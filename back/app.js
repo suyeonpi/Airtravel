@@ -20,7 +20,7 @@ import globalErrorHandler from './middleware/errorHandler.js';
 import rateLimit from './middleware/rateLimit.js';
 
 const app = express();
-const upload = multer();
+// const upload = multer();
 
 const corsOptions = {
   origin: config.cors.allowedOrigin,
@@ -30,8 +30,8 @@ const corsOptions = {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(upload.array());
-app.use(express.static('public'));
+// app.use(upload.array());
+// app.use(express.static('public'));
 app.use(cookieParser());
 
 app.use(helmet());

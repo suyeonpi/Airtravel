@@ -1,27 +1,32 @@
 import React, { useState, useEffect } from "react";
-
 import PostList from "../components/ListComponent/PostList";
+import LikedList from "../components/ListComponent/LikedList";
 import EditModal from "../components/ModalComponent/EditModal";
 
 import { updateMe, getMyInfo } from "../apis/users";
 
-const MyPage = ({ posts }) => {
+const MyPage = ({ posts, likedPosts }) => {
   const fd = new FormData();
 
   const [oldNick, setOldNick] = useState(localStorage.usernick);
-  const [newInfo, setNewInfo] = useState(localStorage.usernick);
+  const [newNick, setNewNick] = useState(localStorage.usernick);
 
   const [dbuser_url, setDbUser_url] = useState(); //업로드 용
   const [dbBack_url, seDbBack_url] = useState(); //업로드 용
 
-  const [activeEditModal, setActiveEditModal] = useState(false);
   const [profileImg, setprofileImg] = useState(); //preview 용
   const [banner, setBanner] = useState(); //preview 용
 
+  const [all, setAll] = useState(true);
+
   //수정모달 활성 비활성
+  const [activeEditModal, setActiveEditModal] = useState(false);
+
   const onEditProfile = () => setActiveEditModal((prev) => !prev);
 
-  //
+  const changeOldNick = (e) => setOldNick(e.target.value);
+
+  //페이지 랜더링 후, 내 정보 가져오는 API 호출
   useEffect(() => {
     getMyInfo().then((res) => {
       setBanner(res.back_url);
@@ -32,24 +37,28 @@ const MyPage = ({ posts }) => {
     });
   }, []);
 
-  const changeOldNick = (e) => setOldNick(e.target.value);
-
   //업데이트 API 호출
-  const onSubmit = () => updateMe(fd).then((res) => console.log(res));
+  const onSubmit = () => {
+    updateMe(fd).then((res) => {
+      console.log(res);
+    });
+  };
 
   useEffect(() => {
-    if (newInfo !== oldNick) {
-      fd.append("usernick", oldNick);
+    if (newNick !== oldNick) {
       localStorage.usernick = oldNick;
     }
-  }, [fd, newInfo, oldNick]);
+  }, [newNick, oldNick]);
 
   // 프로필 수정 창 완료 누를 때 실행
-  const onSaveUserInfo = () => {
-    setNewInfo(oldNick);
+  const onSaveUserInfo = async () => {
+    setNewNick(oldNick);
     onEditProfile();
-    dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
-    dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
+    await (function() {
+      fd.append("usernick", oldNick);
+      dbBack_url && fd.append("back_url", dbBack_url, dbBack_url.name);
+      dbuser_url && fd.append("user_url", dbuser_url, dbuser_url.name);
+    })();
     onSubmit();
   };
 
@@ -78,6 +87,10 @@ const MyPage = ({ posts }) => {
     seDbBack_url(image);
   };
 
+  const onSwitchTabHandler = (boolean) => {
+    setAll(boolean);
+  };
+
   return (
     <>
       <div className="profile">
@@ -94,7 +107,7 @@ const MyPage = ({ posts }) => {
             </span>
           </div>
           {/* 유저 닉네임 */}
-          <p className="profile__nick">{newInfo}</p>
+          <p className="profile__nick">{newNick}</p>
           <button
             type="button"
             onClick={onEditProfile}
@@ -110,8 +123,33 @@ const MyPage = ({ posts }) => {
         </div>
       </div>
       <div className="content-wrap">
-        {/* TODO: 게시글 등록 페이지 띄우는 핸들러 필요 */}
-        <PostList posts={posts} mypage={true} />
+        {/* Tab */}
+        <div className="btn-wrap">
+          <button
+            type="button"
+            //
+            className={
+              all ? "btn btn__small btn__black-outline" : "btn btn__small"
+            }
+            onClick={() => onSwitchTabHandler(true)}
+          >
+            전체
+          </button>
+          <button
+            type="button"
+            className={
+              !all ? "btn btn__small btn__black-outline" : "btn btn__small"
+            }
+            onClick={() => onSwitchTabHandler(false)}
+          >
+            좋아요
+          </button>
+        </div>
+        {all ? (
+          <PostList posts={posts} mypage={true} text={"작성한"} />
+        ) : (
+          <PostList posts={likedPosts} mypage={true} text={"좋아한"} />
+        )}
       </div>
 
       {/* 프로필 수정 모달 */}
