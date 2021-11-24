@@ -36,7 +36,7 @@ const MyPage = ({ posts }) => {
       })
       .then(() => {
         getMyCards(localStorage.usernick).then((res) => {
-          console.log("get My Cards", res);
+          console.log("MyPage getMyCards", res);
         });
       });
   }, []);
@@ -46,7 +46,6 @@ const MyPage = ({ posts }) => {
     console.log("333");
     updateMe(fd).then((res) => {
       console.log(res);
-      console.log(oldNick, newNick);
     });
   };
 
