@@ -15,9 +15,10 @@ const updateMe = async (fd) => {
     const res = await axios.patch("http://localhost:8080/api/v1/users", fd, {
       headers: { Authorization: `Bearer ${localStorage.token}` },
     });
+
     return res.data;
   } catch (error) {
-    console.error("@@updateMe API fail: ", error);
+    console.error("@@updateMe API fail: ", error.response.data);
     return error;
   }
 };
