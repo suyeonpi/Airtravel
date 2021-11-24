@@ -18,8 +18,7 @@ export const getCards = catchAsync(async (req, res, next) => {
 export const getCardsByUser = catchAsync(async (req, res, next) => {
   let { usernick } = req.query;
   if (usernick) usernick = decodeURIComponent(usernick);
-  const deactivatedUser = await userRepository.findDeactivedNick(usernick);
-  if (deactivatedUser) {
+  if (await userRepository.findDeactivedNick(usernick)) {
     return next(new AppError('비활성화된 계정입니다', 403));
   }
   const user = await userRepository.findByUsernick(usernick);

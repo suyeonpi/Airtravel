@@ -4,12 +4,12 @@ import { catchAsync } from '../utils/catchAsync.js';
 import AppError from '../utils/AppError.js';
 
 export const getUser = catchAsync(async (req, res, next) => {
-  const { usernick } = req.query;
+  let { usernick } = req.query;
   let user;
 
   if (usernick) {
-    const decoded = decodeURIComponent(usernick);
-    if (await userRepository.findDeactivedNick(decoded)) {
+    usernick = decodeURIComponent(usernick);
+    if (await userRepository.findDeactivedNick(usernick)) {
       return next(new AppError('비활성화된 계정입니다', 403));
     }
     user = await userRepository.findByUsernick(usernick);
