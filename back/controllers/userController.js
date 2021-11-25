@@ -1,5 +1,5 @@
-import * as userRepository from '../models/userModel.js';
 import {} from 'express-async-errors';
+import * as userRepository from '../models/userModel.js';
 import { catchAsync } from '../utils/catchAsync.js';
 import AppError from '../utils/AppError.js';
 

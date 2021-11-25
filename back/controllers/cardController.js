@@ -1,3 +1,4 @@
+import {} from 'express-async-errors';
 import * as cardRepository from '../models/cardModel.js';
 import * as userRepository from '../models/userModel.js';
 import AppError from '../utils/AppError.js';
