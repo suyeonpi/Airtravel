@@ -59,7 +59,9 @@ function DetailViewPage(props) {
   }, []);
 
   const getDate = (date) => {
-    const arr = String(date).slice(0, 10).split("-");
+    const arr = String(date)
+      .slice(0, 10)
+      .split("-");
     return `${arr[0].slice(2)}.${arr[1]}.${arr[2]}`;
   };
 

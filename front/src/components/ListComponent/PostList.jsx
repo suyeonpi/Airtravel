@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import PostCard from "../PostComponent/PostCard";
 import PostMenu from "../ModalComponent/PostMenu";
+import { useNavigate, Link } from "react-router-dom";
 
 const PostList = ({ posts, mypage, onAddPostHandler, text }) => {
-  const baseUrl = "../../assets/images/";
+  const navigate = useNavigate();
+
+  const onDetilView = (postId) => {
+    navigate(`/detailview:${postId}`);
+  };
 
   return (
     <>
@@ -24,15 +29,15 @@ const PostList = ({ posts, mypage, onAddPostHandler, text }) => {
         {posts.length > 0 ? (
           posts.map((post, idx) => (
             <PostCard
+              onDetilView={onDetilView}
               post={post}
-              postImage={baseUrl + post.url + ".jpg"}
               idx={idx}
               key={idx + Math.random().toString()}
             />
           ))
         ) : (
           //선택한 필터의 게시물이 없을 경우에 나타낼 문구
-          <div className="post__noresult ">
+          <div className="post__noresult">
             <p>아직 {text} 게시물이 없네요!</p>
           </div>
         )}
