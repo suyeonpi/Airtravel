@@ -1,3 +1,4 @@
+import {} from 'express-async-errors';
 import * as likeRepository from '../models/likeModel.js';
 import * as cardRepository from '../models/cardModel.js';
 import { catchAsync } from '../utils/catchAsync.js';

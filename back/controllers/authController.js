@@ -1,6 +1,6 @@
-import * as userRepository from '../models/userModel.js';
-import jwt from 'jsonwebtoken';
 import {} from 'express-async-errors';
+import jwt from 'jsonwebtoken';
+import * as userRepository from '../models/userModel.js';
 import { config } from '../config.js';
 import { catchAsync } from '../utils/catchAsync.js';
 import AppError from '../utils/AppError.js';

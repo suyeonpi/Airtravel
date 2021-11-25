@@ -5,7 +5,6 @@ import {
   validateUsername,
   validateSignup,
   validatePassword,
-  validateCredential,
 } from '../middleware/validator.js';
 
 const router = express.Router();
