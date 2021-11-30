@@ -105,6 +105,7 @@ section {
 html,
 body {
   position: relative;
+  min-height: 100%;
   font-size: var(--font-size);
   color: var(--black-color);
   word-break: keep-all;
