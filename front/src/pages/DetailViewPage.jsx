@@ -124,12 +124,12 @@ function DetailViewPage(props) {
               <div className="subinfo-row">{getDate(CardDate)}</div>
             </div>
             <div style={{ fontSize: "20px" }}>
+              <span>{CardLikeCount}</span>
               <FontAwesomeIcon
-                style={{ marginRight: "0.8rem" }}
+                style={{ marginLeft: "0.8rem" }}
                 icon={["fas", "heart"]}
                 color="red"
               />
-              <span>{CardLikeCount}</span>
             </div>
           </div>
         </div>
