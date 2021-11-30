@@ -4,7 +4,7 @@ import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-function AddPostPage(props) {
+function AddPostPage() {
   const [diaryContinent, setDiaryContinent] = useState("아시아");
   const [diaryLocation, setDiaryLocation] = useState("");
   const [diaryDate, setDiaryDate] = useState("");
@@ -85,10 +85,8 @@ function AddPostPage(props) {
     if (file && file.type.substr(0, 5) === "image") {
       setSelectedFile(file);
       setShowPicName(true);
-      console.log(file);
     } else {
       setSelectedFile(null);
-      console.log("null!!");
     }
   };
 
@@ -110,44 +108,26 @@ function AddPostPage(props) {
               사진 업로드
             </div>
           )}
-          <div>
-            {showPicName ? (
-              <div>
-                <span
-                  type="text"
-                  className="photo__name"
-                  onClick={() => {
-                    setSelectedFile(null);
-                    setShowPicName(false);
-                  }}
-                >
-                  {selectedFile.name.length > 10
-                    ? selectedFile.name.substr(0, 10) +
-                      " ..." +
-                      selectedFile.name.split(".")[1]
-                    : selectedFile.name}
-                  <FontAwesomeIcon
-                    icon={faTimes}
-                    className="photo__name-icon"
-                  />
-                </span>
-              </div>
-            ) : (
-              <span className="photo__name" style={{ visibility: "hidden" }}>
-                <FontAwesomeIcon icon={faTimes} className="photo__name-icon" />
-              </span>
-            )}
-
-            <input
-              ref={fileInputRef}
-              type="file"
-              accept="image/*"
-              onChange={fileSelectedHandler}
-              style={{
-                display: "none",
+          {showPicName && (
+            <div
+              className="image__badge"
+              onClick={() => {
+                setSelectedFile(null);
+                setShowPicName(false);
               }}
-            />
-          </div>
+            >
+              <span type="text" className="photo__name"></span>
+            </div>
+          )}
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*"
+            onChange={fileSelectedHandler}
+            style={{
+              display: "none",
+            }}
+          />
         </div>
         {/* content */}
         <div className="content">

@@ -377,58 +377,82 @@
   .wrapper {
     display: flex;
     align-items: stretch;
+    justify-content: space-between;
     background: #fff;
     width: 1000px;
     border-radius: 2rem;
     overflow: hidden;
-
+    padding: 2.5rem;
     .diary-image {
+      position: relative;
       display: flex;
+      width: calc(50% - 1.5rem);
+      background-color: #000000;
       flex-direction: column;
       background: no-repeat center;
       object-fit: cover;
-      padding-left: 4rem;
-      padding-right: 2rem;
-      padding-top: 2rem;
+      // padding-left: 4rem;
+      // padding-right: 2rem;
+      // padding-top: 2rem;
 
       .image__selected {
         object-fit: cover;
-        width: 500px;
-        height: 500px;
+        width: 100%;
+        // height: 500px;
+        height: 100%;
+        max-height: 545px;
+        vertical-align: middle;
+        justify-content: center;
       }
 
       .image-preview {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 500px;
-        height: 500px;
+        // width: 500px;
+        width: 100%;
+        // height: 500px;
+        height: 100%;
         cursor: pointer;
-        border: 2px dashed teal;
-      }
-
-      .photo__name {
-        display: inline-block;
-        border: 1px solid black;
-        border-radius: 4px;
-        padding: 0.4rem;
-        margin-top: 0.4rem;
-        margin-bottom: 0.4rem;
-        cursor: pointer;
+        border: 2px dashed #dbdbdb;
       }
 
       .photo__name-icon {
         margin-left: 0.4rem;
       }
+
+      & .image__badge {
+        position: absolute;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        text-align: end;
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba($color: #000000, $alpha: 0.3);
+          .photo__name::after {
+            display: flex;
+            content: "클릭하면 첨부된 사진을 삭제합니다";
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+            color: #dbdbdb;
+          }
+        }
+      }
     }
 
     .content {
-      width: 100%;
+      width: calc(50% - 1.5rem);
       display: flex;
       flex-direction: column;
-      padding-left: 2rem;
-      padding-right: 4rem;
-      padding-bottom: 2rem;
+      // padding-left: 2rem;
+      // padding-right: 4rem;
+      // padding-bottom: 2rem;
 
       form {
         height: 100%;
