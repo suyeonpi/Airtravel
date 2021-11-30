@@ -3,10 +3,17 @@
 
 //:S Header
 .header {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
   width: 100%;
   font-size: 3.2rem;
-  border-bottom: 1px solid #dbdbdb;
+  background-color: #fff;
+  margin-bottom: 8.6rem;
   height: 8.6rem;
+  z-index: 10;
+  border-bottom: 1px solid #dbdbdb;
   nav {
     @include utils.setFlex(flex, space-between);
     width: 1200px;

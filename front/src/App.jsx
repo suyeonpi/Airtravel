@@ -64,79 +64,81 @@ function App() {
     <>
       <BrowserRouter>
         <Header auth={localStorage.token} />
-        <Routes>
-          <Route path="/" element={<MainPage />} />
-          <Route
-            path="addpost"
-            element={
-              <PrivateRoute>
-                <AddPostPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="editpost/:id"
-            element={
-              <PrivateRoute>
-                <EditPostPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="mypage"
-            element={
-              <PrivateRoute>
-                <MyPage
-                  loginInfo={localStorage.usernick}
-                  posts={posts}
-                  likedPosts={likedPosts}
-                />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="detailview/:id"
-            element={
-              <PrivateRoute>
-                <DetailViewPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="passwordchange"
-            element={
-              <PrivateRoute>
-                <PasswordChange />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="deleteaccount"
-            element={
-              <PrivateRoute>
-                <DeleteAccountPage />
-              </PrivateRoute>
-            }
-          />
-          <Route
-            path="login"
-            element={
-              <IfAlreadyLoggedIn>
-                <LoginPage />
-              </IfAlreadyLoggedIn>
-            }
-          />
-          <Route
-            path="signup"
-            element={
-              <IfAlreadyLoggedIn>
-                <SignupPage />
-              </IfAlreadyLoggedIn>
-            }
-          />
-          {/* S: 게시물 메뉴 모달 UI 확인용 임시 코드 */}
-          {/* <Route path="modal" element={<PostMenu />} /> */}
-        </Routes>
+        <div style={{ marginTop: "8.6rem" }}>
+          <Routes>
+            <Route path="/" element={<MainPage />} />
+            <Route
+              path="addpost"
+              element={
+                <PrivateRoute>
+                  <AddPostPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="editpost/:id"
+              element={
+                <PrivateRoute>
+                  <EditPostPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="mypage"
+              element={
+                <PrivateRoute>
+                  <MyPage
+                    loginInfo={localStorage.usernick}
+                    posts={posts}
+                    likedPosts={likedPosts}
+                  />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="detailview/:id"
+              element={
+                <PrivateRoute>
+                  <DetailViewPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="passwordchange"
+              element={
+                <PrivateRoute>
+                  <PasswordChange />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="deleteaccount"
+              element={
+                <PrivateRoute>
+                  <DeleteAccountPage />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <IfAlreadyLoggedIn>
+                  <LoginPage />
+                </IfAlreadyLoggedIn>
+              }
+            />
+            <Route
+              path="signup"
+              element={
+                <IfAlreadyLoggedIn>
+                  <SignupPage />
+                </IfAlreadyLoggedIn>
+              }
+            />
+            {/* S: 게시물 메뉴 모달 UI 확인용 임시 코드 */}
+            {/* <Route path="modal" element={<PostMenu />} /> */}
+          </Routes>
+        </div>
       </BrowserRouter>
       <Footer />
     </>

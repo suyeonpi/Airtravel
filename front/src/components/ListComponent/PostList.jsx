@@ -7,7 +7,7 @@ const PostList = ({ posts, mypage, onAddPostHandler, text }) => {
   const navigate = useNavigate();
 
   const onDetilView = (postId) => {
-    navigate(`/detailview:${postId}`);
+    navigate(`/detailview/${postId}`);
   };
 
   return (
