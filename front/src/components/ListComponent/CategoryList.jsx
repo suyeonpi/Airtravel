@@ -5,7 +5,7 @@ import All from "../../assets/images/@bg-cate-all.jpg";
 const CategoryList = ({ categories, onPageTurn }) => {
   const settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 600,
     slidesToShow: 4,
     slidesToScroll: 4,

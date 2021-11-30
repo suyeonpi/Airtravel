@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import PostList from "../components/ListComponent/PostList";
-import LikedList from "../components/ListComponent/LikedList";
 import EditModal from "../components/ModalComponent/EditModal";
 
 import { updateMe, getMyInfo } from "../apis/users";
@@ -99,7 +98,6 @@ const MyPage = ({ posts, likedPosts }) => {
           <img src={banner} alt="" />
         </div>
         {/* E: 프로필 Banner */}
-
         <div className="profile__info">
           <div className="profile__img">
             <span>
@@ -127,7 +125,6 @@ const MyPage = ({ posts, likedPosts }) => {
         <div className="btn-wrap">
           <button
             type="button"
-            //
             className={
               all ? "btn btn__small btn__black-outline" : "btn btn__small"
             }
