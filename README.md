@@ -22,9 +22,9 @@
 <br>
 
 ### 사용 기술
-- front) React
-- back) express
-- DB) mongoDB
+- front) Html, CSS, SCSS, React
+- back) Express.js
+- DB) MongoDB Atlas
 
 <br>
 
